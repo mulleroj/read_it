@@ -1,6 +1,7 @@
 import { checkSingleChoice } from '../core/evaluation.js';
 import { mountItemFlow } from './shared-item-flow.js';
 import { escapeHtml, escapeAttr } from '../ui/html-utils.js';
+import { renderActivityWordBlock } from '../ui/word-audio-control.js';
 
 /** @type {import('./activity-types.js').ActivityModule} */
 const findPattern = {
@@ -21,10 +22,7 @@ const findPattern = {
         const options = item.optionPatternIds.map((id) => store.getPattern(id)).filter(Boolean);
 
         return `
-          <div class="activity__word">
-            <p class="activity__spelling" lang="en">${escapeHtml(word.spelling)}</p>
-            <p class="activity__ipa" aria-label="IPA">${escapeHtml(word.ipa)}</p>
-          </div>
+          ${renderActivityWordBlock(word, context.t)}
           <p class="activity__prompt">${escapeHtml(item.prompt?.cs ?? exercise.prompt?.cs ?? context.t('findPatternPrompt'))}</p>
           <div class="activity__options" role="group" aria-label="${escapeAttr(context.t('findPatternOptions'))}">
             ${options

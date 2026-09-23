@@ -1,0 +1,8 @@
+# M6A.2 / M6C.2 – never publish local prototype assets (even from a dirty working tree)
+tools/audio-prototype/output/
+tools/audio-prototype/piper/
+tools/audio-prototype/voices/
+tools/audio-prototype/_dl/
+tools/audio-prototype/*.zip
+tools/audio-prototype/**/*.onnx
+tools/audio-prototype/**/*.onnx.json

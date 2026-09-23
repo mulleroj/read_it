@@ -10,6 +10,7 @@ import {
 } from '../ui/activity-shell.js';
 import { iconArrowRight } from '../ui/icons.js';
 import { escapeHtml } from '../ui/html-utils.js';
+import { bindWordAudioButtons } from '../ui/word-audio-control.js';
 
 /**
  * @typedef {Object} ItemCheckResult
@@ -113,6 +114,8 @@ export function mountItemFlow(container, exercise, context, store, callbacks) {
         }
       },
     });
+
+    bindWordAudioButtons(ui);
 
     ui.querySelector('.btn-reveal')?.addEventListener('click', () => {
       if (userInput == null) return;

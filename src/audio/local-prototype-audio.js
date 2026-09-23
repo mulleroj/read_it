@@ -1,0 +1,219 @@
+/**
+ * M6C.2 – Local-only mapping from word IDs to M6A.2 prototype WAV files.
+ * Not part of public content JSON. PUBLIC AUDIO RELEASE remains BLOCKED.
+ *
+ * WAV files live at tools/audio-prototype/output/{spelling}.wav (gitignored).
+ */
+
+/** @type {Readonly<Record<string, string>>} wordId → WAV basename (spelling) */
+export const LOCAL_PROTOTYPE_WORD_FILES = Object.freeze({
+  'w-rain': 'rain',
+  'w-day': 'day',
+  'w-car': 'car',
+  'w-bird': 'bird',
+  'w-coin': 'coin',
+  'w-cow': 'cow',
+  'w-city': 'city',
+  'w-gym': 'gym',
+  'w-happy': 'happy',
+  'w-letter': 'letter',
+});
+
+export const LOCAL_PROTOTYPE_AUDIO_DIR = 'tools/audio-prototype/output';
+
+const LOCAL_AUDIO_SESSION_KEY = 'readit-local-audio';
+
+/**
+ * Localhost or private LAN only. Public hosts never enable prototype audio,
+ * even with ?localAudio=1 (does not override PUBLIC AUDIO RELEASE gate).
+ * @param {string} hostname
+ */
+export function isLocalDevHostname(hostname) {
+  return (
+    hostname === 'localhost' ||
+    hostname === '127.0.0.1' ||
+    hostname === '[::1]' ||
+    /^192\.168\.\d{1,3}\.\d{1,3}$/.test(hostname) ||
+    /^10\.\d{1,3}\.\d{1,3}\.\d{1,3}$/.test(hostname) ||
+    /^172\.(1[6-9]|2\d|3[01])\.\d{1,3}\.\d{1,3}$/.test(hostname)
+  );
+}
+
+/** @type {Set<string>} */
+let availableWordIds = new Set();
+
+/** @type {boolean | null} */
+let enabled = null;
+
+/** @type {boolean | null} */
+let enabledOverride = null;
+
+/** @type {HTMLAudioElement | null} */
+let audioElement = null;
+
+/**
+ * @param {string} wordId
+ * @param {string} [root] URL prefix (e.g. '' or '/subdir')
+ */
+export function getLocalPrototypeAudioUrl(wordId, root = '') {
+  const basename = LOCAL_PROTOTYPE_WORD_FILES[wordId];
+  if (!basename) return null;
+
+  const normalizedRoot = root.replace(/\/$/, '');
+  const relativePath = `${LOCAL_PROTOTYPE_AUDIO_DIR}/${basename}.wav`;
+  return normalizedRoot ? `${normalizedRoot}/${relativePath}` : relativePath;
+}
+
+/**
+ * @param {string} url
+ * @param {typeof fetch} fetchFn
+ */
+async function probeAudioUrl(url, fetchFn) {
+  try {
+    let response = await fetchFn(url, { method: 'HEAD' });
+    if (response.status === 405 || response.status === 501) {
+      response = await fetchFn(url, { method: 'GET', headers: { Range: 'bytes=0-0' } });
+    }
+    return response.ok;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Resolve local prototype mode from URL (?localAudio=1|0) and sessionStorage.
+ * Default: enabled on localhost/127.0.0.1 only; disabled on public hosts.
+ * @param {Pick<Location, 'hostname' | 'search'>} [location]
+ */
+export function syncLocalPrototypeAudioFromLocation(location = globalThis.location) {
+  if (!location) {
+    enabled = false;
+    return false;
+  }
+
+  const onLocalDevHost = isLocalDevHostname(location.hostname);
+  const params = new URLSearchParams(location.search);
+  if (params.has('localAudio')) {
+    const requestedOn = params.get('localAudio') !== '0';
+    const nextEnabled = requestedOn && onLocalDevHost;
+    enabled = nextEnabled;
+    try {
+      sessionStorage.setItem(LOCAL_AUDIO_SESSION_KEY, nextEnabled ? '1' : '0');
+    } catch {
+      // sessionStorage may be unavailable
+    }
+    return nextEnabled;
+  }
+
+  if (enabled !== null) {
+    return isLocalPrototypeAudioEnabled();
+  }
+
+  try {
+    const stored = sessionStorage.getItem(LOCAL_AUDIO_SESSION_KEY);
+    if (stored === '1') {
+      enabled = onLocalDevHost;
+      return enabled;
+    }
+    if (stored === '0') {
+      enabled = false;
+      return false;
+    }
+  } catch {
+    // ignore
+  }
+
+  enabled = onLocalDevHost;
+  return enabled;
+}
+
+/** Whether local prototype audio is active for this browser session. */
+export function isLocalPrototypeAudioEnabled() {
+  if (enabledOverride !== null) return enabledOverride;
+  if (enabled === null) syncLocalPrototypeAudioFromLocation();
+  return enabled === true;
+}
+
+/**
+ * Probe which prototype WAV files are reachable from the current origin.
+ * No network requests when local prototype mode is disabled.
+ * @param {string} [root]
+ * @param {typeof fetch} [fetchFn]
+ */
+export async function probeLocalPrototypeAudio(root = '', fetchFn = fetch) {
+  availableWordIds = new Set();
+  if (!isLocalPrototypeAudioEnabled()) {
+    return availableWordIds;
+  }
+
+  await Promise.all(
+    Object.keys(LOCAL_PROTOTYPE_WORD_FILES).map(async (wordId) => {
+      const url = getLocalPrototypeAudioUrl(wordId, root);
+      if (!url) return;
+      if (await probeAudioUrl(url, fetchFn)) {
+        availableWordIds.add(wordId);
+      }
+    })
+  );
+
+  return availableWordIds;
+}
+
+/** @param {string} wordId */
+export function hasLocalPrototypeAudio(wordId) {
+  return isLocalPrototypeAudioEnabled() && availableWordIds.has(wordId);
+}
+
+/** @returns {ReadonlySet<string>} */
+export function getAvailableLocalPrototypeWordIds() {
+  return availableWordIds;
+}
+
+/**
+ * @param {string} wordId
+ * @param {string} [root]
+ */
+export async function playLocalPrototypeAudio(wordId, root = '') {
+  if (!hasLocalPrototypeAudio(wordId)) return false;
+
+  const url = getLocalPrototypeAudioUrl(wordId, root);
+  if (!url) return false;
+
+  if (!audioElement) {
+    audioElement = new Audio();
+  }
+
+  audioElement.pause();
+  audioElement.src = url;
+
+  try {
+    await audioElement.play();
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/** @internal test helper */
+export function resetLocalPrototypeAudioForTests() {
+  availableWordIds = new Set();
+  enabled = null;
+  enabledOverride = null;
+  if (audioElement) {
+    audioElement.pause();
+    audioElement.removeAttribute('src');
+  }
+}
+
+/** @internal test helper */
+export function markLocalPrototypeAudioAvailable(wordIds) {
+  availableWordIds = new Set(wordIds);
+}
+
+/** @internal test helper */
+export function setLocalPrototypeAudioEnabledForTests(value) {
+  enabledOverride = value;
+  if (!value) {
+    availableWordIds = new Set();
+  }
+}

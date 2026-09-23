@@ -11,6 +11,10 @@ import { updateHeaderModeBadge } from './ui/mode-badge.js';
 import { getCategoryClass } from './ui/category-styles.js';
 import { iconTeacher, iconStudent } from './ui/icons.js';
 import { escapeHtml } from './ui/html-utils.js';
+import {
+  probeLocalPrototypeAudio,
+  syncLocalPrototypeAudioFromLocation,
+} from './audio/local-prototype-audio.js';
 
 /** @type {Awaited<ReturnType<typeof loadContentStore>> | null} */
 let contentStore = null;
@@ -38,8 +42,15 @@ async function init() {
 
   mainEl.innerHTML = `<p class="status-message status-message--info">${t('loading')}</p>`;
 
+  syncLocalPrototypeAudioFromLocation();
+
   try {
     contentStore = await loadContentStore('');
+    try {
+      await probeLocalPrototypeAudio('');
+    } catch (audioErr) {
+      console.warn('Local prototype audio probe skipped:', audioErr);
+    }
   } catch (err) {
     console.error(err);
     mainEl.innerHTML = `<p class="status-message status-message--error" role="alert">${t('loadError')}</p>`;

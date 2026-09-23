@@ -1,0 +1,8 @@
+# Block public serving of local audio prototype paths (defense in depth).
+# PUBLIC AUDIO RELEASE remains BLOCKED; production audio uses assets/audio/ after gate PASS.
+
+[[redirects]]
+  from = "/tools/audio-prototype/*"
+  to = "/404.html"
+  status = 404
+  force = true

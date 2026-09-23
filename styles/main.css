@@ -728,12 +728,65 @@ body::before {
 
 /* Word display */
 .activity__word {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
   text-align: center;
   margin: var(--space-6) 0;
   padding: var(--space-6) var(--space-4);
   background: var(--cat-soft);
   border: 1px solid var(--cat-border);
   border-radius: var(--radius-lg);
+}
+
+.activity__word-main {
+  width: 100%;
+}
+
+.word-audio-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--cat-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.word-audio-btn:hover:not(:disabled) {
+  background: var(--color-bg-subtle);
+}
+
+.word-audio-btn:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.word-audio-btn.is-playing {
+  opacity: 0.85;
+}
+
+.word-audio-btn__icon {
+  font-size: 0.85em;
+}
+
+.sort-pool-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  vertical-align: top;
+}
+
+.build-word-audio {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--space-3);
 }
 
 .activity__spelling {

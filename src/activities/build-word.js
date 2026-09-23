@@ -2,6 +2,7 @@ import { checkBuildWordOrder } from '../core/evaluation.js';
 import { shuffleTiles } from '../core/shuffle-tiles.js';
 import { mountItemFlow } from './shared-item-flow.js';
 import { escapeHtml } from '../ui/html-utils.js';
+import { renderWordAudioButton } from '../ui/word-audio-control.js';
 
 /** @type {import('./activity-types.js').ActivityModule} */
 const buildWord = {
@@ -19,8 +20,10 @@ const buildWord = {
       renderBody(item) {
         const target = store.getWord(item.targetWordId);
         const shuffled = shuffleTiles([...item.tiles]);
+        const targetAudio = target ? renderWordAudioButton(target.id, target.spelling, context.t) : '';
 
         return `
+          ${targetAudio ? `<div class="build-word-audio">${targetAudio}</div>` : ''}
           <p class="activity__prompt">${escapeHtml(item.prompt?.cs ?? context.t('buildWordPrompt'))}</p>
           <div class="build-area" aria-live="polite">
             <div class="build-area__slots" data-role="built" aria-label="${escapeHtml(context.t('buildWordBuilt'))}"></div>

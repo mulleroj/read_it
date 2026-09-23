@@ -2,6 +2,7 @@ import { checkSingleChoice } from '../core/evaluation.js';
 import { mountItemFlow } from './shared-item-flow.js';
 import { markOptionButtons, formatPatternLabel } from './find-pattern.js';
 import { escapeHtml, escapeAttr } from '../ui/html-utils.js';
+import { renderActivityWordBlock } from '../ui/word-audio-control.js';
 
 /** @type {import('./activity-types.js').ActivityModule} */
 const exitTicket = {
@@ -24,10 +25,7 @@ const exitTicket = {
         const options = item.optionPatternIds.map((id) => store.getPattern(id)).filter(Boolean);
 
         return `
-          <div class="activity__word activity__word--compact">
-            <p class="activity__spelling" lang="en">${escapeHtml(word.spelling)}</p>
-            <p class="activity__ipa" aria-label="IPA">${escapeHtml(word.ipa)}</p>
-          </div>
+          ${renderActivityWordBlock(word, context.t, { compact: true })}
           <p class="activity__prompt">${escapeHtml(item.prompt?.cs ?? context.t('exitTicketPrompt'))}</p>
           <div class="activity__options" role="group">
             ${options

@@ -1,6 +1,7 @@
 import { checkSortAssignments } from '../core/evaluation.js';
 import { mountItemFlow } from './shared-item-flow.js';
 import { escapeHtml } from '../ui/html-utils.js';
+import { renderWordAudioButton } from '../ui/word-audio-control.js';
 
 /** @type {import('./activity-types.js').ActivityModule} */
 const sortWords = {
@@ -23,12 +24,16 @@ const sortWords = {
           <p class="sort-help" id="sort-help-text">${escapeHtml(context.t('sortWordsHelp'))}</p>
           <div class="sort-pool" data-role="pool" aria-label="${escapeHtml(context.t('sortWordsPool'))}" aria-describedby="sort-help-text">
             ${words
-              .map(
-                (w) => `
-              <button type="button" class="word-chip" data-word-id="${escapeHtml(w.id)}" aria-pressed="false">
-                <span lang="en">${escapeHtml(w.spelling)}</span>
-              </button>`
-              )
+              .map((w) => {
+                const audio = renderWordAudioButton(w.id, w.spelling, context.t);
+                return `
+              <div class="sort-pool-item">
+                <button type="button" class="word-chip" data-word-id="${escapeHtml(w.id)}" aria-pressed="false">
+                  <span lang="en">${escapeHtml(w.spelling)}</span>
+                </button>
+                ${audio}
+              </div>`;
+              })
               .join('')}
           </div>
           <div class="sort-bins" role="group" aria-label="${escapeHtml(context.t('sortWordsBins'))}">
