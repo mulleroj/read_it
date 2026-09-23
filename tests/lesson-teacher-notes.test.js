@@ -23,6 +23,9 @@ describe('lesson teacher notes', () => {
     assert.ok(config.teacherNotes?.includes('gift'));
     assert.ok(config.teacherNotes.includes('hard g'));
     assert.ok(config.teacherNotes.includes('digraf'));
+    assert.ok(config.teacherNotes.includes('get a girl'));
+    assert.ok(config.teacherNotes.includes('neprozrazujte'));
+    assert.ok(config.teacherNotes.includes('Po exit ticketu'));
   });
 
   it('formatTeacherNotesParagraphs escapes HTML and splits paragraphs', () => {
