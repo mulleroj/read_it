@@ -114,7 +114,7 @@ Oba enginy splňují požadavek **plně lokální** syntézy (bez runtime API v 
 | CPU-only škola | ✅ vhodné | ✅ (pomalejší) |
 | Licence modelu | CC BY 4.0 (dataset) | Apache 2.0 |
 | Licence enginu | MIT | Apache 2.0 / MIT (onnx wrapper) |
-| Redistribuce MP3 | ✅ s atribucí datasetu | ✅ s Apache notices |
+| Redistribuce MP3 | ⚠️ závisí na MODEL_CARD vybraného hlasu | ⚠️ závisí na Apache 2.0 + ověření konkrétního hlasu |
 | espeak-ng (GPL) | ✅ ano | ✅ typicky ano |
 | Izolovaná slova (bez kontextu) | Nutný test | Nutný test |
 | Jednotný hlas pro 80–120 slov | Ano | Ano |
@@ -132,8 +132,8 @@ Oba enginy splňují požadavek **plně lokální** syntézy (bez runtime API v 
 | Komponenta | Licence | Redistribuce generovaného MP3 |
 |------------|---------|-------------------------------|
 | Piper binary / kód | MIT | Volná (s copyright notice) |
-| Voice model (alba) | Dataset **CC BY 4.0** | **Ano**, s uvedením zdroje datasetu / MODEL_CARD |
-| Voice model (alan, …) | Různé / nejasné | **Ne** bez explicitního schválení |
+| Voice model (alba) | Dataset **CC BY 4.0** | **Pravděpodobně ano** s atribucí – **ověřit MODEL_CARD** před release |
+| Voice model (alan, …) | Různé / nejasné | **Ne** bez explicitního schválení a právní kontroly |
 | espeak-ng (phonemizer) | **GPL v3** | Generované audio obvykle **není** odvozené dílo; **nesmí** se však redistribuovat espeak-ng binárka v produktu bez compliance |
 | Piper projekt | „Neukládá extra restrikce na hlasy“ – **MODEL_CARD rozhoduje** | Per hlas |
 
@@ -141,7 +141,7 @@ Oba enginy splňují požadavek **plně lokální** syntézy (bez runtime API v 
 
 | Komponenta | Licence | Redistribuce generovaného MP3 |
 |------------|---------|-------------------------------|
-| Kokoro-82M weights | **Apache 2.0** | **Ano** (NOTICE soubor v repu) |
+| Kokoro-82M weights | **Apache 2.0** | **Pravděpodobně ano** (NOTICE) – **ověřit** u zvoleného hlasu a toolchainu |
 | `kokoro` / `kokoro-onnx` | Apache 2.0 / MIT | Ano |
 | espeak-ng (pokud použit) | GPL v3 | Stejná poznámka jako u Piper |
 | Tréninková data | „Permissive/non-copyrighted“ + CC BY u části | Model Apache umožňuje deploy |
@@ -155,7 +155,7 @@ Po schválení enginu doplnit do [`docs/THIRD_PARTY.md`](THIRD_PARTY.md):
 - espeak-ng (pokud součást toolchainu)
 - Atribuce CC BY / Apache v dokumentaci projektu nebo `assets/audio/README` (TBD)
 
-**Generovaná MP3** v `assets/audio/` jsou **projektová aktiva** – redistribuovatelná pouze pokud stack hlasu to dovoluje.
+**Generovaná MP3** v `assets/audio/` jsou **projektová aktiva** – redistribuovatelná **až po ověření licence** konkrétně zvoleného hlasu/modelu (MODEL_CARD + právní review).
 
 ---
 
@@ -167,7 +167,6 @@ Typická rizika u TTS (platí pro oba enginy):
 
 | Riziko | Příklad u testovacích slov |
 |--------|---------------------------|
-| Amerikanismus | /ɑ/ vs /ɒ/ u *happy* |
 | Rhotic / non-rhotic | *car*, *bird* – nesprávná artikulace *r* |
 | Diphthong reduction | *coin*, *cow* – zploštění |
 | Soft *g* | *gym* vs /ɡ/ |

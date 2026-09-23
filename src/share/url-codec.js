@@ -2,6 +2,7 @@ import {
   LESSON_CONFIG_VERSION,
   validateLessonConfig,
   presetToLessonConfig,
+  lessonConfigMatchesPreset,
 } from '../lessons/lesson-config.js';
 import {
   compressToEncodedURIComponent,
@@ -128,15 +129,25 @@ export function resolvePresetShareId(config, store) {
   const preset = store.getLessonPreset(presetId);
   if (!preset) return null;
 
-  const unchanged =
-    config.exercises.length === preset.exercises.length &&
-    preset.exercises.every(
-      (slot, idx) =>
-        config.exercises[idx]?.exerciseId === slot.exerciseId &&
-        (config.exercises[idx]?.feedbackMode ?? undefined) === (slot.feedbackMode ?? undefined)
-    );
+  return lessonConfigMatchesPreset(config, preset) ? presetId : null;
+}
 
-  return unchanged ? presetId : null;
+/**
+ * Shared decision for preset vs custom cfg URLs (Builder launch + QR/share).
+ * @param {import('../lessons/lesson-config.js').LessonConfig} config
+ * @param {{ getLessonPreset?: (id: string) => object | null }} [store]
+ * @returns {{ lesson: string | null, cfg: string | null, tooLong: boolean }}
+ */
+export function resolveLessonShareQuery(config, store) {
+  const presetId = resolvePresetShareId(config, store);
+  if (presetId) {
+    return { lesson: presetId, cfg: null, tooLong: false };
+  }
+
+  const normalized = { ...config, kind: 'custom' };
+  const encoded = encodeLessonConfig(normalized);
+  const tooLong = isCfgPayloadTooLong(encoded);
+  return { lesson: null, cfg: encoded, tooLong };
 }
 
 /**
@@ -146,14 +157,12 @@ export function resolvePresetShareId(config, store) {
  * @param {{ getLessonPreset?: (id: string) => object | null }} [store]
  */
 export function buildLessonShareLinks(config, mode, baseUrl, store) {
-  const presetId = resolvePresetShareId(config, store);
-  if (presetId) {
-    const url = buildShareUrl(mode, { lesson: presetId }, baseUrl);
+  const query = resolveLessonShareQuery(config, store);
+  if (query.lesson) {
+    const url = buildShareUrl(mode, { lesson: query.lesson }, baseUrl);
     return { url, cfg: null, tooLong: false };
   }
 
-  const encoded = encodeLessonConfig(config);
-  const tooLong = isCfgPayloadTooLong(encoded);
-  const url = buildShareUrl(mode, { cfg: encoded }, baseUrl);
-  return { url, cfg: encoded, tooLong };
+  const url = buildShareUrl(mode, { cfg: query.cfg ?? undefined }, baseUrl);
+  return { url, cfg: query.cfg, tooLong: query.tooLong };
 }

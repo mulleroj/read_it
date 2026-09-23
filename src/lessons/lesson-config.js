@@ -223,3 +223,55 @@ export function applySlotOverrides(exercise, slot) {
   }
   return copy;
 }
+
+/**
+ * Normalizes optional slot fields for preset/share comparison.
+ * @param {LessonExerciseSlot} slot
+ */
+function normalizeExerciseSlot(slot) {
+  return {
+    exerciseId: slot.exerciseId,
+    feedbackMode: slot.feedbackMode ?? undefined,
+    difficulty: slot.difficulty ?? undefined,
+    minutes: slot.minutes ?? undefined,
+  };
+}
+
+/**
+ * True when two exercise slots share the same student-facing overrides.
+ * @param {LessonExerciseSlot} a
+ * @param {LessonExerciseSlot} b
+ */
+export function exerciseSlotsMatchPreset(a, b) {
+  const left = normalizeExerciseSlot(a);
+  const right = normalizeExerciseSlot(b);
+  return (
+    left.exerciseId === right.exerciseId &&
+    left.feedbackMode === right.feedbackMode &&
+    left.difficulty === right.difficulty &&
+    left.minutes === right.minutes
+  );
+}
+
+/**
+ * True when `config` matches the effective preset lesson (order, count, timing,
+ * difficulty and other student-facing settings). Metadata-only edits still
+ * require a custom cfg URL.
+ * @param {LessonConfig} config
+ * @param {PresetLesson} preset
+ */
+export function lessonConfigMatchesPreset(config, preset) {
+  const baseline = presetToLessonConfig(preset);
+
+  if (config.title !== baseline.title) return false;
+  if ((config.description ?? '') !== (baseline.description ?? '')) return false;
+  if (config.plannedMinutes !== baseline.plannedMinutes) return false;
+  if ((config.difficulty ?? undefined) !== (baseline.difficulty ?? undefined)) {
+    return false;
+  }
+  if (config.exercises.length !== baseline.exercises.length) return false;
+
+  return config.exercises.every((slot, idx) =>
+    exerciseSlotsMatchPreset(slot, baseline.exercises[idx])
+  );
+}

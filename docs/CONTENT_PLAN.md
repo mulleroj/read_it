@@ -113,10 +113,10 @@ Každý grafém má **jedno primární** `patternId`. Při jiné výslovnosti ne
 
 | Grafém / pár | Primární oblast | Výslovnostní role | Didaktická poznámka |
 |--------------|-----------------|-------------------|---------------------|
-| **ea** | Vowel Teams (`pat-ea-long-e`) | /iː/ v *eat, tree* | Sekundární: `pat-ea-short-e` /e/ (*head, bread*) – **jiný patternId**, v hlavní lekci max. 1 slovo /e/ jako kontrast |
+| **ea** | Vowel Teams (`pat-ea-long-e`) | /iː/ v *eat* | *tree* patří k `pat-ee`, ne k *ea*. Sekundární: `pat-ea-short-e` /e/ (*head, bread*) – **jiný patternId**, v hlavní lekci max. 1 slovo /e/ jako kontrast |
 | **ow** | **Diphthongs** (`pat-ow-diph`) pro /aʊ/ (*cow, brown*) | /aʊ/ | Vowel team `pat-ow-long-o` /əʊ/ (*snow, grow*) – **samostatný pattern**; ve smíšené lekci **ne oba najednou** |
 | **oi / oy** | Diphthongs | /ɔɪ/ | *oi* uprostřed, *oy* na konci – **jeden foném, dva grafémy** (`pat-oi`, `pat-oy`) |
-| **au / aw** | Diphthongs (`pat-aw`, `pat-au`) | /ɔː/ (*saw, law*) | Nepřidávat do hlavní lekce současně s *oi/oy*; v bance volitelně 2–3 slova |
+| **au / aw** | Vowel Teams (`pat-aw`, `pat-au`) | /ɔː/ (*saw, law*) – **monoftong**, ne dvojhláska | V bance volitelně 2–3 slova; nepatří do oblasti Diphthongs |
 | **r-controlled** | R-Controlled | RP non-rhotic | Popisovat jako **spelling + vowel quality**, ne „silné r“; audio povinné pro model |
 | **soft c/g** | Soft C/G | /s/, /dʒ/ | Výjimky hard *g* (*gift*) a hard *c* (*cat*) jako **kontrastní sada**, ne náhodné chyby |
 | **double consonants** | Double Consonants | spelling convention | *ck*, *ll*, *ss* – vysvětlit **pravopis**, ne délku artikulace |

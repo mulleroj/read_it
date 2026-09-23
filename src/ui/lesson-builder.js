@@ -14,7 +14,7 @@ import {
   importLessonJson,
 } from '../core/storage.js';
 import { renderLessonSharePanel } from './lesson-share.js';
-import { encodeLessonConfig } from '../share/url-codec.js';
+import { resolveLessonShareQuery } from '../share/url-codec.js';
 import { ACTIVITY_TYPE_LABELS } from '../config.js';
 import { getCategoryClass } from './category-styles.js';
 import { escapeHtml, escapeAttr } from './html-utils.js';
@@ -230,22 +230,14 @@ export function mountLessonBuilder(container, store, context) {
       return { teacher: '#', student: '#' };
     }
 
-    const presetId = draft.sourcePresetId ?? (draft.kind === 'preset' ? draft.id : null);
-    if (presetId && draft.exercises.every((slot, idx) => {
-      const preset = store.getLessonPreset(presetId);
-      return preset?.exercises[idx]?.exerciseId === slot.exerciseId;
-    })) {
-      return {
-        teacher: `#/teacher?lesson=${encodeURIComponent(presetId)}`,
-        student: `#/student?lesson=${encodeURIComponent(presetId)}`,
-      };
-    }
-
     try {
-      const cfg = encodeURIComponent(encodeLessonConfig({ ...draft, kind: 'custom' }));
+      const query = resolveLessonShareQuery({ ...draft, kind: 'custom' }, store);
+      const qs = query.lesson
+        ? `lesson=${encodeURIComponent(query.lesson)}`
+        : `cfg=${encodeURIComponent(query.cfg ?? '')}`;
       return {
-        teacher: `#/teacher?cfg=${cfg}`,
-        student: `#/student?cfg=${cfg}`,
+        teacher: `#/teacher?${qs}`,
+        student: `#/student?${qs}`,
       };
     } catch {
       return { teacher: '#', student: '#' };
