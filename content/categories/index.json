@@ -1,0 +1,27 @@
+[
+  {
+    "id": "cat-vowel-teams",
+    "label": { "cs": "Vowel teams", "en": "Vowel teams" },
+    "available": true
+  },
+  {
+    "id": "cat-r-controlled",
+    "label": { "cs": "R-controlled vowels", "en": "R-controlled vowels" },
+    "available": false
+  },
+  {
+    "id": "cat-diphthongs",
+    "label": { "cs": "Diphthongs", "en": "Diphthongs" },
+    "available": false
+  },
+  {
+    "id": "cat-soft-cg",
+    "label": { "cs": "Soft C and Soft G", "en": "Soft C and Soft G" },
+    "available": false
+  },
+  {
+    "id": "cat-double-consonants",
+    "label": { "cs": "Double consonants", "en": "Double consonants" },
+    "available": false
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "id": "les-vowel-teams-demo",
+    "preset": true,
+    "title": { "cs": "Vowel Teams – ukázková lekce" },
+    "description": {
+      "cs": "Demonstrační lekce se všemi dostupnými demo cvičeními. Není to kompletní 30minutový výukový modul – slouží k ověření Lesson Builderu a sdílení."
+    },
+    "plannedMinutes": 30,
+    "difficulty": "medium",
+    "exercises": [
+      { "exerciseId": "ex-find-pattern-demo", "feedbackMode": "practice" },
+      { "exerciseId": "ex-odd-one-out-demo", "feedbackMode": "practice" },
+      { "exerciseId": "ex-sort-words-demo", "feedbackMode": "practice" },
+      { "exerciseId": "ex-build-word-demo", "feedbackMode": "practice" },
+      { "exerciseId": "ex-exit-ticket-demo", "feedbackMode": "assessment" }
+    ],
+    "teacherNotes": {
+      "cs": "Toto je ukázková lekce pro milník M3. Pro plnou 30min hodinu bude v budoucnu doplněn reálný obsahový balíček."
+    }
+  }
+]

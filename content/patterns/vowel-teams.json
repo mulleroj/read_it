@@ -1,0 +1,40 @@
+[
+  {
+    "id": "pat-ai",
+    "categoryId": "cat-vowel-teams",
+    "label": { "cs": "ai → /eɪ/", "en": "ai as in rain" },
+    "graphemes": ["ai"],
+    "phoneme": "/eɪ/",
+    "notes": { "cs": "Typicky uprostřed slova" }
+  },
+  {
+    "id": "pat-ay",
+    "categoryId": "cat-vowel-teams",
+    "label": { "cs": "ay → /eɪ/", "en": "ay as in day" },
+    "graphemes": ["ay"],
+    "phoneme": "/eɪ/",
+    "notes": { "cs": "Typicky na konci slova" }
+  },
+  {
+    "id": "pat-ee",
+    "categoryId": "cat-vowel-teams",
+    "label": { "cs": "ee → /iː/", "en": "ee as in tree" },
+    "graphemes": ["ee"],
+    "phoneme": "/iː/"
+  },
+  {
+    "id": "pat-oa",
+    "categoryId": "cat-vowel-teams",
+    "label": { "cs": "oa → /əʊ/", "en": "oa as in boat" },
+    "graphemes": ["oa"],
+    "phoneme": "/əʊ/",
+    "notes": { "cs": "Britská angličtina (RP)" }
+  },
+  {
+    "id": "pat-igh",
+    "categoryId": "cat-vowel-teams",
+    "label": { "cs": "igh → /aɪ/", "en": "igh as in light" },
+    "graphemes": ["igh"],
+    "phoneme": "/aɪ/"
+  }
+]

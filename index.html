@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="READ IT! – English Reading Lab">
+  <title>READ IT! – English Reading Lab</title>
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Přeskočit na obsah</a>
+  <header class="app-header">
+    <div class="app-header__inner">
+      <a href="#/home" class="app-logo" data-nav>
+        <span class="app-logo__mark" aria-hidden="true">R</span>
+        READ IT!
+      </a>
+      <div class="app-header__right">
+        <div id="mode-badge" hidden></div>
+        <nav class="app-nav" aria-label="Hlavní navigace">
+          <a href="#/home" class="app-nav__link" data-nav data-route="home">Domů</a>
+          <a href="#/builder" class="app-nav__link" data-nav data-route="builder">Lekce</a>
+          <a href="#/teacher" class="app-nav__link" data-nav data-route="teacher">Učitel</a>
+          <a href="#/student" class="app-nav__link" data-nav data-route="student">Student</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <main id="main-content" class="app-main" tabindex="-1"></main>
+  <footer class="app-footer">
+    <p><strong>READ IT!</strong> · English Reading Lab</p>
+  </footer>
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>

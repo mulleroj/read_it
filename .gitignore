@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+
+# Secrets and credentials
+.env
+.env.*
+*.pem
+*.key
+credentials.json
+secrets/
+
+# Local and temporary files
+*.log
+npm-debug.log*
+*.tmp
+*.swp
+.cache/
+coverage/
+.nyc_output/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE / editor (local only)
+.idea/
+.vscode/
+*.code-workspace
+
+# Audio prototype outputs (not part of baseline app)
+tools/audio-prototype/output/
+
+# Build artifacts (future)
+dist/
+build/

@@ -1,0 +1,17 @@
+[
+  { "id": "w-rain", "spelling": "rain", "ipa": "/reɪn/", "patternIds": ["pat-ai"], "audioId": null, "difficulty": "easy" },
+  { "id": "w-wait", "spelling": "wait", "ipa": "/weɪt/", "patternIds": ["pat-ai"], "audioId": null, "difficulty": "easy" },
+  { "id": "w-chain", "spelling": "chain", "ipa": "/tʃeɪn/", "patternIds": ["pat-ai"], "audioId": null, "difficulty": "easy" },
+  { "id": "w-day", "spelling": "day", "ipa": "/deɪ/", "patternIds": ["pat-ay"], "audioId": null, "difficulty": "easy" },
+  { "id": "w-play", "spelling": "play", "ipa": "/pleɪ/", "patternIds": ["pat-ay"], "audioId": null, "difficulty": "easy" },
+  { "id": "w-grey", "spelling": "grey", "ipa": "/ɡreɪ/", "patternIds": ["pat-ay"], "audioId": null, "difficulty": "easy" },
+  { "id": "w-tree", "spelling": "tree", "ipa": "/triː/", "patternIds": ["pat-ee"], "audioId": null, "difficulty": "easy" },
+  { "id": "w-see", "spelling": "see", "ipa": "/siː/", "patternIds": ["pat-ee"], "audioId": null, "difficulty": "easy" },
+  { "id": "w-bee", "spelling": "bee", "ipa": "/biː/", "patternIds": ["pat-ee"], "audioId": null, "difficulty": "easy" },
+  { "id": "w-boat", "spelling": "boat", "ipa": "/bəʊt/", "patternIds": ["pat-oa"], "audioId": null, "difficulty": "medium" },
+  { "id": "w-coat", "spelling": "coat", "ipa": "/kəʊt/", "patternIds": ["pat-oa"], "audioId": null, "difficulty": "medium" },
+  { "id": "w-road", "spelling": "road", "ipa": "/rəʊt/", "patternIds": ["pat-oa"], "audioId": null, "difficulty": "medium" },
+  { "id": "w-light", "spelling": "light", "ipa": "/laɪt/", "patternIds": ["pat-igh"], "audioId": null, "difficulty": "medium" },
+  { "id": "w-night", "spelling": "night", "ipa": "/naɪt/", "patternIds": ["pat-igh"], "audioId": null, "difficulty": "medium" },
+  { "id": "w-high", "spelling": "high", "ipa": "/haɪ/", "patternIds": ["pat-igh"], "audioId": null, "difficulty": "medium" }
+]

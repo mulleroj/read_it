@@ -1,0 +1,8 @@
+{
+  "meta": "content/meta/version.json",
+  "categories": "content/categories/index.json",
+  "patterns": "content/patterns/vowel-teams.json",
+  "words": "content/words/demo-vowel-teams.json",
+  "exercises": "content/exercises/demo-m2a.json",
+  "lessons": "content/lessons/demo-preset.json"
+}

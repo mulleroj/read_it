@@ -1,0 +1,145 @@
+[
+  {
+    "id": "ex-find-pattern-demo",
+    "type": "find-pattern",
+    "title": { "cs": "Najdi vowel team" },
+    "categoryId": "cat-vowel-teams",
+    "difficulty": "easy",
+    "feedbackMode": "practice",
+    "autoCheck": true,
+    "items": [
+      {
+        "wordId": "w-rain",
+        "optionPatternIds": ["pat-ai", "pat-ay", "pat-ee", "pat-oa"],
+        "correctPatternId": "pat-ai",
+        "explanation": { "cs": "Rain obsahuje písmena ai, která se v britské angličtině vyslovují /eɪ/." }
+      },
+      {
+        "wordId": "w-day",
+        "optionPatternIds": ["pat-ai", "pat-ay", "pat-ee", "pat-igh"],
+        "correctPatternId": "pat-ay",
+        "explanation": { "cs": "Day končí na ay – běžný způsob zápisu /eɪ/ na konci slova." }
+      },
+      {
+        "wordId": "w-tree",
+        "optionPatternIds": ["pat-ee", "pat-ai", "pat-ay", "pat-oa"],
+        "correctPatternId": "pat-ee",
+        "explanation": { "cs": "Tree obsahuje ee pro dlouhé /iː/." }
+      }
+    ]
+  },
+  {
+    "id": "ex-odd-one-out-demo",
+    "type": "odd-one-out",
+    "title": { "cs": "Co nepatří?" },
+    "categoryId": "cat-vowel-teams",
+    "difficulty": "easy",
+    "feedbackMode": "practice",
+    "autoCheck": true,
+    "items": [
+      {
+        "prompt": { "cs": "Které slovo neobsahuje vzor ai?" },
+        "wordIds": ["w-rain", "w-wait", "w-chain", "w-day"],
+        "oddWordId": "w-day",
+        "explanation": { "cs": "Rain, wait a chain obsahují ai. Day používá ay na konci slova." }
+      },
+      {
+        "prompt": { "cs": "Které slovo neobsahuje vzor ee?" },
+        "wordIds": ["w-tree", "w-see", "w-bee", "w-boat"],
+        "oddWordId": "w-boat",
+        "explanation": { "cs": "Tree, see a bee mají ee (/iː/). Boat má oa (/əʊ/)." }
+      }
+    ]
+  },
+  {
+    "id": "ex-sort-words-demo",
+    "type": "sort-words",
+    "title": { "cs": "Roztřiď slova" },
+    "categoryId": "cat-vowel-teams",
+    "difficulty": "medium",
+    "feedbackMode": "practice",
+    "autoCheck": true,
+    "items": [
+      {
+        "prompt": { "cs": "Přiřaď každé slovo ke správnému vowel team vzoru." },
+        "wordIds": ["w-rain", "w-day", "w-tree", "w-boat", "w-light", "w-wait"],
+        "bins": [
+          { "patternId": "pat-ai", "label": "ai" },
+          { "patternId": "pat-ay", "label": "ay" },
+          { "patternId": "pat-ee", "label": "ee" },
+          { "patternId": "pat-oa", "label": "oa" },
+          { "patternId": "pat-igh", "label": "igh" }
+        ],
+        "correctAssignments": {
+          "w-rain": "pat-ai",
+          "w-wait": "pat-ai",
+          "w-day": "pat-ay",
+          "w-tree": "pat-ee",
+          "w-boat": "pat-oa",
+          "w-light": "pat-igh"
+        },
+        "explanation": { "cs": "Každé slovo patří právě k jednomu hlavnímu vowel teamu podle svého pravopisu." }
+      }
+    ]
+  },
+  {
+    "id": "ex-build-word-demo",
+    "type": "build-word",
+    "title": { "cs": "Sestav slovo" },
+    "categoryId": "cat-vowel-teams",
+    "difficulty": "easy",
+    "feedbackMode": "practice",
+    "autoCheck": true,
+    "items": [
+      {
+        "prompt": { "cs": "Sestav slovo s významem prší (dešť)." },
+        "targetWordId": "w-rain",
+        "tiles": ["r", "ai", "n"],
+        "correctOrder": ["r", "ai", "n"],
+        "explanation": { "cs": "Rain = r + ai + n. Vzor ai se vyslovuje /eɪ/." }
+      },
+      {
+        "prompt": { "cs": "Sestav slovo s významem noc (night)." },
+        "targetWordId": "w-night",
+        "tiles": ["n", "igh", "t"],
+        "correctOrder": ["n", "igh", "t"],
+        "explanation": { "cs": "Night = n + igh + t. Vzor igh se vyslovuje /aɪ/." }
+      }
+    ]
+  },
+  {
+    "id": "ex-exit-ticket-demo",
+    "type": "exit-ticket",
+    "title": { "cs": "Exit ticket – rychlý test" },
+    "categoryId": "cat-vowel-teams",
+    "difficulty": "medium",
+    "feedbackMode": "assessment",
+    "autoCheck": true,
+    "items": [
+      {
+        "wordId": "w-rain",
+        "optionPatternIds": ["pat-ai", "pat-ay", "pat-ee", "pat-oa"],
+        "correctPatternId": "pat-ai",
+        "explanation": { "cs": "Rain → ai /eɪ/." }
+      },
+      {
+        "wordId": "w-play",
+        "optionPatternIds": ["pat-ai", "pat-ay", "pat-ee", "pat-igh"],
+        "correctPatternId": "pat-ay",
+        "explanation": { "cs": "Play → ay /eɪ/." }
+      },
+      {
+        "wordId": "w-see",
+        "optionPatternIds": ["pat-ee", "pat-ai", "pat-oa", "pat-igh"],
+        "correctPatternId": "pat-ee",
+        "explanation": { "cs": "See → ee /iː/." }
+      },
+      {
+        "wordId": "w-road",
+        "optionPatternIds": ["pat-oa", "pat-ai", "pat-ay", "pat-ee"],
+        "correctPatternId": "pat-oa",
+        "explanation": { "cs": "Road → oa /əʊ/ (britská angličtina)." }
+      }
+    ]
+  }
+]
