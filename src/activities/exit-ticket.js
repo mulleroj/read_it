@@ -28,7 +28,7 @@ const exitTicket = {
             <p class="activity__spelling" lang="en">${escapeHtml(word.spelling)}</p>
             <p class="activity__ipa" aria-label="IPA">${escapeHtml(word.ipa)}</p>
           </div>
-          <p class="activity__prompt">${escapeHtml(context.t('exitTicketPrompt'))}</p>
+          <p class="activity__prompt">${escapeHtml(item.prompt?.cs ?? context.t('exitTicketPrompt'))}</p>
           <div class="activity__options" role="group">
             ${options
               .map(
@@ -61,7 +61,7 @@ const exitTicket = {
           userLabel: formatPatternLabel(store.getPattern(patternId)),
           correctLabel: formatPatternLabel(store.getPattern(item.correctPatternId)),
           explanation: item.explanation?.cs ?? '',
-          prompt: word?.spelling ?? '',
+          prompt: item.prompt?.cs ?? word?.spelling ?? '',
         };
       },
 

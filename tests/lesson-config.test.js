@@ -67,6 +67,33 @@ describe('lesson-config', () => {
     if (resolved.ok) assert.equal(resolved.resolved.length, 5);
   });
 
+  it('preserves teacherNotes through validateLessonConfig', async () => {
+    const index = JSON.parse(await readFile(join(root, 'content/index.json'), 'utf8'));
+    const loadBundle = async (paths) => {
+      const list = Array.isArray(paths) ? paths : [paths];
+      const chunks = await Promise.all(
+        list.map((p) => readFile(join(root, p), 'utf8').then(JSON.parse))
+      );
+      return chunks.flat();
+    };
+    const store = createContentStoreFromData({
+      meta: JSON.parse(await readFile(join(root, index.meta), 'utf8')),
+      categories: await loadBundle(index.categories),
+      patterns: await loadBundle(index.patterns),
+      words: await loadBundle(index.words),
+      exercises: await loadBundle(index.exercises),
+      lessons: await loadBundle(index.lessons),
+    });
+    const preset = store.getLessonPreset('les-read-it-30-mixed');
+    assert.ok(preset);
+    const config = presetToLessonConfig(preset);
+    const resolved = resolveLessonConfig(config, store);
+    assert.equal(resolved.ok, true);
+    if (resolved.ok) {
+      assert.ok(resolved.config.teacherNotes?.includes('gift'));
+    }
+  });
+
   it('fails on missing exercise ids', async () => {
     const store = await loadDemoStore();
     const config = createEmptyLessonConfig({

@@ -7,21 +7,21 @@
   {
     "id": "cat-r-controlled",
     "label": { "cs": "R-controlled vowels", "en": "R-controlled vowels" },
-    "available": false
+    "available": true
   },
   {
     "id": "cat-diphthongs",
     "label": { "cs": "Diphthongs", "en": "Diphthongs" },
-    "available": false
+    "available": true
   },
   {
     "id": "cat-soft-cg",
     "label": { "cs": "Soft C and Soft G", "en": "Soft C and Soft G" },
-    "available": false
+    "available": true
   },
   {
     "id": "cat-double-consonants",
     "label": { "cs": "Double consonants", "en": "Double consonants" },
-    "available": false
+    "available": true
   }
 ]

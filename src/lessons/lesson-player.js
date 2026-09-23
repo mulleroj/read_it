@@ -1,6 +1,11 @@
 import { getActivity } from '../activities/registry.js';
 import { applySlotOverrides } from './lesson-config.js';
 import { estimateLessonDuration } from './duration.js';
+import {
+  isAssessmentExercise,
+  renderLessonTeacherNotesOverview,
+  renderLessonTeacherNotesPanel,
+} from './lesson-teacher-notes.js';
 import { escapeHtml } from '../ui/html-utils.js';
 import { iconArrowRight, iconCheck, iconTrophy } from '../ui/icons.js';
 
@@ -94,6 +99,7 @@ export function mountLessonPlayer(container, config, resolved, mode, store, cont
           <p class="lesson-duration__note">${escapeHtml(context.t('lessonDurationDisclaimer'))}</p>
           ${warning}
         </div>
+        ${renderTeacherNotesOverview()}
         <section class="lesson-sequence" aria-labelledby="lesson-sequence-title">
           <h2 id="lesson-sequence-title" class="lesson-sequence__title">${escapeHtml(context.t('lessonSequence'))}</h2>
           <ol class="lesson-sequence__list">${items}</ol>
@@ -166,14 +172,20 @@ export function mountLessonPlayer(container, config, resolved, mode, store, cont
       inner.className = 'activity-host';
       layout.appendChild(inner);
 
-      const panel = document.createElement('aside');
-      panel.className = 'teacher-panel';
-      panel.setAttribute('aria-label', context.t('teacherPanelTitle'));
-      panel.innerHTML = `
-        <h2 class="teacher-panel__title">${context.t('teacherPanelTitle')}</h2>
-        <p class="teacher-panel__lesson-note">${escapeHtml(context.t('lessonTeacherNote'))}</p>
-      `;
-      layout.appendChild(panel);
+      const notesHtml = renderTeacherNotesAside(exercise);
+      if (notesHtml) {
+        layout.insertAdjacentHTML('beforeend', notesHtml);
+      } else {
+        const panel = document.createElement('aside');
+        panel.className = 'teacher-panel';
+        panel.setAttribute('aria-label', context.t('teacherPanelTitle'));
+        panel.innerHTML = `
+          <h2 class="teacher-panel__title">${escapeHtml(context.t('teacherPanelTitle'))}</h2>
+          <p class="teacher-panel__lesson-note">${escapeHtml(context.t('lessonTeacherNote'))}</p>
+        `;
+        layout.appendChild(panel);
+      }
+
       activityHost.appendChild(layout);
       activeActivity = activity.mount(inner, exercise, { mode, t: context.t }, store);
     } else {
@@ -249,5 +261,32 @@ export function mountLessonPlayer(container, config, resolved, mode, store, cont
   function destroyActivity() {
     if (activeActivity?.destroy) activeActivity.destroy();
     activeActivity = null;
+  }
+
+  function hasTeacherNotes() {
+    return mode === 'teacher' && Boolean(config.teacherNotes?.trim());
+  }
+
+  function renderTeacherNotesOverview() {
+    if (!hasTeacherNotes()) return '';
+    return renderLessonTeacherNotesOverview(config.teacherNotes, context.t('lessonTeacherNotesTitle'));
+  }
+
+  /**
+   * @param {object} exercise
+   * @returns {string}
+   */
+  function renderTeacherNotesAside(exercise) {
+    if (!hasTeacherNotes()) return '';
+
+    const nextEntry = resolved[exerciseIndex + 1];
+    const showAssessmentCallout =
+      isAssessmentExercise(exercise) ||
+      (nextEntry && isAssessmentExercise(applySlotOverrides(nextEntry.exercise, nextEntry.slot)));
+
+    return renderLessonTeacherNotesPanel(config.teacherNotes, {
+      title: context.t('lessonTeacherNotesTitle'),
+      callout: showAssessmentCallout ? context.t('lessonTeacherNotesCallout') : undefined,
+    });
   }
 }

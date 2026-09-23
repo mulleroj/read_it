@@ -1,8 +1,20 @@
 {
   "meta": "content/meta/version.json",
   "categories": "content/categories/index.json",
-  "patterns": "content/patterns/vowel-teams.json",
-  "words": "content/words/demo-vowel-teams.json",
-  "exercises": "content/exercises/demo-m2a.json",
-  "lessons": "content/lessons/demo-preset.json"
+  "patterns": [
+    "content/patterns/vowel-teams.json",
+    "content/patterns/mixed-patterns.json"
+  ],
+  "words": [
+    "content/words/demo-vowel-teams.json",
+    "content/words/mixed-read-it.json"
+  ],
+  "exercises": [
+    "content/exercises/demo-m2a.json",
+    "content/exercises/mixed-m6b.json"
+  ],
+  "lessons": [
+    "content/lessons/demo-preset.json",
+    "content/lessons/mixed-preset.json"
+  ]
 }

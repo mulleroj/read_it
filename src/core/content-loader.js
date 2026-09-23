@@ -63,13 +63,13 @@ export async function loadContentStore(baseUrl = '', fetchFn = fetch) {
 
   const fetches = [
     fetchJson(`${root}${index.meta}`, fetchFn),
-    fetchJson(`${root}${index.categories}`, fetchFn),
-    fetchJson(`${root}${index.patterns}`, fetchFn),
-    fetchJson(`${root}${index.words}`, fetchFn),
-    fetchJson(`${root}${index.exercises}`, fetchFn),
+    loadJsonBundle(`${root}`, index.categories, fetchFn),
+    loadJsonBundle(`${root}`, index.patterns, fetchFn),
+    loadJsonBundle(`${root}`, index.words, fetchFn),
+    loadJsonBundle(`${root}`, index.exercises, fetchFn),
   ];
   if (index.lessons) {
-    fetches.push(fetchJson(`${root}${index.lessons}`, fetchFn));
+    fetches.push(loadJsonBundle(`${root}`, index.lessons, fetchFn));
   }
 
   const results = await Promise.all(fetches);
@@ -196,4 +196,106 @@ async function fetchJson(url, fetchFn) {
     throw new Error(`Chyba načítání ${url} (${res.status})`);
   }
   return res.json();
+}
+
+/**
+ * Load one JSON bundle path or merge several bundle files (arrays concatenated).
+ * @param {string} root
+ * @param {string | string[]} pathOrPaths
+ * @param {typeof fetch} fetchFn
+ */
+async function loadJsonBundle(root, pathOrPaths, fetchFn) {
+  const paths = Array.isArray(pathOrPaths) ? pathOrPaths : [pathOrPaths];
+  const chunks = await Promise.all(paths.map((p) => fetchJson(`${root}${p}`, fetchFn)));
+  return chunks.flat();
+}
+
+/**
+ * Validate cross-references inside a loaded content store (for tests and CI).
+ * @param {ReturnType<typeof createContentStoreFromData>} store
+ */
+export function validateContentReferences(store) {
+  const errors = [];
+
+  for (const word of store.wordsById.values()) {
+    for (const patternId of word.patternIds) {
+      if (!store.patternsById.has(patternId)) {
+        errors.push(`Word ${word.id} references missing pattern ${patternId}`);
+      }
+    }
+    if (word.audioId != null) {
+      errors.push(`Word ${word.id} has audioId ${word.audioId} but production audio is not shipped`);
+    }
+  }
+
+  for (const pattern of store.patternsById.values()) {
+    if (!store.categoriesById.has(pattern.categoryId)) {
+      errors.push(`Pattern ${pattern.id} references missing category ${pattern.categoryId}`);
+    }
+  }
+
+  for (const exercise of store.exercisesById.values()) {
+    if (!store.categoriesById.has(exercise.categoryId)) {
+      errors.push(`Exercise ${exercise.id} references missing category ${exercise.categoryId}`);
+    }
+    for (const item of exercise.items) {
+      collectExerciseItemReferenceErrors(exercise, item, store, errors);
+    }
+  }
+
+  for (const lesson of store.lessonsById.values()) {
+    for (const slot of lesson.exercises) {
+      if (!store.exercisesById.has(slot.exerciseId)) {
+        errors.push(`Lesson ${lesson.id} references missing exercise ${slot.exerciseId}`);
+      }
+    }
+  }
+
+  if (errors.length > 0) {
+    throw new Error(`Content reference validation failed:\n${errors.join('\n')}`);
+  }
+}
+
+/**
+ * @param {object} exercise
+ * @param {object} item
+ * @param {ReturnType<typeof createContentStoreFromData>} store
+ * @param {string[]} errors
+ */
+function collectExerciseItemReferenceErrors(exercise, item, store, errors) {
+  const prefix = `${exercise.id} item`;
+
+  if (item.wordId && !store.wordsById.has(item.wordId)) {
+    errors.push(`${prefix}: missing word ${item.wordId}`);
+  }
+
+  for (const wordId of item.wordIds ?? []) {
+    if (!store.wordsById.has(wordId)) {
+      errors.push(`${prefix}: missing word ${wordId}`);
+    }
+  }
+
+  for (const patternId of item.optionPatternIds ?? []) {
+    if (!store.patternsById.has(patternId)) {
+      errors.push(`${prefix}: missing option pattern ${patternId}`);
+    }
+  }
+
+  if (item.correctPatternId && !store.patternsById.has(item.correctPatternId)) {
+    errors.push(`${prefix}: missing correct pattern ${item.correctPatternId}`);
+  }
+
+  for (const patternId of Object.values(item.correctAssignments ?? {})) {
+    if (!store.patternsById.has(patternId) && !String(patternId).startsWith('bin-')) {
+      errors.push(`${prefix}: sort assignment references unknown pattern ${patternId}`);
+    }
+  }
+
+  if (item.targetWordId && !store.wordsById.has(item.targetWordId)) {
+    errors.push(`${prefix}: missing target word ${item.targetWordId}`);
+  }
+
+  if (item.oddWordId && !store.wordsById.has(item.oddWordId)) {
+    errors.push(`${prefix}: missing odd word ${item.oddWordId}`);
+  }
 }

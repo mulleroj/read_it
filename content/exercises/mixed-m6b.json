@@ -1,0 +1,163 @@
+[
+  {
+    "id": "ex-find-pattern-mixed",
+    "type": "find-pattern",
+    "title": { "cs": "Najdi pravopisný vzor – pět oblastí" },
+    "prompt": { "cs": "Který pravopisný vzor odpovídá zápisu ve slově?" },
+    "categoryId": "cat-vowel-teams",
+    "difficulty": "easy",
+    "feedbackMode": "practice",
+    "autoCheck": true,
+    "items": [
+      {
+        "wordId": "w-rain",
+        "optionPatternIds": ["pat-ai", "pat-ay", "pat-ee", "pat-oa"],
+        "correctPatternId": "pat-ai",
+        "explanation": { "cs": "Rain obsahuje ai → /eɪ/ (vowel team)." }
+      },
+      {
+        "wordId": "w-car",
+        "optionPatternIds": ["pat-ar", "pat-ir", "pat-ur", "pat-or"],
+        "correctPatternId": "pat-ar",
+        "explanation": { "cs": "Car má ar – v britské angličtině /ɑː/ (non-rhotic, kvalita vokálu)." }
+      },
+      {
+        "wordId": "w-coin",
+        "optionPatternIds": ["pat-oi", "pat-oy", "pat-ou", "pat-ow-diph"],
+        "correctPatternId": "pat-oi",
+        "explanation": { "cs": "Coin obsahuje oi → /ɔɪ/ (diphthong)." }
+      },
+      {
+        "wordId": "w-city",
+        "optionPatternIds": ["pat-soft-c", "pat-soft-g", "pat-hard-c-g", "pat-ai"],
+        "correctPatternId": "pat-soft-c",
+        "explanation": { "cs": "City má měkké c před i → /s/. Toto je cílový příklad soft c." }
+      },
+      {
+        "wordId": "w-happy",
+        "optionPatternIds": ["pat-double-medial", "pat-ll", "pat-ss", "pat-ck"],
+        "correctPatternId": "pat-double-medial",
+        "explanation": { "cs": "Happy má dvojité písmeno pp – pravopisný vzor. Souhláska se nevyslovuje dvakrát." }
+      },
+      {
+        "wordId": "w-tree",
+        "optionPatternIds": ["pat-ee", "pat-ai", "pat-ay", "pat-oa"],
+        "correctPatternId": "pat-ee",
+        "explanation": { "cs": "Tree obsahuje ee → /iː/. Ne plést s ea." }
+      }
+    ]
+  },
+  {
+    "id": "ex-sort-words-mixed",
+    "type": "sort-words",
+    "title": { "cs": "Roztřiď slova do pěti oblastí" },
+    "categoryId": "cat-vowel-teams",
+    "difficulty": "medium",
+    "feedbackMode": "practice",
+    "autoCheck": true,
+    "items": [
+      {
+        "prompt": { "cs": "Přiřaď každé slovo ke správné výukové oblasti (vowel teams, r-controlled, diphthongs, soft c/g, double consonants)." },
+        "wordIds": ["w-rain", "w-day", "w-car", "w-bird", "w-coin", "w-cow", "w-city", "w-gym", "w-happy", "w-letter"],
+        "bins": [
+          { "patternId": "bin-vt", "label": "Vowel Teams" },
+          { "patternId": "bin-r", "label": "R-Controlled" },
+          { "patternId": "bin-diph", "label": "Diphthongs" },
+          { "patternId": "bin-soft", "label": "Soft C / G" },
+          { "patternId": "bin-dc", "label": "Double Consonants" }
+        ],
+        "correctAssignments": {
+          "w-rain": "bin-vt",
+          "w-day": "bin-vt",
+          "w-car": "bin-r",
+          "w-bird": "bin-r",
+          "w-coin": "bin-diph",
+          "w-cow": "bin-diph",
+          "w-city": "bin-soft",
+          "w-gym": "bin-soft",
+          "w-happy": "bin-dc",
+          "w-letter": "bin-dc"
+        },
+        "explanation": { "cs": "Každé slovo patří do jedné z pěti oblastí podle hlavního pravopisného vzoru." }
+      }
+    ]
+  },
+  {
+    "id": "ex-build-word-mixed",
+    "type": "build-word",
+    "title": { "cs": "Sestav slovo z dílků" },
+    "categoryId": "cat-double-consonants",
+    "difficulty": "easy",
+    "feedbackMode": "practice",
+    "autoCheck": true,
+    "items": [
+      {
+        "prompt": { "cs": "Sestav slovo rain (prší)." },
+        "targetWordId": "w-rain",
+        "tiles": ["r", "ai", "n"],
+        "correctOrder": ["r", "ai", "n"],
+        "explanation": { "cs": "Rain = r + ai + n. Ai je pravopisná jednotka (vowel team)." }
+      },
+      {
+        "prompt": { "cs": "Sestav slovo bell (zvonek)." },
+        "targetWordId": "w-bell",
+        "tiles": ["b", "e", "ll"],
+        "correctOrder": ["b", "e", "ll"],
+        "explanation": { "cs": "Bell = b + e + ll. Ll je dvojité písmeno – souhláska se nevyslovuje dvakrát." }
+      },
+      {
+        "prompt": { "cs": "Sestav slovo clock (hodiny)." },
+        "targetWordId": "w-clock",
+        "tiles": ["c", "l", "o", "ck"],
+        "correctOrder": ["c", "l", "o", "ck"],
+        "explanation": { "cs": "Clock = c + l + o + ck. Ck je pravopisný digraf – ne totéž co dvojité písmeno ll." }
+      }
+    ]
+  },
+  {
+    "id": "ex-exit-ticket-mixed",
+    "type": "exit-ticket",
+    "title": { "cs": "Exit ticket – smíšený test" },
+    "categoryId": "cat-r-controlled",
+    "difficulty": "medium",
+    "feedbackMode": "assessment",
+    "autoCheck": true,
+    "items": [
+      {
+        "wordId": "w-bird",
+        "prompt": { "cs": "Který r-controlled vzor odpovídá zápisu ve slově bird?" },
+        "optionPatternIds": ["pat-ir", "pat-ar", "pat-ur", "pat-er"],
+        "correctPatternId": "pat-ir",
+        "explanation": { "cs": "Bird → ir /ɜː/ (RP, non-rhotic)." }
+      },
+      {
+        "wordId": "w-cow",
+        "prompt": { "cs": "Který zápis dvojhlásky odpovídá slovu cow?" },
+        "optionPatternIds": ["pat-ow-diph", "pat-oi", "pat-oa", "pat-ou"],
+        "correctPatternId": "pat-ow-diph",
+        "explanation": { "cs": "Cow → ow /aʊ/. Ne plést s oa /əʊ/ (např. boat)." }
+      },
+      {
+        "wordId": "w-gym",
+        "prompt": { "cs": "Který popis výslovnosti g v gym je správný?" },
+        "optionPatternIds": ["pat-soft-g", "pat-soft-c", "pat-hard-c-g", "pat-oi"],
+        "correctPatternId": "pat-soft-g",
+        "explanation": { "cs": "Gym → měkké g /dʒ/ před y. Toto je cílový příklad soft g." }
+      },
+      {
+        "wordId": "w-gift",
+        "prompt": { "cs": "Který popis písmena g v gift je správný?" },
+        "optionPatternIds": ["pat-hard-c-g", "pat-soft-g", "pat-soft-c", "pat-oi"],
+        "correctPatternId": "pat-hard-c-g",
+        "explanation": { "cs": "Gift má hard g /ɡ/ – výjimka k pravidlu soft g. Není to měkké g." }
+      },
+      {
+        "wordId": "w-boat",
+        "prompt": { "cs": "Který vowel team vzor slovo boat obsahuje?" },
+        "optionPatternIds": ["pat-oa", "pat-ow-diph", "pat-oi", "pat-ai"],
+        "correctPatternId": "pat-oa",
+        "explanation": { "cs": "Boat → oa /əʊ/ (RP). Jiný vzor než diphthong ow v cow." }
+      }
+    ]
+  }
+]

@@ -28,8 +28,14 @@ desktop.ini
 .vscode/
 *.code-workspace
 
-# Audio prototype outputs (not part of baseline app)
+# M6A.2 audio prototype – local binaries, models and outputs only
+tools/audio-prototype/piper/
+tools/audio-prototype/voices/
 tools/audio-prototype/output/
+tools/audio-prototype/_dl/
+tools/audio-prototype/*.zip
+tools/audio-prototype/**/*.onnx
+tools/audio-prototype/**/*.onnx.json
 
 # Build artifacts (future)
 dist/

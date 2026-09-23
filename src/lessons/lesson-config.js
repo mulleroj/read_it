@@ -21,6 +21,7 @@
  * @property {string} [createdAt]
  * @property {string} [updatedAt]
  * @property {string} [sourcePresetId]
+ * @property {string} [teacherNotes]
  */
 
 /**
@@ -79,6 +80,7 @@ export function presetToLessonConfig(preset) {
     difficulty: preset.difficulty,
     exercises: preset.exercises.map((slot) => ({ ...slot })),
     sourcePresetId: preset.id,
+    teacherNotes: preset.teacherNotes?.cs?.trim() ? preset.teacherNotes.cs.trim() : undefined,
   };
 }
 
@@ -170,6 +172,10 @@ export function validateLessonConfig(raw) {
     createdAt: typeof cfg.createdAt === 'string' ? cfg.createdAt : undefined,
     updatedAt: typeof cfg.updatedAt === 'string' ? cfg.updatedAt : undefined,
     sourcePresetId: typeof cfg.sourcePresetId === 'string' ? cfg.sourcePresetId : undefined,
+    teacherNotes:
+      typeof cfg.teacherNotes === 'string' && cfg.teacherNotes.trim()
+        ? cfg.teacherNotes.trim()
+        : undefined,
   };
 
   return { ok: true, config };

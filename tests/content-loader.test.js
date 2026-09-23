@@ -44,7 +44,7 @@ describe('content-loader', () => {
 
     assert.equal(store.categoriesById.size, 5);
     assert.equal(store.getCategory('cat-vowel-teams')?.available, true);
-    assert.equal(store.getCategory('cat-diphthongs')?.available, false);
+    assert.equal(store.getCategory('cat-diphthongs')?.available, true);
     assert.equal(store.getWord('w-rain')?.ipa, '/reɪn/');
     assert.equal(store.getExercise('ex-find-pattern-demo')?.type, 'find-pattern');
     assert.equal(store.exercisesById.size, 5);

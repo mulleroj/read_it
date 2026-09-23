@@ -25,7 +25,7 @@ const findPattern = {
             <p class="activity__spelling" lang="en">${escapeHtml(word.spelling)}</p>
             <p class="activity__ipa" aria-label="IPA">${escapeHtml(word.ipa)}</p>
           </div>
-          <p class="activity__prompt">${escapeHtml(context.t('findPatternPrompt'))}</p>
+          <p class="activity__prompt">${escapeHtml(item.prompt?.cs ?? exercise.prompt?.cs ?? context.t('findPatternPrompt'))}</p>
           <div class="activity__options" role="group" aria-label="${escapeAttr(context.t('findPatternOptions'))}">
             ${options
               .map(
@@ -58,7 +58,7 @@ const findPattern = {
           userLabel: formatPatternLabel(store.getPattern(patternId)),
           correctLabel: formatPatternLabel(store.getPattern(item.correctPatternId)),
           explanation: item.explanation?.cs ?? '',
-          prompt: word?.spelling ?? '',
+          prompt: item.prompt?.cs ?? exercise.prompt?.cs ?? word?.spelling ?? '',
         };
       },
 

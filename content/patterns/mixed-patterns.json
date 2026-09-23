@@ -1,0 +1,124 @@
+[
+  {
+    "id": "pat-ar",
+    "categoryId": "cat-r-controlled",
+    "label": { "cs": "ar → /ɑː/ (RP)", "en": "ar as in car" },
+    "graphemes": ["ar"],
+    "phoneme": "/ɑː/",
+    "notes": { "cs": "Britská angličtina (non-rhotic) – kvalita vokálu, ne silné r" }
+  },
+  {
+    "id": "pat-ir",
+    "categoryId": "cat-r-controlled",
+    "label": { "cs": "ir → /ɜː/ (RP)", "en": "ir as in bird" },
+    "graphemes": ["ir"],
+    "phoneme": "/ɜː/",
+    "notes": { "cs": "Non-rhotic – stejná kvalita jako er/ur v RP" }
+  },
+  {
+    "id": "pat-ur",
+    "categoryId": "cat-r-controlled",
+    "label": { "cs": "ur → /ɜː/ (RP)", "en": "ur as in turn" },
+    "graphemes": ["ur"],
+    "phoneme": "/ɜː/"
+  },
+  {
+    "id": "pat-or",
+    "categoryId": "cat-r-controlled",
+    "label": { "cs": "or → /ɔː/ (RP)", "en": "or as in fork" },
+    "graphemes": ["or"],
+    "phoneme": "/ɔː/"
+  },
+  {
+    "id": "pat-er",
+    "categoryId": "cat-r-controlled",
+    "label": { "cs": "er → /ɜː/ (RP)", "en": "er as in her" },
+    "graphemes": ["er"],
+    "phoneme": "/ɜː/"
+  },
+  {
+    "id": "pat-oi",
+    "categoryId": "cat-diphthongs",
+    "label": { "cs": "oi → /ɔɪ/", "en": "oi as in coin" },
+    "graphemes": ["oi"],
+    "phoneme": "/ɔɪ/"
+  },
+  {
+    "id": "pat-oy",
+    "categoryId": "cat-diphthongs",
+    "label": { "cs": "oy → /ɔɪ/", "en": "oy as in boy" },
+    "graphemes": ["oy"],
+    "phoneme": "/ɔɪ/"
+  },
+  {
+    "id": "pat-ou",
+    "categoryId": "cat-diphthongs",
+    "label": { "cs": "ou → /aʊ/", "en": "ou as in house" },
+    "graphemes": ["ou"],
+    "phoneme": "/aʊ/"
+  },
+  {
+    "id": "pat-ow-diph",
+    "categoryId": "cat-diphthongs",
+    "label": { "cs": "ow → /aʊ/", "en": "ow as in cow" },
+    "graphemes": ["ow"],
+    "phoneme": "/aʊ/",
+    "notes": { "cs": "Diphthong /aʊ/ – ne plést s oa /əʊ/" }
+  },
+  {
+    "id": "pat-soft-c",
+    "categoryId": "cat-soft-cg",
+    "label": { "cs": "měkké c → /s/", "en": "soft c as in city" },
+    "graphemes": ["c"],
+    "phoneme": "/s/",
+    "notes": { "cs": "Cílový vzor: c před e, i, y → /s/" }
+  },
+  {
+    "id": "pat-soft-g",
+    "categoryId": "cat-soft-cg",
+    "label": { "cs": "měkké g → /dʒ/", "en": "soft g as in gym" },
+    "graphemes": ["g"],
+    "phoneme": "/dʒ/",
+    "notes": { "cs": "Cílový vzor: g před e, i, y → /dʒ/ (s výjimkami)" }
+  },
+  {
+    "id": "pat-hard-c-g",
+    "categoryId": "cat-soft-cg",
+    "label": { "cs": "hard c / hard g (kontrast)", "en": "hard c or hard g" },
+    "graphemes": ["c", "g"],
+    "phoneme": "—",
+    "notes": { "cs": "Kontrastní položka – NE měkké c/g. Např. gift, get, cat." }
+  },
+  {
+    "id": "pat-ll",
+    "categoryId": "cat-double-consonants",
+    "label": { "cs": "ll (dvojité písmeno)", "en": "ll as in bell" },
+    "graphemes": ["ll"],
+    "phoneme": "—",
+    "notes": { "cs": "Pravopisný vzor – souhláska se nevyslovuje dvakrát" }
+  },
+  {
+    "id": "pat-ss",
+    "categoryId": "cat-double-consonants",
+    "label": { "cs": "ss (dvojité písmeno)", "en": "ss as in miss" },
+    "graphemes": ["ss"],
+    "phoneme": "—",
+    "notes": { "cs": "Pravopisný vzor – souhláska se nevyslovuje dvakrát" }
+  },
+  {
+    "id": "pat-ck",
+    "categoryId": "cat-double-consonants",
+    "label": { "cs": "ck (pravopisný digraf)", "en": "ck as in clock" },
+    "graphemes": ["ck"],
+    "phoneme": "—",
+    "notes": { "cs": "Ortografický digraf po krátké samohlásce – ne totéž co ll/pp" }
+  },
+  {
+    "id": "pat-double-medial",
+    "categoryId": "cat-double-consonants",
+    "label": { "cs": "pp / tt (dvojité písmeno)", "en": "doubled letters pp or tt" },
+    "graphemes": ["pp", "tt"],
+    "phoneme": "—",
+    "notes": { "cs": "Pravopisný geminát uprostřed slova – ne dvojité vyslovování" }
+  }
+]

@@ -119,6 +119,9 @@ const cs = {
   lessonCompleteText: (params) => `Dokončil/a jsi lekci „${params.title}".`,
   lessonRestart: 'Projít znovu',
   lessonTeacherNote: 'Ručně odhaluj odpovědi a postupuj až po diskusi.',
+  lessonTeacherNotesTitle: 'Poznámky k lekci',
+  lessonTeacherNotesCallout:
+    'Před exit ticketem: uveď kontrast hard g (gift, get, girl). G před e/i/y není vždy měkké – teprve potom spusť assessment.',
   lessonNotFound: 'Lekci se nepodařilo načíst.',
   lessonResolveError: 'Lekce obsahuje chyby a nelze ji spustit.',
   shareTitle: 'Sdílení lekce',

@@ -553,6 +553,10 @@ body::before {
     grid-template-columns: 1fr 240px;
     align-items: start;
   }
+
+  .activity-layout--teacher:has(.teacher-panel--lesson-notes) {
+    grid-template-columns: 1fr minmax(260px, 320px);
+  }
 }
 
 .teacher-panel {
@@ -588,6 +592,54 @@ body::before {
 
 .teacher-panel__list li:last-child {
   margin-bottom: 0;
+}
+
+.teacher-panel__lesson-note,
+.teacher-panel__note-p {
+  margin: 0 0 var(--space-3);
+  font-size: var(--text-sm);
+  line-height: 1.55;
+  color: #78350f;
+}
+
+.teacher-panel__note-p:last-child {
+  margin-bottom: 0;
+}
+
+.teacher-panel__callout {
+  margin: 0 0 var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background: #fef3c7;
+  border: 1px solid #f59e0b;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  line-height: 1.5;
+  color: #92400e;
+}
+
+.teacher-panel--lesson-notes .teacher-panel__notes-body {
+  max-height: min(60vh, 28rem);
+  overflow-y: auto;
+}
+
+.lesson-teacher-notes {
+  margin-bottom: var(--space-6);
+  padding: var(--space-5);
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: var(--radius-lg);
+}
+
+.lesson-teacher-notes__title {
+  margin: 0 0 var(--space-3);
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: #92400e;
+}
+
+.lesson-teacher-notes__body .teacher-panel__note-p {
+  color: #78350f;
 }
 
 /* ── Activity panel ── */
