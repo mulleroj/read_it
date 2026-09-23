@@ -13,8 +13,7 @@ import {
   exportLessonJson,
   importLessonJson,
 } from '../core/storage.js';
-import { renderLessonSharePanel } from './lesson-share.js';
-import { resolveLessonShareQuery } from '../share/url-codec.js';
+import { resolveBuilderShareState, syncBuilderShareOutputs } from './builder-share-sync.js';
 import { ACTIVITY_TYPE_LABELS } from '../config.js';
 import { getCategoryClass } from './category-styles.js';
 import { escapeHtml, escapeAttr } from './html-utils.js';
@@ -140,7 +139,7 @@ export function mountLessonBuilder(container, store, context) {
         ? `<p class="lesson-warning" role="status">${escapeHtml(context.t('lessonDurationShort', { gap: String(Math.abs(duration.contentGap)) }))}</p>`
         : '';
 
-    const launchLinks = buildLaunchLinks(validation.ok);
+    const launchLinks = resolveBuilderShareState(draft, store).launchLinks;
 
     host.innerHTML = `
       <header class="lesson-builder__header">
@@ -218,38 +217,17 @@ export function mountLessonBuilder(container, store, context) {
       <div class="lesson-builder__share-host"></div>`;
 
     bindEvents();
-    if (validation.ok) {
-      const shareHost = host.querySelector('.lesson-builder__share-host');
-      if (shareHost) renderLessonSharePanel(shareHost, draft, context, store);
-    }
-  }
-
-  /** @param {boolean} valid */
-  function buildLaunchLinks(valid) {
-    if (!valid) {
-      return { teacher: '#', student: '#' };
-    }
-
-    try {
-      const query = resolveLessonShareQuery({ ...draft, kind: 'custom' }, store);
-      const qs = query.lesson
-        ? `lesson=${encodeURIComponent(query.lesson)}`
-        : `cfg=${encodeURIComponent(query.cfg ?? '')}`;
-      return {
-        teacher: `#/teacher?${qs}`,
-        student: `#/student?${qs}`,
-      };
-    } catch {
-      return { teacher: '#', student: '#' };
-    }
+    syncBuilderShareOutputs(host, draft, store, context);
   }
 
   function bindEvents() {
     host.querySelector('.builder-title-input')?.addEventListener('input', (e) => {
       draft.title = /** @type {HTMLInputElement} */ (e.target).value;
+      syncBuilderShareOutputs(host, draft, store, context);
     });
     host.querySelector('.builder-desc-input')?.addEventListener('input', (e) => {
       draft.description = /** @type {HTMLTextAreaElement} */ (e.target).value;
+      syncBuilderShareOutputs(host, draft, store, context);
     });
     host.querySelector('.builder-planned-input')?.addEventListener('input', (e) => {
       draft.plannedMinutes = Number(/** @type {HTMLInputElement} */ (e.target).value) || 30;
@@ -297,6 +275,7 @@ export function mountLessonBuilder(container, store, context) {
         const value = /** @type {HTMLSelectElement} */ (e.target).value;
         if (draft.exercises[idx]) {
           draft.exercises[idx].feedbackMode = value ? /** @type {'practice' | 'assessment'} */ (value) : undefined;
+          syncBuilderShareOutputs(host, draft, store, context);
         }
       });
     });
