@@ -18,6 +18,12 @@ import { ACTIVITY_TYPE_LABELS } from '../config.js';
 import { getCategoryClass } from './category-styles.js';
 import { escapeHtml, escapeAttr } from './html-utils.js';
 import { iconArrowRight } from './icons.js';
+import {
+  buildHelpHref,
+  getCurrentReturnPath,
+  readBuilderDraftRestore,
+  snapshotBuilderDraft,
+} from '../help/help-navigation.js';
 
 /**
  * @param {HTMLElement} container
@@ -30,8 +36,14 @@ export function mountLessonBuilder(container, store, context) {
 
   const editId = new URLSearchParams(window.location.hash.split('?')[1] ?? '').get('edit');
   const presetId = new URLSearchParams(window.location.hash.split('?')[1] ?? '').get('preset');
+  const restoredDraft = readBuilderDraftRestore();
 
-  if (editId) {
+  if (restoredDraft) {
+    const restoredValidation = validateLessonConfig(restoredDraft);
+    if (restoredValidation.ok) {
+      draft = { ...restoredValidation.config };
+    }
+  } else if (editId) {
     const saved = getSavedLesson(editId);
     if (saved) draft = { ...saved };
   } else if (presetId) {
@@ -143,7 +155,10 @@ export function mountLessonBuilder(container, store, context) {
 
     host.innerHTML = `
       <header class="lesson-builder__header">
-        <h1 class="lesson-builder__title">${escapeHtml(context.t('builderTitle'))}</h1>
+        <div class="lesson-builder__header-row">
+          <h1 class="lesson-builder__title">${escapeHtml(context.t('builderTitle'))}</h1>
+          <a href="${escapeAttr(buildHelpHref(getCurrentReturnPath()))}" class="btn btn-secondary btn-builder-help" data-help-link>${escapeHtml(context.t('navHelp'))}</a>
+        </div>
         <p class="lesson-builder__intro">${escapeHtml(context.t('builderIntro'))}</p>
       </header>
 
@@ -332,6 +347,22 @@ export function mountLessonBuilder(container, store, context) {
         render();
       });
     });
+
+    host.querySelector('[data-help-link]')?.addEventListener('click', () => {
+      syncDraftFromInputs();
+      snapshotBuilderDraft({ ...draft, kind: 'custom' });
+    });
+  }
+
+  function syncDraftFromInputs() {
+    const titleInput = host.querySelector('.builder-title-input');
+    const descInput = host.querySelector('.builder-desc-input');
+    const plannedInput = host.querySelector('.builder-planned-input');
+    if (titleInput) draft.title = /** @type {HTMLInputElement} */ (titleInput).value;
+    if (descInput) draft.description = /** @type {HTMLTextAreaElement} */ (descInput).value;
+    if (plannedInput) {
+      draft.plannedMinutes = Number(/** @type {HTMLInputElement} */ (plannedInput).value) || 30;
+    }
   }
 
   /** @param {string} msg @param {boolean} [isError] */

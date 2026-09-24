@@ -27,5 +27,5 @@ export function buildHashRoute(mode, query = {}) {
  * @returns {boolean}
  */
 export function isValidMode(mode) {
-  return ['home', 'teacher', 'student', 'builder'].includes(mode);
+  return ['home', 'teacher', 'student', 'builder', 'help'].includes(mode);
 }

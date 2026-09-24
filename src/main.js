@@ -1,5 +1,13 @@
 import { APP_VERSION, ACTIVITY_TYPE_LABELS } from './config.js';
 import { parseHashRoute, isValidMode } from './router.js';
+import {
+  buildHelpHref,
+  getCurrentReturnPath,
+  isStudentActiveLessonReturn,
+  resolveHelpReturnPath,
+  saveHelpReturn,
+} from './help/help-navigation.js';
+import { mountTeacherHelp, mountStudentHelpBlocked } from './ui/teacher-help.js';
 import { loadContentStore } from './core/content-loader.js';
 import { getActivity } from './activities/registry.js';
 import { parseLessonFromParams } from './share/url-codec.js';
@@ -73,13 +81,28 @@ function updateNavState() {
   document.body.classList.toggle('mode-teacher', mode === 'teacher');
   document.body.classList.toggle('mode-student', mode === 'student');
   document.body.classList.toggle('mode-builder', mode === 'builder');
+  document.body.classList.toggle('mode-help', mode === 'help');
 
   updateHeaderModeBadge(mode, t);
+  updateHelpNavLink(mode);
 
   document.querySelectorAll('[data-route]').forEach((el) => {
     const route = el.getAttribute('data-route');
     el.classList.toggle('is-active', route === mode);
   });
+}
+
+/** @param {string} mode */
+function updateHelpNavLink(mode) {
+  const helpNav = document.querySelector('[data-help-nav]');
+  if (!helpNav) return;
+
+  const hideForStudent = mode === 'student';
+  helpNav.hidden = hideForStudent;
+
+  if (!hideForStudent && mode !== 'help') {
+    helpNav.href = buildHelpHref(getCurrentReturnPath());
+  }
 }
 
 function renderRoute() {
@@ -102,6 +125,11 @@ function renderRoute() {
 
   if (mode === 'builder') {
     activeActivity = mountLessonBuilder(mainEl, contentStore, { t });
+    return;
+  }
+
+  if (mode === 'help') {
+    renderHelp(params);
     return;
   }
 
@@ -204,6 +232,9 @@ function renderHome() {
         <span class="view-home__meta">Verze ${APP_VERSION} · obsah ${contentStore.meta.contentVersion}</span>
       </div>
       <div class="category-legend" aria-label="Tematické oblasti">${legendHtml}</div>
+      <p class="view-home__help-banner">
+        <a href="${escapeAttr(buildHelpHref('/home'))}" class="view-home__help-link">${escapeHtml(t('homeHelpLink'))}</a>
+      </p>
       <div class="card-grid">
         <article class="mode-card mode-card--teacher">
           <span class="mode-card__icon" aria-hidden="true">${iconTeacher}</span>
@@ -329,6 +360,21 @@ function destroyActiveActivity() {
     activeActivity.destroy();
   }
   activeActivity = null;
+}
+
+/** @param {URLSearchParams} params */
+function renderHelp(params) {
+  if (!mainEl) return;
+
+  const returnPath = resolveHelpReturnPath(params);
+  saveHelpReturn(returnPath);
+
+  if (isStudentActiveLessonReturn(returnPath)) {
+    activeActivity = mountStudentHelpBlocked(mainEl, { t, returnPath });
+    return;
+  }
+
+  activeActivity = mountTeacherHelp(mainEl, { t, returnPath });
 }
 
 /** @param {string} str */

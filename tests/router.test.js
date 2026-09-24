@@ -31,6 +31,13 @@ describe('router', () => {
   it('validates known modes', () => {
     assert.equal(isValidMode('teacher'), true);
     assert.equal(isValidMode('builder'), true);
+    assert.equal(isValidMode('help'), true);
     assert.equal(isValidMode('unknown'), false);
+  });
+
+  it('parses help route with return param', () => {
+    const { mode, params } = parseHashRoute('#/help?return=%2Fhome');
+    assert.equal(mode, 'help');
+    assert.equal(params.get('return'), '/home');
   });
 });

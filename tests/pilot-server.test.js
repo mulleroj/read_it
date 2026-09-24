@@ -89,6 +89,29 @@ describe('pilot server HTTP', () => {
     assert.match(content.body, /mixed-preset/);
   });
 
+  it('serves vendor .mjs modules with JavaScript MIME type', async () => {
+    const port = /** @type {import('node:net').AddressInfo} */ (pilot.server.address()).port;
+    const res = await new Promise((resolve, reject) => {
+      http
+        .get({ hostname: '127.0.0.1', port, path: '/src/vendor/qrcode-generator.mjs' }, (response) => {
+          const chunks = [];
+          response.on('data', (c) => chunks.push(c));
+          response.on('end', () => {
+            resolve({
+              status: response.statusCode ?? 0,
+              type: response.headers['content-type'],
+              bodyLen: Buffer.concat(chunks).length,
+            });
+          });
+        })
+        .on('error', reject);
+    });
+
+    assert.equal(res.status, 200);
+    assert.match(String(res.type), /javascript/);
+    assert.ok(res.bodyLen > 0);
+  });
+
   it('returns 404 for prototype WAV and tools paths', async () => {
     const wav = await request('/tools/audio-prototype/output/rain.wav');
     assert.equal(wav.status, 404);

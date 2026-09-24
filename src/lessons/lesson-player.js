@@ -6,8 +6,9 @@ import {
   renderLessonTeacherNotesOverview,
   renderLessonTeacherNotesPanel,
 } from './lesson-teacher-notes.js';
-import { escapeHtml } from '../ui/html-utils.js';
+import { escapeHtml, escapeAttr } from '../ui/html-utils.js';
 import { iconArrowRight, iconCheck, iconTrophy } from '../ui/icons.js';
+import { buildHelpHref, buildHelpPageUrl, getCurrentReturnPath } from '../help/help-navigation.js';
 
 /**
  * @param {HTMLElement} container
@@ -111,7 +112,8 @@ export function mountLessonPlayer(container, config, resolved, mode, store, cont
           </button>
           ${
             mode === 'teacher'
-              ? `<a href="#/builder" class="btn btn-secondary">${escapeHtml(context.t('builderBack'))}</a>`
+              ? `<a href="#/builder" class="btn btn-secondary">${escapeHtml(context.t('builderBack'))}</a>
+                 <a href="${escapeAttr(buildHelpHref(getCurrentReturnPath()))}" class="btn btn-secondary btn-lesson-help">${escapeHtml(context.t('navHelp'))}</a>`
               : ''
           }
         </div>
@@ -148,6 +150,11 @@ export function mountLessonPlayer(container, config, resolved, mode, store, cont
       <div class="lesson-player__progress">
         <span>${escapeHtml(context.t('lessonProgress', { current: String(current), total: String(total) }))}</span>
         <span class="lesson-player__step-title">${escapeHtml(exercise.title?.cs ?? exercise.id)}</span>
+        ${
+          mode === 'teacher'
+            ? `<a href="${escapeAttr(buildHelpPageUrl(getCurrentReturnPath()))}" class="btn btn-secondary btn-lesson-help btn-lesson-help--compact" target="_blank" rel="noopener noreferrer" aria-label="${escapeAttr(context.t('helpOpensNewTab'))}">${escapeHtml(context.t('navHelp'))}</a>`
+            : ''
+        }
       </div>
       <div class="lesson-player__activity-host"></div>
       <div class="lesson-player__nav">

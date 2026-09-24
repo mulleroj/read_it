@@ -151,6 +151,18 @@ const cs = {
   homeLessonCard: 'Sestav vlastní lekci nebo spusť ukázkový preset.',
   homeStartBuilder: 'Lesson Builder',
   homePresetLesson: 'Ukázková lekce',
+  navHelp: 'Nápověda pro učitele',
+  helpTitle: 'Nápověda pro učitele',
+  helpIntro: 'Praktický průvodce READ IT! pro kolegy učitele – spuštění lekce, režimy, úprava obsahu a řešení problémů.',
+  helpBackToLesson: 'Vrátit se k lekci',
+  helpBackHome: 'Zpět',
+  helpTocLabel: 'Obsah nápovědy',
+  helpSearchLabel: 'Hledat v nápovědě',
+  helpSearchPlaceholder: 'Hledat… (např. QR, exit ticket, sort)',
+  helpStudentBlockedTitle: 'Nápověda je pro učitele',
+  helpStudentBlockedText: 'Během studentské lekce zůstaňte v cvičení. Metodická nápověda je určena učiteli.',
+  homeHelpLink: 'První spuštění? Přečtěte si nápovědu pro učitele.',
+  helpOpensNewTab: 'Nápověda pro učitele (otevře se v novém panelu)',
 };
 
 /**
