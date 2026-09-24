@@ -33,7 +33,7 @@
 |---------|-------------------|
 | `localhost` / `127.0.0.1` | ❌ |
 | `http://<LAN-IP>:3000` + **`serve:pilot`** | ✅ |
-| veřejná URL (Netlify…) | 🔶 až po nasazení |
+| veřejná URL | ✅ https://readit-stsul.netlify.app/ |
 
 ---
 

@@ -24,7 +24,8 @@ export function getTeacherHelpSections() {
           <li>Studenti otevřou odkaz na telefonu a stisknou <strong>Spustit lekci</strong>.</li>
         </ol>
         <p><a href="#help-quick-lesson">Podrobný postup hotové lekce →</a></p>
-        <p class="teacher-help__optional">Spuštění aplikace ve školní síti řeší správce – viz <a href="#help-pilot-admin">Spuštění pro správce sítě</a>.</p>`,
+        <p>Veřejná adresa READ IT!: <strong><a href="https://readit-stsul.netlify.app/" target="_blank" rel="noopener noreferrer">readit-stsul.netlify.app</a></strong> – funguje odkudkoliv s internetem (odkaz i QR).</p>
+        <p class="teacher-help__optional">Pilot ve školní síti bez závislosti na internetu studentů řeší správce – viz <a href="#help-pilot-admin">Spuštění pro správce sítě (pilot)</a>.</p>`,
     },
     {
       id: 'what-is',
@@ -138,14 +139,15 @@ export function getTeacherHelpSections() {
       keywords: 'odkaz qr wifi telefon studenti',
       html: `
         <p>Studenti nepotřebují účet – dostanou <strong>odkaz nebo QR kód</strong> z panelu sdílení v Lesson Builderu.</p>
+        <h3 class="teacher-help__h3">Veřejná adresa (doporučeno)</h3>
         <ol class="teacher-help__steps">
-          <li>Otevřete Builder s načtenou lekcí a sjeďte k panelu <strong>Sdílení lekce</strong>.</li>
-          <li>Zkontrolujte, že <strong>Odkaz pro studenty</strong> obsahuje síťovou adresu učitelova počítače (např. <code>192.168.x.x</code>), ne <code>localhost</code>.</li>
-          <li>QR kód ukažte na projekci (<strong>Celá obrazovka</strong>) nebo zkopírujte odkaz do chatu.</li>
-          <li>Telefony studentů musí být ve <strong>stejné Wi-Fi</strong> a musí dosáhnout na učitelův počítač.</li>
+          <li>Otevřete <strong><a href="https://readit-stsul.netlify.app/" target="_blank" rel="noopener noreferrer">readit-stsul.netlify.app</a></strong> a načtěte lekci v Builderu.</li>
+          <li>V panelu <strong>Sdílení lekce</strong> zkopírujte <strong>Odkaz pro studenty</strong> nebo ukažte QR na projekci.</li>
+          <li>Studenti otevřou odkaz na telefonu – stačí běžné internetové připojení.</li>
         </ol>
-        <p class="teacher-help__note">Správná adresa sama o sobě ne garantuje funkční propojení – některé školní sítě telefony navzájem izolují (viz FAQ).</p>
-        <p>Veřejná internetová adresa READ IT! zatím <strong>není k dispozici</strong>.</p>`,
+        <h3 class="teacher-help__h3">Alternativa: pilot ve školní síti</h3>
+        <p>Pro test bez internetu studentů nebo izolovanou Wi-Fi viz <a href="#help-pilot-admin">Spuštění pro správce sítě (pilot)</a>. Odkaz v QR musí obsahovat LAN IP učitelova PC (<code>192.168.x.x</code>), ne <code>localhost</code>.</p>
+        <p class="teacher-help__note">U LAN pilotu musí být telefony ve stejné Wi-Fi; některé sítě klienty izolují (viz FAQ).</p>`,
     },
     {
       id: 'pilot-admin',
@@ -216,7 +218,7 @@ export function getTeacherHelpSections() {
           </details>
           <details class="teacher-help__faq">
             <summary>Počítač nemá LAN IP / jen offline</summary>
-            <p>Připojte PC ke školní Wi-Fi nebo ethernetu. Bez síťové adresy studenti na telefony nepřipojíte – READ IT! zatím nemá veřejné cloudové nasazení.</p>
+            <p>Připojte PC ke školní Wi-Fi nebo ethernetu pro LAN pilot. Nebo použijte veřejnou adresu <strong><a href="https://readit-stsul.netlify.app/" target="_blank" rel="noopener noreferrer">readit-stsul.netlify.app</a></strong>, která nevyžaduje lokální server.</p>
           </details>
           <details class="teacher-help__faq">
             <summary>Port 3000 je obsazený</summary>

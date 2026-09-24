@@ -14,6 +14,7 @@ describe('lesson share access hints', () => {
   it('returns context-specific QR hints', () => {
     assert.match(resolveShareQrHint(t, 'localhost'), /localhost/i);
     assert.match(resolveShareQrHint(t, '192.168.1.50'), /Wi-Fi/i);
-    assert.match(resolveShareQrHint(t, 'read-it.example.com'), /produkční banky/i);
+    assert.match(resolveShareQrHint(t, 'readit-stsul.netlify.app'), /veřejnou adresu READ IT!/i);
+    assert.match(resolveShareQrHint(t, '192.168.1.50'), /LAN pilot/i);
   });
 });

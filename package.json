@@ -6,8 +6,10 @@
   "description": "READ IT! – English Reading Lab",
   "scripts": {
     "test": "node --test tests/**/*.test.js",
+    "build:public": "node scripts/build-public.mjs",
     "serve": "npx --yes serve . -l tcp://127.0.0.1:3000",
-    "serve:pilot": "node scripts/pilot-server.mjs"
+    "serve:pilot": "node scripts/pilot-server.mjs",
+    "serve:dist": "npx --yes serve dist -l tcp://127.0.0.1:3000"
   },
   "dependencies": {
     "lz-string": "^1.5.0",

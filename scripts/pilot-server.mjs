@@ -8,15 +8,20 @@ import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import {
+  PUBLIC_SURFACE_DIRS,
+  PUBLIC_SURFACE_FILES,
+  isPublishableRelativePath,
+} from './public-surface.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export const PILOT_REPO_ROOT = path.resolve(__dirname, '..');
 
-/** @type {ReadonlySet<string>} */
-export const PILOT_ALLOWED_DIRS = new Set(['styles', 'src', 'content']);
+/** @deprecated alias – use PUBLIC_SURFACE_DIRS */
+export const PILOT_ALLOWED_DIRS = PUBLIC_SURFACE_DIRS;
 
-/** @type {ReadonlySet<string>} */
-export const PILOT_ALLOWED_FILES = new Set(['index.html']);
+/** @deprecated alias – use PUBLIC_SURFACE_FILES */
+export const PILOT_ALLOWED_FILES = PUBLIC_SURFACE_FILES;
 
 /** @type {Record<string, string>} */
 const MIME_TYPES = {
@@ -57,14 +62,8 @@ export function resolvePilotFilePath(urlPath, repoRoot = PILOT_REPO_ROOT) {
     return null;
   }
 
-  const segments = normalized.split(path.sep).filter(Boolean);
-  const first = segments[0];
-
-  const allowed =
-    PILOT_ALLOWED_FILES.has(normalized) ||
-    (first && PILOT_ALLOWED_DIRS.has(first) && segments.length >= 2);
-
-  if (!allowed) {
+  const relativePosix = normalized.split(path.sep).join('/');
+  if (!isPublishableRelativePath(relativePosix)) {
     return null;
   }
 

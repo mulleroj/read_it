@@ -136,9 +136,9 @@ const cs = {
   shareQrHintLocalhost:
     'QR kód obsahuje localhost – telefony studentů ho nedohledají. Pro pilot spusťte npm run serve:pilot a otevřete builder přes LAN IP (např. http://192.168.x.x:3000), teprve pak sdílejte QR.',
   shareQrHintLan:
-    'QR kód vede na síťovou adresu tohoto počítače. Telefony studentů musí být ve stejné Wi-Fi. Veřejný internet zatím není k dispozici.',
+    'QR kód vede na síťovou adresu tohoto počítače (LAN pilot). Telefony studentů musí být ve stejné Wi-Fi. Pro běžné sdílení přes internet použijte readit-stsul.netlify.app.',
   shareQrHintPublic:
-    'QR kód funguje pro studenty s přístupem k této adrese. Studentské audio z produkční banky zatím není k dispozici.',
+    'QR kód vede na veřejnou adresu READ IT! – studenti potřebují internet. Hotové studentské audio v aplikaci zatím není k dispozici.',
   shareAccessLocalhost:
     'Odkaz je jen pro tento počítač (učitel/projektce). Studenti potřebují síťovou adresu (LAN IP), ne localhost.',
   shareDownloadQr: 'Stáhnout QR (PNG)',
