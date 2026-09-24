@@ -89,6 +89,12 @@
 
   --touch-min: 44px;
   --transition: 0.18s ease;
+
+  /* Scrollbars (thumb matches .app-logo__mark brand purple) */
+  --scrollbar-size: 6px;
+  --scrollbar-track: var(--color-border);
+  --scrollbar-thumb: var(--color-brand);
+  --scrollbar-thumb-hover: #6366f1;
 }
 
 /* ── Category modifiers ── */
@@ -2033,6 +2039,36 @@ body::before {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* ── Scrollbars ── */
+/* Firefox: thin ≈ 8px (no exact px); mobile browsers may use overlay scrollbars. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+*::-webkit-scrollbar {
+  width: var(--scrollbar-size);
+  height: var(--scrollbar-size);
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+  border-radius: var(--radius-full);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: var(--radius-full);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+*::-webkit-scrollbar-corner {
+  background: var(--scrollbar-track);
 }
 
 /* ── Reduced motion ── */
