@@ -97,10 +97,16 @@ describe('local prototype audio', () => {
     assert.equal(isLocalPrototypeAudioEnabled(), false);
   });
 
-  it('allows ?localAudio=1 on private LAN hostnames', () => {
+  it('defaults to disabled on private LAN hostnames (pilot server)', () => {
+    resetLocalPrototypeAudioForTests();
+    syncLocalPrototypeAudioFromLocation({ hostname: '192.168.1.50', search: '' });
+    assert.equal(isLocalPrototypeAudioEnabled(), false);
+    assert.equal(isLocalDevHostname('192.168.1.50'), true);
+  });
+
+  it('ignores ?localAudio=1 on private LAN hostnames', () => {
     resetLocalPrototypeAudioForTests();
     syncLocalPrototypeAudioFromLocation({ hostname: '192.168.1.50', search: '?localAudio=1' });
-    assert.equal(isLocalPrototypeAudioEnabled(), true);
-    assert.equal(isLocalDevHostname('192.168.1.50'), true);
+    assert.equal(isLocalPrototypeAudioEnabled(), false);
   });
 });

@@ -36,7 +36,7 @@ const cs = {
   oddOneOutOptions: 'Možnosti slov',
   sortWordsPrompt: 'Roztřiď slova do správných kategorií.',
   sortWordsHelp:
-    'Vyber slovo (kliknutí nebo Enter/Mezerník). Tabem přejdi na tlačítko kategorie a stiskni Enter pro přiřazení. Esc zruší výběr.',
+    'Klepni na slovo, pak na „Přiřadit sem" u správné kategorie. Po roztřídění všech slov stiskni Ověřit.',
   sortWordsPool: 'Slova k roztřídění',
   sortWordsBins: 'Kategorie pro roztřídění',
   sortWordsAssign: 'Přiřadit sem',
@@ -133,7 +133,14 @@ const cs = {
   shareCopied: 'Zkopírováno',
   shareCopyFallback: 'Zkopíruj odkaz ručně:',
   shareQrTitle: 'QR kód pro studenty',
-  shareQrHint: 'QR kód obsahuje odkaz pro studenty. Na localhost nefunguje z jiného zařízení bez nasazení.',
+  shareQrHintLocalhost:
+    'QR kód obsahuje localhost – telefony studentů ho nedohledají. Pro pilot spusťte npm run serve:pilot a otevřete builder přes LAN IP (např. http://192.168.x.x:3000), teprve pak sdílejte QR.',
+  shareQrHintLan:
+    'QR kód vede na síťovou adresu tohoto počítače. Telefony studentů musí být ve stejné Wi-Fi. Veřejný internet zatím není k dispozici.',
+  shareQrHintPublic:
+    'QR kód funguje pro studenty s přístupem k této adrese. Studentské audio z produkční banky zatím není k dispozici.',
+  shareAccessLocalhost:
+    'Odkaz je jen pro tento počítač (učitel/projektce). Studenti potřebují síťovou adresu (LAN IP), ne localhost.',
   shareDownloadQr: 'Stáhnout QR (PNG)',
   shareQrFullscreen: 'Celá obrazovka (projektor)',
   shareClose: 'Zavřít',

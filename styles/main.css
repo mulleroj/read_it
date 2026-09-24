@@ -783,6 +783,23 @@ body::before {
   vertical-align: top;
 }
 
+@media (max-width: 479px) {
+  .sort-pool-item {
+    flex-direction: column;
+    align-items: stretch;
+    width: calc(50% - var(--space-1));
+  }
+
+  .sort-bin__head {
+    flex-wrap: wrap;
+  }
+
+  .sort-bin .btn-bin-assign {
+    flex: 1 1 100%;
+    margin-top: var(--space-1);
+  }
+}
+
 .build-word-audio {
   display: flex;
   justify-content: center;

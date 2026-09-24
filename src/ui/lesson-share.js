@@ -1,6 +1,32 @@
+import { isLocalDevHostname } from '../audio/local-prototype-audio.js';
 import { buildLessonShareLinks } from '../share/url-codec.js';
 import { renderQrToCanvas, downloadQrCanvas } from '../share/qr.js';
 import { escapeHtml, escapeAttr } from './html-utils.js';
+
+/**
+ * @param {string} [hostname]
+ * @returns {'localhost' | 'lan' | 'public'}
+ */
+export function resolveShareAccessContext(hostname = window.location.hostname) {
+  if (hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '[::1]') {
+    return 'localhost';
+  }
+  if (isLocalDevHostname(hostname)) {
+    return 'lan';
+  }
+  return 'public';
+}
+
+/**
+ * @param {Function} t
+ * @param {string} [hostname]
+ */
+export function resolveShareQrHint(t, hostname = window.location.hostname) {
+  const context = resolveShareAccessContext(hostname);
+  if (context === 'localhost') return t('shareQrHintLocalhost');
+  if (context === 'lan') return t('shareQrHintLan');
+  return t('shareQrHintPublic');
+}
 
 /**
  * @param {HTMLElement} container
@@ -12,6 +38,12 @@ export function renderLessonSharePanel(container, config, context, store) {
   const teacherLinks = buildLessonShareLinks(config, 'teacher', undefined, store);
   const studentLinks = buildLessonShareLinks(config, 'student', undefined, store);
   const tooLong = teacherLinks.tooLong || studentLinks.tooLong;
+  const accessContext = resolveShareAccessContext();
+  const qrHint = resolveShareQrHint(context.t);
+  const localhostWarning =
+    accessContext === 'localhost'
+      ? `<p class="lesson-warning" role="alert">${escapeHtml(context.t('shareAccessLocalhost'))}</p>`
+      : '';
 
   container.innerHTML = `
     <section class="lesson-share" aria-labelledby="lesson-share-title">
@@ -35,9 +67,10 @@ export function renderLessonSharePanel(container, config, context, store) {
           <button type="button" class="btn btn-secondary btn-copy-link" data-url="${escapeAttr(teacherLinks.url)}">${escapeHtml(context.t('shareCopy'))}</button>
         </div>
       </div>
+      ${localhostWarning}
       <div class="lesson-share__qr">
         <h3 class="lesson-share__subtitle">${escapeHtml(context.t('shareQrTitle'))}</h3>
-        <p class="lesson-share__hint">${escapeHtml(context.t('shareQrHint'))}</p>
+        <p class="lesson-share__hint">${escapeHtml(qrHint)}</p>
         <div class="lesson-share__qr-wrap" id="qr-preview" aria-label="${escapeAttr(context.t('shareQrTitle'))}"></div>
         <div class="lesson-share__qr-actions">
           <button type="button" class="btn btn-secondary btn-download-qr">${escapeHtml(context.t('shareDownloadQr'))}</button>

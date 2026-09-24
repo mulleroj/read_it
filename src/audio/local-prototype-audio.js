@@ -24,15 +24,20 @@ export const LOCAL_PROTOTYPE_AUDIO_DIR = 'tools/audio-prototype/output';
 const LOCAL_AUDIO_SESSION_KEY = 'readit-local-audio';
 
 /**
- * Localhost or private LAN only. Public hosts never enable prototype audio,
- * even with ?localAudio=1 (does not override PUBLIC AUDIO RELEASE gate).
+ * Strict localhost only – prototype audio is never enabled on LAN pilot hosts.
+ * @param {string} hostname
+ */
+export function isLocalhostAudioHost(hostname) {
+  return hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '[::1]';
+}
+
+/**
+ * Localhost or private LAN – used for share/QR hints, not for serving prototype audio.
  * @param {string} hostname
  */
 export function isLocalDevHostname(hostname) {
   return (
-    hostname === 'localhost' ||
-    hostname === '127.0.0.1' ||
-    hostname === '[::1]' ||
+    isLocalhostAudioHost(hostname) ||
     /^192\.168\.\d{1,3}\.\d{1,3}$/.test(hostname) ||
     /^10\.\d{1,3}\.\d{1,3}\.\d{1,3}$/.test(hostname) ||
     /^172\.(1[6-9]|2\d|3[01])\.\d{1,3}\.\d{1,3}$/.test(hostname)
@@ -91,11 +96,11 @@ export function syncLocalPrototypeAudioFromLocation(location = globalThis.locati
     return false;
   }
 
-  const onLocalDevHost = isLocalDevHostname(location.hostname);
+  const onLocalhost = isLocalhostAudioHost(location.hostname);
   const params = new URLSearchParams(location.search);
   if (params.has('localAudio')) {
     const requestedOn = params.get('localAudio') !== '0';
-    const nextEnabled = requestedOn && onLocalDevHost;
+    const nextEnabled = requestedOn && onLocalhost;
     enabled = nextEnabled;
     try {
       sessionStorage.setItem(LOCAL_AUDIO_SESSION_KEY, nextEnabled ? '1' : '0');
@@ -112,7 +117,7 @@ export function syncLocalPrototypeAudioFromLocation(location = globalThis.locati
   try {
     const stored = sessionStorage.getItem(LOCAL_AUDIO_SESSION_KEY);
     if (stored === '1') {
-      enabled = onLocalDevHost;
+      enabled = onLocalhost;
       return enabled;
     }
     if (stored === '0') {
@@ -123,7 +128,7 @@ export function syncLocalPrototypeAudioFromLocation(location = globalThis.locati
     // ignore
   }
 
-  enabled = onLocalDevHost;
+  enabled = onLocalhost;
   return enabled;
 }
 
