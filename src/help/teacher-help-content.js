@@ -39,7 +39,7 @@ export function getTeacherHelpSections() {
           <li><strong>Režim studenta</strong> – samostatná práce na mobilu; <strong>účet není potřeba</strong>.</li>
           <li>U slov je k dispozici <strong>britská IPA</strong> (nápověda k výslovnosti).</li>
         </ul>
-        <p class="teacher-help__note"><strong>Hotové studentské audio v aplikaci zatím není.</strong> Výslovnost učitel modeluje ústně nebo pomocí IPA.</p>`,
+        <p class="teacher-help__note"><strong>Poslech (TTSMaker, britská angličtina)</strong> je u <strong>26 mapovaných slov</strong> – ne u celé databáze READ IT!. U ostatních slov modelujte výslovnost ústně nebo pomocí IPA.</p>`,
     },
     {
       id: 'quick-lesson',
@@ -55,7 +55,7 @@ export function getTeacherHelpSections() {
           <li>Na projekci klikněte <strong>Spustit lekci</strong> a postupujte cvičení po cvičení.</li>
           <li>Studenti na telefonech dokončí každé cvičení; teprve pak se jim odemkne <strong>Další cvičení</strong>.</li>
         </ol>
-        <p>Lekce obsahuje 4 cvičení: Najdi vzor (6 položek), Roztřiď slova (10 slov), Sestav slovo (3 slova), Exit ticket (5 položek) + učitelský poslechový blok mimo app.</p>`,
+        <p>Lekce obsahuje 4 cvičení: Najdi vzor (6 položek), Roztřiď slova (10 slov), Sestav slovo (3 slova), Exit ticket (5 položek) + plánovaný poslechový blok (5 slov).</p>`,
     },
     {
       id: 'modes',
@@ -125,7 +125,7 @@ export function getTeacherHelpSections() {
             <tr><td>Najdi vzor</td><td>8 min</td><td>rain, car, coin, city, happy, tree</td></tr>
             <tr><td>Roztřiď slova</td><td>4 min</td><td>10 slov do 5 kategorií</td></tr>
             <tr><td>Sestav slovo</td><td>5 min</td><td>rain, bell, clock</td></tr>
-            <tr><td>Poslech (učitel)</td><td>3 min</td><td>rain, car, coin, city, happy – <strong>ústně</strong></td></tr>
+            <tr><td>Poslech</td><td>3 min</td><td>rain, car, coin, city, happy – tlačítko Poslech nebo ústně učitele</td></tr>
             <tr><td>Exit ticket</td><td>5 min</td><td>bird, cow, gym, gift, boat</td></tr>
             <tr><td>Závěr</td><td>1 min</td><td>Shrnutí – gift = hard g</td></tr>
           </tbody>
@@ -175,12 +175,12 @@ export function getTeacherHelpSections() {
       html: `
         <ul>
           <li><strong>IPA</strong> (britská) je v aplikaci u slov.</li>
-          <li><strong>Hotové studentské audio</strong> v aplikaci zatím není – ve třídě modelujte výslovnost ústně.</li>
-          <li>Ve smíšené lekci učíte poslech u <strong>5 slov</strong>: rain, car, coin, city, happy (blok mimo digitální cvičení).</li>
-          <li>Na telefonech studentů se tlačítko <strong>Poslech</strong> v pilotním režimu <strong>nezobrazuje</strong>.</li>
-          <li>Na učitelově počítači doma může existovat lokální audio prototyp (jen pro přípravu, ne pro studenty).</li>
+          <li><strong>Poslech (TTSMaker Robert 2402)</strong> – schválené MP3 u <strong>26 mapovaných slov</strong> (15 individuálních nahrávek + 11 split z batch souboru). <strong>Ne</strong> u každého slova v databázi READ IT!.</li>
+          <li>Ve smíšené lekci je plánovaný poslech u <strong>5 slov</strong>: rain, car, coin, city, happy – všechna mají tlačítko Poslech.</li>
+          <li>Na veřejné adrese (<strong>readit-stsul.netlify.app</strong>) a v buildu s committnutými MP3 funguje Poslech u mapovaných slov i na telefonech studentů.</li>
+          <li>Složka <code>tools/audio-prototype/</code> je jen pro vývoj – do produkce se nekopíruje.</li>
         </ul>
-        <p class="teacher-help__note">Lokální zvukové soubory nejsou určeny ke sdílení se studenty.</p>`,
+        <p class="teacher-help__note">Piper/Alba WAV z lokálního prototypu nejsou součástí aplikace.</p>`,
     },
     {
       id: 'faq',
@@ -202,7 +202,7 @@ export function getTeacherHelpSections() {
           </details>
           <details class="teacher-help__faq">
             <summary>Chybí tlačítko Poslech</summary>
-            <p>Ve třídě je to <strong>očekávané</strong>. Hotové audio studentům zatím není k dispozici – modelujte výslovnost ústně. IPA u slov zůstává jako opora.</p>
+            <p>Tlačítko Poslech se zobrazí jen u <strong>26 mapovaných slov</strong> se schváleným TTSMaker audiem – ne u každého slova v cvičení. U ostatních slov použijte IPA nebo ústní modelování. Pokud u mapovaného slova Poslech chybí, zkontrolujte internet a že používáte build s nasazenými MP3 v <code>assets/audio/</code>.</p>
           </details>
           <details class="teacher-help__faq">
             <summary>Nevidím poznámky k lekci</summary>

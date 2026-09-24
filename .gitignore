@@ -37,6 +37,13 @@ tools/audio-prototype/*.zip
 tools/audio-prototype/**/*.onnx
 tools/audio-prototype/**/*.onnx.json
 
+# M8.1 TTSMaker intake – MP3 until public audio release approved
+tools/audio-prototype/ttsmaker-2402/*.mp3
+tools/audio-prototype/ttsmaker-2402/review-export.json
+
+# M8.2 production audio – committed under assets/audio/ (manifest allowlist only).
+# Intake copies stay gitignored in tools/audio-prototype/ttsmaker-2402/*.mp3 above.
+
 # Build artifacts (future)
 dist/
 build/

@@ -21,7 +21,8 @@ const cs = {
   teacherTip1: 'Nejdříve nech studenty slovo přečíst nahlas.',
   teacherTip2: 'Zeptej se: „Které písmena tvoří dlouhou samohlásku?"',
   teacherTip3: 'Po odpovědi vysvětli vzor na tabuli.',
-  teacherTip4: 'IPA slouží jako opora – poslech jen u slov s lokálním M6A.2 prototypem.',
+  teacherTip4:
+    'IPA slouží jako opora – tlačítko Poslech je u 26 mapovaných slov se schváleným TTSMaker audiem, ne u celé databáze slov.',
   audioListen: 'Poslech',
   audioPlay: (params) => `Přehrát výslovnost slova ${params.word}`,
   teacherReveal: 'Zobrazit odpověď',
@@ -138,7 +139,7 @@ const cs = {
   shareQrHintLan:
     'QR kód vede na síťovou adresu tohoto počítače (LAN pilot). Telefony studentů musí být ve stejné Wi-Fi. Pro běžné sdílení přes internet použijte readit-stsul.netlify.app.',
   shareQrHintPublic:
-    'QR kód vede na veřejnou adresu READ IT! – studenti potřebují internet. Hotové studentské audio v aplikaci zatím není k dispozici.',
+    'QR kód vede na veřejnou adresu READ IT! – studenti potřebují internet. Poslech je u 26 mapovaných slov se schváleným TTSMaker audiem (ne u každého slova v databázi).',
   shareAccessLocalhost:
     'Odkaz je jen pro tento počítač (učitel/projektce). Studenti potřebují síťovou adresu (LAN IP), ne localhost.',
   shareDownloadQr: 'Stáhnout QR (PNG)',

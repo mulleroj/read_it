@@ -15,6 +15,12 @@
   [headers.values]
     Content-Type = "text/javascript; charset=utf-8"
 
+# M8.2 – after public audio deploy, serve staged TTSMaker MP3 with correct MIME type.
+[[headers]]
+  for = "/assets/audio/*.mp3"
+  [headers.values]
+    Content-Type = "audio/mpeg"
+
 # Defense in depth – these paths must never be reachable even after misconfiguration.
 [[redirects]]
   from = "/docs/*"

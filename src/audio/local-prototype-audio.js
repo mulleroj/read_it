@@ -1,11 +1,12 @@
 /**
- * M6C.2 – Local-only mapping from word IDs to M6A.2 prototype WAV files.
+ * M8.1 – Local-only mapping from word IDs to TTSMaker MP3 files (voice 2402 Robert).
+ * Separate from M6A.2 Piper/Alba WAV bank in tools/audio-prototype/output/.
  * Not part of public content JSON. PUBLIC AUDIO RELEASE remains BLOCKED.
  *
- * WAV files live at tools/audio-prototype/output/{spelling}.wav (gitignored).
+ * MP3 files live at tools/audio-prototype/ttsmaker-2402/{spelling}.mp3 (gitignored).
  */
 
-/** @type {Readonly<Record<string, string>>} wordId → WAV basename (spelling) */
+/** @type {Readonly<Record<string, string>>} wordId → MP3 basename (spelling) */
 export const LOCAL_PROTOTYPE_WORD_FILES = Object.freeze({
   'w-rain': 'rain',
   'w-day': 'day',
@@ -17,9 +18,26 @@ export const LOCAL_PROTOTYPE_WORD_FILES = Object.freeze({
   'w-gym': 'gym',
   'w-happy': 'happy',
   'w-letter': 'letter',
+  'w-tree': 'tree',
+  'w-bell': 'bell',
+  'w-clock': 'clock',
+  'w-gift': 'gift',
+  'w-boat': 'boat',
+  'w-wait': 'wait',
+  'w-chain': 'chain',
+  'w-play': 'play',
+  'w-grey': 'grey',
+  'w-see': 'see',
+  'w-bee': 'bee',
+  'w-coat': 'coat',
+  'w-road': 'road',
+  'w-light': 'light',
+  'w-night': 'night',
+  'w-high': 'high',
 });
 
-export const LOCAL_PROTOTYPE_AUDIO_DIR = 'tools/audio-prototype/output';
+export const LOCAL_PROTOTYPE_AUDIO_DIR = 'tools/audio-prototype/ttsmaker-2402';
+export const LOCAL_PROTOTYPE_AUDIO_EXT = '.mp3';
 
 const LOCAL_AUDIO_SESSION_KEY = 'readit-local-audio';
 
@@ -65,7 +83,7 @@ export function getLocalPrototypeAudioUrl(wordId, root = '') {
   if (!basename) return null;
 
   const normalizedRoot = root.replace(/\/$/, '');
-  const relativePath = `${LOCAL_PROTOTYPE_AUDIO_DIR}/${basename}.wav`;
+  const relativePath = `${LOCAL_PROTOTYPE_AUDIO_DIR}/${basename}${LOCAL_PROTOTYPE_AUDIO_EXT}`;
   return normalizedRoot ? `${normalizedRoot}/${relativePath}` : relativePath;
 }
 
@@ -140,7 +158,7 @@ export function isLocalPrototypeAudioEnabled() {
 }
 
 /**
- * Probe which prototype WAV files are reachable from the current origin.
+ * Probe which TTSMaker MP3 files are reachable from the current origin.
  * No network requests when local prototype mode is disabled.
  * @param {string} [root]
  * @param {typeof fetch} [fetchFn]

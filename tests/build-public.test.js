@@ -18,8 +18,12 @@ describe('public surface allowlist', () => {
     assert.equal(isPublishableRelativePath('src/main.js'), true);
     assert.equal(isPublishableRelativePath('src/vendor/qrcode-generator.mjs'), true);
     assert.equal(isPublishableRelativePath('content/index.json'), true);
+    assert.equal(isPublishableRelativePath('assets/audio/README.md'), true);
+    assert.equal(isPublishableRelativePath('assets/audio/w-rain.mp3'), true);
+    assert.equal(isPublishableRelativePath('assets/audio/w-extra.mp3'), false);
     assert.equal(isPublishableRelativePath('docs/CLASSROOM_PILOT_RUNSHEET.cs.md'), false);
     assert.equal(isPublishableRelativePath('tools/audio-prototype/output/rain.wav'), false);
+    assert.equal(isPublishableRelativePath('tools/audio-prototype/ttsmaker-2402/rain.mp3'), false);
     assert.equal(isPublishableRelativePath('tests/router.test.js'), false);
     assert.equal(isPublishableRelativePath('package.json'), false);
     assert.equal(isPublishableRelativePath('scripts/pilot-server.mjs'), false);
@@ -50,6 +54,7 @@ describe('build:public output', () => {
     assert.ok(builtFiles.includes('src/main.js'));
     assert.ok(builtFiles.includes('src/vendor/qrcode-generator.mjs'));
     assert.ok(builtFiles.includes('content/index.json'));
+    assert.ok(builtFiles.includes('assets/audio/README.md'));
     assert.ok(builtFiles.some((f) => f.startsWith('src/help/')));
     assert.ok(builtFiles.some((f) => f.startsWith('src/ui/teacher-help.js') || f === 'src/ui/teacher-help.js'));
   });
@@ -63,10 +68,12 @@ describe('build:public output', () => {
     assert.equal(builtFiles.includes('package-lock.json'), false);
   });
 
-  it('never copies blocked binary extensions from the working tree', () => {
+  it('never copies blocked binary extensions except approved public MP3', () => {
     assert.equal(builtFiles.some((f) => f.endsWith('.wav')), false);
     assert.equal(builtFiles.some((f) => f.endsWith('.onnx')), false);
-    assert.equal(builtFiles.some((f) => f.endsWith('.mp3')), false);
+    const mp3 = builtFiles.filter((f) => f.endsWith('.mp3'));
+    assert.ok(mp3.every((f) => f.startsWith('assets/audio/w-') && f.endsWith('.mp3')));
+    assert.equal(mp3.length <= 26, true);
   });
 
   it('matches collectPublicSurfaceFiles inventory', () => {

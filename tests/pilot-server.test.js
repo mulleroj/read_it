@@ -24,6 +24,7 @@ describe('pilot server path allowlist', () => {
 
   it('blocks prototype audio, tools, docs, tests and traversal', () => {
     assert.equal(resolvePilotFilePath('/tools/audio-prototype/output/rain.wav', repoRoot), null);
+    assert.equal(resolvePilotFilePath('/tools/audio-prototype/ttsmaker-2402/rain.mp3', repoRoot), null);
     assert.equal(resolvePilotFilePath('/tools/audio-prototype/', repoRoot), null);
     assert.equal(resolvePilotFilePath('/docs/CLASSROOM_PILOT_RUNSHEET.cs.md', repoRoot), null);
     assert.equal(resolvePilotFilePath('/tests/mixed-content.test.js', repoRoot), null);

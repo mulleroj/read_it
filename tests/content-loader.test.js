@@ -51,10 +51,22 @@ describe('content-loader', () => {
     assert.equal(store.getExercise('ex-exit-ticket-demo')?.feedbackMode, 'assessment');
   });
 
-  it('demo words have null audioId (no audio in M1)', async () => {
+  it('demo vowel-team words map audioId across the full fifteen-word lesson bank', async () => {
     const words = await readJson('content/words/demo-vowel-teams.json');
+    assert.equal(words.length, 15);
     for (const word of words) {
-      assert.equal(word.audioId, null);
+      assert.equal(word.audioId, word.id, `expected audio on ${word.id}`);
+    }
+    assert.equal(words.find((w) => w.spelling === 'wait')?.audioId, 'w-wait');
+    assert.equal(words.find((w) => w.spelling === 'light')?.audioId, 'w-light');
+  });
+
+  it('demo words with audioId must exist in the audio manifest (26 bank)', async () => {
+    const words = await readJson('content/words/demo-vowel-teams.json');
+    const manifest = await readJson('content/meta/audio-manifest.json');
+    const ids = new Set(manifest.entries.map((e) => e.wordId));
+    for (const word of words) {
+      if (word.audioId) assert.ok(ids.has(word.audioId), `${word.audioId} missing from manifest`);
     }
   });
 });

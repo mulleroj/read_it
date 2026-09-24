@@ -164,7 +164,7 @@ describe('M6B mixed lesson content', () => {
     assert.deepEqual(clock.correctOrder, ['c', 'l', 'o', 'ck']);
   });
 
-  it('word bank has thirty-three candidate words and no production audio', async () => {
+  it('word bank has thirty-three candidate words with audio mapped only where manifest defines it', async () => {
     const store = await loadFullContentStore();
 
     const mixedWordIds = new Set([
@@ -175,13 +175,20 @@ describe('M6B mixed lesson content', () => {
       'w-happy', 'w-letter', 'w-bell', 'w-sock', 'w-miss', 'w-clock',
     ]);
 
+    const approvedPublicAudioIds = new Set([
+      'w-rain', 'w-day', 'w-tree', 'w-boat', 'w-car', 'w-bird', 'w-coin', 'w-cow',
+      'w-city', 'w-gym', 'w-happy', 'w-letter', 'w-bell', 'w-clock', 'w-gift',
+      'w-wait', 'w-play', 'w-light',
+    ]);
+
     for (const id of mixedWordIds) {
       assert.ok(store.getWord(id), `Missing word ${id}`);
     }
     assert.equal(mixedWordIds.size, 33);
 
     for (const id of mixedWordIds) {
-      assert.equal(store.getWord(id).audioId, null);
+      const expectedAudioId = approvedPublicAudioIds.has(id) ? id : null;
+      assert.equal(store.getWord(id).audioId, expectedAudioId, `audioId mismatch for ${id}`);
     }
   });
 

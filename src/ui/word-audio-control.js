@@ -1,4 +1,4 @@
-import { hasLocalPrototypeAudio, playLocalPrototypeAudio } from '../audio/local-prototype-audio.js';
+import { hasWordAudio, playWordAudio } from '../audio/word-audio.js';
 import { escapeHtml, escapeAttr } from './html-utils.js';
 
 /**
@@ -7,7 +7,7 @@ import { escapeHtml, escapeAttr } from './html-utils.js';
  * @param {Function} t
  */
 export function renderWordAudioButton(wordId, spelling, t) {
-  if (!hasLocalPrototypeAudio(wordId)) return '';
+  if (!hasWordAudio(wordId)) return '';
 
   return `<button type="button" class="word-audio-btn" data-audio-word-id="${escapeAttr(wordId)}" aria-label="${escapeAttr(t('audioPlay', { word: spelling }))}">
     <span class="word-audio-btn__icon" aria-hidden="true">▶</span>
@@ -47,13 +47,7 @@ export function bindWordAudioButtons(container, root = '') {
       const wordId = button.getAttribute('data-audio-word-id');
       if (!wordId) return;
 
-      button.classList.add('is-playing');
-      button.setAttribute('aria-busy', 'true');
-
-      void playLocalPrototypeAudio(wordId, root).finally(() => {
-        button.classList.remove('is-playing');
-        button.removeAttribute('aria-busy');
-      });
+      void playWordAudio(wordId, root, button);
     });
   });
 }

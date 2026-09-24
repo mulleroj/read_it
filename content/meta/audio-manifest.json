@@ -1,0 +1,402 @@
+{
+  "version": "2026.2-ttsmaker-2402",
+  "releaseStatus": "INTEGRATED_LOCAL_26",
+  "publicAudioEnabled": true,
+  "extendedReleaseEnabled": true,
+  "entryCount": 26,
+  "approvedPublicEntryCount": 26,
+  "pendingPublicEntryCount": 0,
+  "source": {
+    "service": "TTSMaker",
+    "voiceId": "2402",
+    "voiceName": "Robert",
+    "locale": "United Kingdom",
+    "gender": "male",
+    "intakeDirectory": "tools/audio-prototype/ttsmaker-2402"
+  },
+  "approvalRecord": "content/meta/ttsmaker-audio-approval.json",
+  "pendingApprovalRecord": null,
+  "publicPathPrefix": "assets/audio",
+  "mimeType": "audio/mpeg",
+  "batch11Source": {
+    "sourceFile": "tools/audio-prototype/ttsmaker-2402/ttsmaker-file-2026-9-24-17-36-11.mp3",
+    "declaredWordOrder": [
+      "wait",
+      "chain",
+      "play",
+      "grey",
+      "see",
+      "bee",
+      "coat",
+      "road",
+      "light",
+      "night",
+      "high"
+    ],
+    "splitTool": "tools/audio-prototype/ttsmaker-2402/split-batch11.mjs",
+    "splitDate": "2026-09-24"
+  },
+  "entries": [
+    {
+      "wordId": "w-rain",
+      "spelling": "rain",
+      "publicFile": "assets/audio/w-rain.mp3",
+      "intakeFile": "tools/audio-prototype/ttsmaker-2402/rain.mp3",
+      "sha256": "d6fce69f7b15d8c68ab5e5e798d8116eb488d2c5420fec9754dac09726b4aa7a",
+      "bytes": 10656,
+      "publicReleaseApproved": true,
+      "ownerPronunciationApproved": true
+    },
+    {
+      "wordId": "w-day",
+      "spelling": "day",
+      "publicFile": "assets/audio/w-day.mp3",
+      "intakeFile": "tools/audio-prototype/ttsmaker-2402/day.mp3",
+      "sha256": "ffc080275877e7707d14bdcfd9c3b69c80ca38d05496322942d37825b29e0f35",
+      "bytes": 10656,
+      "publicReleaseApproved": true,
+      "ownerPronunciationApproved": true
+    },
+    {
+      "wordId": "w-car",
+      "spelling": "car",
+      "publicFile": "assets/audio/w-car.mp3",
+      "intakeFile": "tools/audio-prototype/ttsmaker-2402/car.mp3",
+      "sha256": "234fa3fd1a5037e275a750663f2662447e8e49c32e69850e08b2f6a1027b65a0",
+      "bytes": 10656,
+      "publicReleaseApproved": true,
+      "ownerPronunciationApproved": true
+    },
+    {
+      "wordId": "w-bird",
+      "spelling": "bird",
+      "publicFile": "assets/audio/w-bird.mp3",
+      "intakeFile": "tools/audio-prototype/ttsmaker-2402/bird.mp3",
+      "sha256": "eeabc64518bcde76d0931650a05f6669746f2e22d5c42626790e838aebdbfb64",
+      "bytes": 10512,
+      "publicReleaseApproved": true,
+      "ownerPronunciationApproved": true
+    },
+    {
+      "wordId": "w-coin",
+      "spelling": "coin",
+      "publicFile": "assets/audio/w-coin.mp3",
+      "intakeFile": "tools/audio-prototype/ttsmaker-2402/coin.mp3",
+      "sha256": "68eb867d7f287debb6b3706a78d396f142e9a5a44d09739e15dbf3ae6d5b354b",
+      "bytes": 10656,
+      "publicReleaseApproved": true,
+      "ownerPronunciationApproved": true
+    },
+    {
+      "wordId": "w-cow",
+      "spelling": "cow",
+      "publicFile": "assets/audio/w-cow.mp3",
+      "intakeFile": "tools/audio-prototype/ttsmaker-2402/cow.mp3",
+      "sha256": "671cbf92198705c93cd2c8f920551fdc63c10f40007fbc8c2478aac0d424cefe",
+      "bytes": 10656,
+      "publicReleaseApproved": true,
+      "ownerPronunciationApproved": true
+    },
+    {
+      "wordId": "w-city",
+      "spelling": "city",
+      "publicFile": "assets/audio/w-city.mp3",
+      "intakeFile": "tools/audio-prototype/ttsmaker-2402/city.mp3",
+      "sha256": "2b0b11d5d7dd611540b6d0b93becd9c79e02aa28d91569bc9cca7c5d724c919b",
+      "bytes": 10656,
+      "publicReleaseApproved": true,
+      "ownerPronunciationApproved": true
+    },
+    {
+      "wordId": "w-gym",
+      "spelling": "gym",
+      "publicFile": "assets/audio/w-gym.mp3",
+      "intakeFile": "tools/audio-prototype/ttsmaker-2402/gym.mp3",
+      "sha256": "7d979e76c9e26c6e27779bf4cee7c283395a568f0b4fb077b45a09deaf0a09fa",
+      "bytes": 10800,
+      "publicReleaseApproved": true,
+      "ownerPronunciationApproved": true
+    },
+    {
+      "wordId": "w-happy",
+      "spelling": "happy",
+      "publicFile": "assets/audio/w-happy.mp3",
+      "intakeFile": "tools/audio-prototype/ttsmaker-2402/happy.mp3",
+      "sha256": "7dc838c793509646ab59b97ba01384892da03ba9f2e061585c9af381b9d434e2",
+      "bytes": 10656,
+      "publicReleaseApproved": true,
+      "ownerPronunciationApproved": true
+    },
+    {
+      "wordId": "w-letter",
+      "spelling": "letter",
+      "publicFile": "assets/audio/w-letter.mp3",
+      "intakeFile": "tools/audio-prototype/ttsmaker-2402/letter.mp3",
+      "sha256": "71ada2c1e1fbd7dccac74a00e7f1b1b52b6ed08159d5eaa00216bbacba66a0dd",
+      "bytes": 10656,
+      "publicReleaseApproved": true,
+      "ownerPronunciationApproved": true
+    },
+    {
+      "wordId": "w-tree",
+      "spelling": "tree",
+      "publicFile": "assets/audio/w-tree.mp3",
+      "intakeFile": "tools/audio-prototype/ttsmaker-2402/tree.mp3",
+      "sha256": "bcb6ed07da56b95eb9d07b12e06a88fa5a03a88e6092b314cc85969bedd68a9c",
+      "bytes": 10656,
+      "publicReleaseApproved": true,
+      "ownerPronunciationApproved": true
+    },
+    {
+      "wordId": "w-bell",
+      "spelling": "bell",
+      "publicFile": "assets/audio/w-bell.mp3",
+      "intakeFile": "tools/audio-prototype/ttsmaker-2402/bell.mp3",
+      "sha256": "0186f9ced4f3799774e1ff05519b8f8da7b45e6781f6f0be2f8126cc2fcc3c2b",
+      "bytes": 10656,
+      "publicReleaseApproved": true,
+      "ownerPronunciationApproved": true
+    },
+    {
+      "wordId": "w-clock",
+      "spelling": "clock",
+      "publicFile": "assets/audio/w-clock.mp3",
+      "intakeFile": "tools/audio-prototype/ttsmaker-2402/clock.mp3",
+      "sha256": "9b6894c1eb8ac64758774e4e41d040990c99c233dbc5300a48c4cfacb610d7e1",
+      "bytes": 10656,
+      "publicReleaseApproved": true,
+      "ownerPronunciationApproved": true
+    },
+    {
+      "wordId": "w-gift",
+      "spelling": "gift",
+      "publicFile": "assets/audio/w-gift.mp3",
+      "intakeFile": "tools/audio-prototype/ttsmaker-2402/gift.mp3",
+      "sha256": "31e3531155743ed9ee482194102d6d683b5cf2d1ea1f641687e0faa97fc4748a",
+      "bytes": 10656,
+      "publicReleaseApproved": true,
+      "ownerPronunciationApproved": true
+    },
+    {
+      "wordId": "w-boat",
+      "spelling": "boat",
+      "publicFile": "assets/audio/w-boat.mp3",
+      "intakeFile": "tools/audio-prototype/ttsmaker-2402/boat.mp3",
+      "sha256": "6d69741752c1899fb1fb9c4562e3d4f2be1ef64aa31a5a3d84cd771457bee933",
+      "bytes": 10656,
+      "publicReleaseApproved": true,
+      "ownerPronunciationApproved": true
+    },
+    {
+      "wordId": "w-wait",
+      "spelling": "wait",
+      "publicFile": "assets/audio/w-wait.mp3",
+      "intakeFile": "tools/audio-prototype/ttsmaker-2402/wait.mp3",
+      "sha256": "3c3cf6616fc91812d178523c18c7e2fefe95406612cb7c8d1fdd9da2cf044c6f",
+      "bytes": 4197,
+      "durationSeconds": 0.48,
+      "publicReleaseApproved": true,
+      "ownerPronunciationApproved": true,
+      "sourceBatch": {
+        "batchId": "ttsmaker-batch11-2026-09-24",
+        "sourceFile": "tools/audio-prototype/ttsmaker-2402/ttsmaker-file-2026-9-24-17-36-11.mp3",
+        "splitIndex": 1,
+        "declaredSpelling": "wait",
+        "segmentStartSeconds": 0,
+        "segmentEndSeconds": 0.425625
+      }
+    },
+    {
+      "wordId": "w-chain",
+      "spelling": "chain",
+      "publicFile": "assets/audio/w-chain.mp3",
+      "intakeFile": "tools/audio-prototype/ttsmaker-2402/chain.mp3",
+      "sha256": "463268f8b84a7ba21f2df9e3844abd69d02925d6a2c9fcfe44d7fb6fcb07e474",
+      "bytes": 4557,
+      "durationSeconds": 0.528,
+      "publicReleaseApproved": true,
+      "ownerPronunciationApproved": true,
+      "sourceBatch": {
+        "batchId": "ttsmaker-batch11-2026-09-24",
+        "sourceFile": "tools/audio-prototype/ttsmaker-2402/ttsmaker-file-2026-9-24-17-36-11.mp3",
+        "splitIndex": 2,
+        "declaredSpelling": "chain",
+        "segmentStartSeconds": 1.38125,
+        "segmentEndSeconds": 1.85267
+      }
+    },
+    {
+      "wordId": "w-play",
+      "spelling": "play",
+      "publicFile": "assets/audio/w-play.mp3",
+      "intakeFile": "tools/audio-prototype/ttsmaker-2402/play.mp3",
+      "sha256": "99d4064e7138e96a493ceb283ee68605b7b6ef219444fc05a2e28168b62e761f",
+      "bytes": 3837,
+      "durationSeconds": 0.456,
+      "publicReleaseApproved": true,
+      "ownerPronunciationApproved": true,
+      "sourceBatch": {
+        "batchId": "ttsmaker-batch11-2026-09-24",
+        "sourceFile": "tools/audio-prototype/ttsmaker-2402/ttsmaker-file-2026-9-24-17-36-11.mp3",
+        "splitIndex": 3,
+        "declaredSpelling": "play",
+        "segmentStartSeconds": 2.81296,
+        "segmentEndSeconds": 3.20837
+      }
+    },
+    {
+      "wordId": "w-grey",
+      "spelling": "grey",
+      "publicFile": "assets/audio/w-grey.mp3",
+      "intakeFile": "tools/audio-prototype/ttsmaker-2402/grey.mp3",
+      "sha256": "d428f54892c9f1523d2e144cccef502e182309a2a02b9900e2d4afe19c145426",
+      "bytes": 4413,
+      "durationSeconds": 0.528,
+      "publicReleaseApproved": true,
+      "ownerPronunciationApproved": true,
+      "sourceBatch": {
+        "batchId": "ttsmaker-batch11-2026-09-24",
+        "sourceFile": "tools/audio-prototype/ttsmaker-2402/ttsmaker-file-2026-9-24-17-36-11.mp3",
+        "splitIndex": 4,
+        "declaredSpelling": "grey",
+        "segmentStartSeconds": 4.184,
+        "segmentEndSeconds": 4.6425
+      }
+    },
+    {
+      "wordId": "w-see",
+      "spelling": "see",
+      "publicFile": "assets/audio/w-see.mp3",
+      "intakeFile": "tools/audio-prototype/ttsmaker-2402/see.mp3",
+      "sha256": "840dcf87d8a1697f9711cb23c7888eef7e53653e9aeabb610a798ded5296d645",
+      "bytes": 5013,
+      "durationSeconds": 0.504,
+      "publicReleaseApproved": true,
+      "ownerPronunciationApproved": true,
+      "sourceBatch": {
+        "batchId": "ttsmaker-batch11-2026-09-24",
+        "sourceFile": "tools/audio-prototype/ttsmaker-2402/ttsmaker-file-2026-9-24-17-36-11.mp3",
+        "splitIndex": 5,
+        "declaredSpelling": "see",
+        "segmentStartSeconds": 5.60483,
+        "segmentEndSeconds": 6.03863
+      }
+    },
+    {
+      "wordId": "w-bee",
+      "spelling": "bee",
+      "publicFile": "assets/audio/w-bee.mp3",
+      "intakeFile": "tools/audio-prototype/ttsmaker-2402/bee.mp3",
+      "sha256": "37b9cd6fa7bd213b35755ad56b9bf6c18ee84ae53c8d3d62b6f32b6aaf66959e",
+      "bytes": 3501,
+      "durationSeconds": 0.456,
+      "publicReleaseApproved": true,
+      "ownerPronunciationApproved": true,
+      "sourceBatch": {
+        "batchId": "ttsmaker-batch11-2026-09-24",
+        "sourceFile": "tools/audio-prototype/ttsmaker-2402/ttsmaker-file-2026-9-24-17-36-11.mp3",
+        "splitIndex": 6,
+        "declaredSpelling": "bee",
+        "segmentStartSeconds": 6.99562,
+        "segmentEndSeconds": 7.38092
+      }
+    },
+    {
+      "wordId": "w-coat",
+      "spelling": "coat",
+      "publicFile": "assets/audio/w-coat.mp3",
+      "intakeFile": "tools/audio-prototype/ttsmaker-2402/coat.mp3",
+      "sha256": "fa705f23c1553a09f4d335e5c64b5c1ca5ae125a677267db24ac483f22a4d26a",
+      "bytes": 4341,
+      "durationSeconds": 0.48,
+      "publicReleaseApproved": true,
+      "ownerPronunciationApproved": true,
+      "sourceBatch": {
+        "batchId": "ttsmaker-batch11-2026-09-24",
+        "sourceFile": "tools/audio-prototype/ttsmaker-2402/ttsmaker-file-2026-9-24-17-36-11.mp3",
+        "splitIndex": 7,
+        "declaredSpelling": "coat",
+        "segmentStartSeconds": 8.34583,
+        "segmentEndSeconds": 8.76383
+      }
+    },
+    {
+      "wordId": "w-road",
+      "spelling": "road",
+      "publicFile": "assets/audio/w-road.mp3",
+      "intakeFile": "tools/audio-prototype/ttsmaker-2402/road.mp3",
+      "sha256": "7365fd117aef59f3fa3b7c75d045856c8248ba754d1f5d3f95840a77a5c6714a",
+      "bytes": 5085,
+      "durationSeconds": 0.552,
+      "publicReleaseApproved": true,
+      "ownerPronunciationApproved": true,
+      "sourceBatch": {
+        "batchId": "ttsmaker-batch11-2026-09-24",
+        "sourceFile": "tools/audio-prototype/ttsmaker-2402/ttsmaker-file-2026-9-24-17-36-11.mp3",
+        "splitIndex": 8,
+        "declaredSpelling": "road",
+        "segmentStartSeconds": 9.70525,
+        "segmentEndSeconds": 10.1981
+      }
+    },
+    {
+      "wordId": "w-light",
+      "spelling": "light",
+      "publicFile": "assets/audio/w-light.mp3",
+      "intakeFile": "tools/audio-prototype/ttsmaker-2402/light.mp3",
+      "sha256": "f75d7c43da949d1e6f8ca53b16cda25f96cf57514f65e17313980bd77747b1f3",
+      "bytes": 5373,
+      "durationSeconds": 0.552,
+      "publicReleaseApproved": true,
+      "ownerPronunciationApproved": true,
+      "sourceBatch": {
+        "batchId": "ttsmaker-batch11-2026-09-24",
+        "sourceFile": "tools/audio-prototype/ttsmaker-2402/ttsmaker-file-2026-9-24-17-36-11.mp3",
+        "splitIndex": 9,
+        "declaredSpelling": "light",
+        "segmentStartSeconds": 11.159,
+        "segmentEndSeconds": 11.6475
+      }
+    },
+    {
+      "wordId": "w-night",
+      "spelling": "night",
+      "publicFile": "assets/audio/w-night.mp3",
+      "intakeFile": "tools/audio-prototype/ttsmaker-2402/night.mp3",
+      "sha256": "8134af4cd17c7ecc8b792ffdc428fbc3b74bc3c17cb85d4e3571c236c7e4cf6a",
+      "bytes": 5157,
+      "durationSeconds": 0.552,
+      "publicReleaseApproved": true,
+      "ownerPronunciationApproved": true,
+      "sourceBatch": {
+        "batchId": "ttsmaker-batch11-2026-09-24",
+        "sourceFile": "tools/audio-prototype/ttsmaker-2402/ttsmaker-file-2026-9-24-17-36-11.mp3",
+        "splitIndex": 10,
+        "declaredSpelling": "night",
+        "segmentStartSeconds": 12.5897,
+        "segmentEndSeconds": 13.0833
+      }
+    },
+    {
+      "wordId": "w-high",
+      "spelling": "high",
+      "publicFile": "assets/audio/w-high.mp3",
+      "intakeFile": "tools/audio-prototype/ttsmaker-2402/high.mp3",
+      "sha256": "b0e25495d0992d1ec288fafb4889448cd30921e1d6f39db6eeb34df223a9ebc1",
+      "bytes": 4365,
+      "durationSeconds": 0.504,
+      "publicReleaseApproved": true,
+      "ownerPronunciationApproved": true,
+      "sourceBatch": {
+        "batchId": "ttsmaker-batch11-2026-09-24",
+        "sourceFile": "tools/audio-prototype/ttsmaker-2402/ttsmaker-file-2026-9-24-17-36-11.mp3",
+        "splitIndex": 11,
+        "declaredSpelling": "high",
+        "segmentStartSeconds": 14.0214,
+        "segmentEndSeconds": 14.4702
+      }
+    }
+  ],
+  "ownerApprovedEntryCount": 26,
+  "ownerPendingEntryCount": 0
+}

@@ -49,6 +49,8 @@
  * @property {boolean} autoCheck
  */
 
+import { MANIFEST_AUDIO_BY_WORD_ID } from '../audio/public-audio-manifest.js';
+
 /**
  * @param {string} baseUrl
  * @param {typeof fetch} fetchFn
@@ -224,7 +226,11 @@ export function validateContentReferences(store) {
       }
     }
     if (word.audioId != null) {
-      errors.push(`Word ${word.id} has audioId ${word.audioId} but production audio is not shipped`);
+      if (word.audioId !== word.id) {
+        errors.push(`Word ${word.id} audioId must equal word id (got ${word.audioId})`);
+      } else if (!MANIFEST_AUDIO_BY_WORD_ID.has(word.audioId)) {
+        errors.push(`Word ${word.id} audioId ${word.audioId} is not in audio manifest`);
+      }
     }
   }
 

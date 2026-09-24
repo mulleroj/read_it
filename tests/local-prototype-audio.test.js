@@ -2,6 +2,8 @@ import { describe, it, beforeEach } from 'node:test';
 import assert from 'node:assert/strict';
 import {
   LOCAL_PROTOTYPE_WORD_FILES,
+  LOCAL_PROTOTYPE_AUDIO_DIR,
+  LOCAL_PROTOTYPE_AUDIO_EXT,
   getLocalPrototypeAudioUrl,
   probeLocalPrototypeAudio,
   hasLocalPrototypeAudio,
@@ -20,10 +22,18 @@ describe('local prototype audio', () => {
     resetLocalPrototypeAudioForTests();
   });
 
-  it('maps ten reviewed word IDs to prototype WAV basenames', () => {
-    assert.equal(Object.keys(LOCAL_PROTOTYPE_WORD_FILES).length, 10);
-    assert.equal(getLocalPrototypeAudioUrl('w-rain'), 'tools/audio-prototype/output/rain.wav');
-    assert.equal(getLocalPrototypeAudioUrl('w-letter'), 'tools/audio-prototype/output/letter.wav');
+  it('maps twenty-six TTSMaker word IDs to MP3 basenames', () => {
+    assert.equal(Object.keys(LOCAL_PROTOTYPE_WORD_FILES).length, 26);
+    assert.equal(LOCAL_PROTOTYPE_WORD_FILES['w-wait'], 'wait');
+    assert.equal(LOCAL_PROTOTYPE_WORD_FILES['w-light'], 'light');
+    assert.equal(
+      getLocalPrototypeAudioUrl('w-rain'),
+      `${LOCAL_PROTOTYPE_AUDIO_DIR}/rain${LOCAL_PROTOTYPE_AUDIO_EXT}`
+    );
+    assert.equal(
+      getLocalPrototypeAudioUrl('w-boat'),
+      `${LOCAL_PROTOTYPE_AUDIO_DIR}/boat${LOCAL_PROTOTYPE_AUDIO_EXT}`
+    );
     assert.equal(getLocalPrototypeAudioUrl('w-green'), null);
   });
 
@@ -43,11 +53,11 @@ describe('local prototype audio', () => {
     assert.match(html, /Poslech/);
   });
 
-  it('probe marks only reachable WAV files', async () => {
+  it('probe marks only reachable MP3 files', async () => {
     setLocalPrototypeAudioEnabledForTests(true);
     const available = new Set(['w-rain', 'w-day', 'w-car']);
     const fetchFn = async (url) => {
-      const basename = url.split('/').pop()?.replace('.wav', '');
+      const basename = url.split('/').pop()?.replace(LOCAL_PROTOTYPE_AUDIO_EXT, '');
       const wordId = Object.entries(LOCAL_PROTOTYPE_WORD_FILES).find(([, file]) => file === basename)?.[0];
       const ok = wordId ? available.has(wordId) : false;
       return { ok, status: ok ? 200 : 404 };

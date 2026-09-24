@@ -1,0 +1,54 @@
+{
+  "bankId": "ttsmaker-2402-robert-batch11",
+  "service": "TTSMaker",
+  "voiceId": "2402",
+  "voiceName": "Robert",
+  "locale": "United Kingdom",
+  "gender": "male",
+  "wordCount": 11,
+  "approvedCount": 11,
+  "approvalDate": "2026-09-24",
+  "approver": "project owner",
+  "approvalSource": "review-batch11.html export in Cursor chat (exportedAt 2026-09-24T15:52:34.792Z, 11/11 approved)",
+  "approvalScope": "pronunciation review – 11 vowel-team MP3 split from one TTSMaker batch recording",
+  "linkedManifest": "content/meta/audio-manifest.json",
+  "reviewHtml": "tools/audio-prototype/ttsmaker-2402/review-batch11.html",
+  "reviewHtmlNote": "Owner must listen and approve each split recording locally. localStorage is not authoritative until exported and recorded by the project owner.",
+  "sourceBatch": {
+    "sourceFile": "tools/audio-prototype/ttsmaker-2402/ttsmaker-file-2026-9-24-17-36-11.mp3",
+    "declaredWordOrder": [
+      "wait",
+      "chain",
+      "play",
+      "grey",
+      "see",
+      "bee",
+      "coat",
+      "road",
+      "light",
+      "night",
+      "high"
+    ],
+    "splitTool": "tools/audio-prototype/ttsmaker-2402/split-batch11.mjs",
+    "splitDate": "2026-09-24"
+  },
+  "previousApprovalRecord": "content/meta/ttsmaker-audio-approval.json",
+  "note": "Pronunciation approved 11/11 on 2026-09-24. Does not extend ttsmaker-audio-approval.json automatically. Public 26-file release still requires stage:audio, commit of assets/audio/, and deploy GO.",
+  "reviewExport": {
+    "bank": "ttsmaker-2402-robert-batch11",
+    "exportedAt": "2026-09-24T15:52:34.792Z",
+    "reviews": {
+      "wait": "approved",
+      "chain": "approved",
+      "play": "approved",
+      "grey": "approved",
+      "see": "approved",
+      "bee": "approved",
+      "coat": "approved",
+      "road": "approved",
+      "light": "approved",
+      "night": "approved",
+      "high": "approved"
+    }
+  }
+}

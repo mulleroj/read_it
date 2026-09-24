@@ -7,7 +7,12 @@
   "scripts": {
     "test": "node --test tests/**/*.test.js",
     "build:public": "node scripts/build-public.mjs",
+    "stage:audio": "node scripts/stage-public-audio.mjs",
+    "stage:audio:dry-run": "node scripts/stage-public-audio.mjs --dry-run",
+    "verify:audio": "node scripts/verify-committed-audio.mjs",
+    "split:batch11": "node tools/audio-prototype/ttsmaker-2402/split-batch11.mjs",
     "serve": "npx --yes serve . -l tcp://127.0.0.1:3000",
+    "serve:audio-review": "npx --yes serve tools/audio-prototype/ttsmaker-2402 -l tcp://127.0.0.1:3001",
     "serve:pilot": "node scripts/pilot-server.mjs",
     "serve:dist": "npx --yes serve dist -l tcp://127.0.0.1:3000"
   },

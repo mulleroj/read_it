@@ -100,7 +100,8 @@ describe('teacher help content', () => {
     assert.ok(ids.includes('pilot-admin'));
     assert.ok(ids.includes('audio'));
     assert.ok(ids.includes('faq'));
-    assert.match(sections.find((s) => s.id === 'audio')?.html ?? '', /Hotové studentské audio/);
+    assert.match(sections.find((s) => s.id === 'audio')?.html ?? '', /26 mapovaných slov/);
+    assert.match(sections.find((s) => s.id === 'audio')?.html ?? '', /TTSMaker/);
     assert.match(sections.find((s) => s.id === 'pilot-admin')?.html ?? '', /serve:pilot/);
     assert.doesNotMatch(sections.find((s) => s.id === 'start')?.html ?? '', /npm run serve:pilot/);
   });

@@ -1,28 +1,262 @@
 [
-  { "id": "w-green", "spelling": "green", "ipa": "/ɡriːn/", "patternIds": ["pat-ee"], "audioId": null, "difficulty": "easy" },
-  { "id": "w-car", "spelling": "car", "ipa": "/kɑː/", "patternIds": ["pat-ar"], "audioId": null, "difficulty": "easy" },
-  { "id": "w-bird", "spelling": "bird", "ipa": "/bɜːd/", "patternIds": ["pat-ir"], "audioId": null, "difficulty": "easy" },
-  { "id": "w-turn", "spelling": "turn", "ipa": "/tɜːn/", "patternIds": ["pat-ur"], "audioId": null, "difficulty": "easy" },
-  { "id": "w-fork", "spelling": "fork", "ipa": "/fɔːk/", "patternIds": ["pat-or"], "audioId": null, "difficulty": "medium" },
-  { "id": "w-her", "spelling": "her", "ipa": "/hɜː/", "patternIds": ["pat-er"], "audioId": null, "difficulty": "easy" },
-  { "id": "w-coin", "spelling": "coin", "ipa": "/kɔɪn/", "patternIds": ["pat-oi"], "audioId": null, "difficulty": "easy" },
-  { "id": "w-cow", "spelling": "cow", "ipa": "/kaʊ/", "patternIds": ["pat-ow-diph"], "audioId": null, "difficulty": "easy" },
-  { "id": "w-boy", "spelling": "boy", "ipa": "/bɔɪ/", "patternIds": ["pat-oy"], "audioId": null, "difficulty": "easy" },
-  { "id": "w-house", "spelling": "house", "ipa": "/haʊs/", "patternIds": ["pat-ou"], "audioId": null, "difficulty": "easy" },
-  { "id": "w-brown", "spelling": "brown", "ipa": "/braʊn/", "patternIds": ["pat-ow-diph"], "audioId": null, "difficulty": "easy" },
-  { "id": "w-city", "spelling": "city", "ipa": "/ˈsɪti/", "patternIds": ["pat-soft-c"], "audioId": null, "difficulty": "easy" },
-  { "id": "w-gym", "spelling": "gym", "ipa": "/dʒɪm/", "patternIds": ["pat-soft-g"], "audioId": null, "difficulty": "easy" },
-  { "id": "w-face", "spelling": "face", "ipa": "/feɪs/", "patternIds": ["pat-soft-c"], "audioId": null, "difficulty": "easy" },
-  { "id": "w-nice", "spelling": "nice", "ipa": "/naɪs/", "patternIds": ["pat-soft-c"], "audioId": null, "difficulty": "easy" },
-  { "id": "w-gift", "spelling": "gift", "ipa": "/ɡɪft/", "patternIds": ["pat-hard-c-g"], "audioId": null, "difficulty": "easy" },
-  { "id": "w-get", "spelling": "get", "ipa": "/ɡet/", "patternIds": ["pat-hard-c-g"], "audioId": null, "difficulty": "easy" },
-  { "id": "w-girl", "spelling": "girl", "ipa": "/ɡɜːl/", "patternIds": ["pat-hard-c-g"], "audioId": null, "difficulty": "easy" },
-  { "id": "w-cat", "spelling": "cat", "ipa": "/kæt/", "patternIds": ["pat-hard-c-g"], "audioId": null, "difficulty": "easy" },
-  { "id": "w-rice", "spelling": "rice", "ipa": "/raɪs/", "patternIds": ["pat-soft-c"], "audioId": null, "difficulty": "easy" },
-  { "id": "w-happy", "spelling": "happy", "ipa": "/ˈhæpi/", "patternIds": ["pat-double-medial"], "audioId": null, "difficulty": "easy" },
-  { "id": "w-letter", "spelling": "letter", "ipa": "/ˈletə/", "patternIds": ["pat-double-medial"], "audioId": null, "difficulty": "easy" },
-  { "id": "w-bell", "spelling": "bell", "ipa": "/bel/", "patternIds": ["pat-ll"], "audioId": null, "difficulty": "easy" },
-  { "id": "w-sock", "spelling": "sock", "ipa": "/sɒk/", "patternIds": ["pat-ck"], "audioId": null, "difficulty": "easy" },
-  { "id": "w-miss", "spelling": "miss", "ipa": "/mɪs/", "patternIds": ["pat-ss"], "audioId": null, "difficulty": "easy" },
-  { "id": "w-clock", "spelling": "clock", "ipa": "/klɒk/", "patternIds": ["pat-ck"], "audioId": null, "difficulty": "easy" }
+  {
+    "id": "w-green",
+    "spelling": "green",
+    "ipa": "/ɡriːn/",
+    "patternIds": [
+      "pat-ee"
+    ],
+    "audioId": null,
+    "difficulty": "easy"
+  },
+  {
+    "id": "w-car",
+    "spelling": "car",
+    "ipa": "/kɑː/",
+    "patternIds": [
+      "pat-ar"
+    ],
+    "audioId": "w-car",
+    "difficulty": "easy"
+  },
+  {
+    "id": "w-bird",
+    "spelling": "bird",
+    "ipa": "/bɜːd/",
+    "patternIds": [
+      "pat-ir"
+    ],
+    "audioId": "w-bird",
+    "difficulty": "easy"
+  },
+  {
+    "id": "w-turn",
+    "spelling": "turn",
+    "ipa": "/tɜːn/",
+    "patternIds": [
+      "pat-ur"
+    ],
+    "audioId": null,
+    "difficulty": "easy"
+  },
+  {
+    "id": "w-fork",
+    "spelling": "fork",
+    "ipa": "/fɔːk/",
+    "patternIds": [
+      "pat-or"
+    ],
+    "audioId": null,
+    "difficulty": "medium"
+  },
+  {
+    "id": "w-her",
+    "spelling": "her",
+    "ipa": "/hɜː/",
+    "patternIds": [
+      "pat-er"
+    ],
+    "audioId": null,
+    "difficulty": "easy"
+  },
+  {
+    "id": "w-coin",
+    "spelling": "coin",
+    "ipa": "/kɔɪn/",
+    "patternIds": [
+      "pat-oi"
+    ],
+    "audioId": "w-coin",
+    "difficulty": "easy"
+  },
+  {
+    "id": "w-cow",
+    "spelling": "cow",
+    "ipa": "/kaʊ/",
+    "patternIds": [
+      "pat-ow-diph"
+    ],
+    "audioId": "w-cow",
+    "difficulty": "easy"
+  },
+  {
+    "id": "w-boy",
+    "spelling": "boy",
+    "ipa": "/bɔɪ/",
+    "patternIds": [
+      "pat-oy"
+    ],
+    "audioId": null,
+    "difficulty": "easy"
+  },
+  {
+    "id": "w-house",
+    "spelling": "house",
+    "ipa": "/haʊs/",
+    "patternIds": [
+      "pat-ou"
+    ],
+    "audioId": null,
+    "difficulty": "easy"
+  },
+  {
+    "id": "w-brown",
+    "spelling": "brown",
+    "ipa": "/braʊn/",
+    "patternIds": [
+      "pat-ow-diph"
+    ],
+    "audioId": null,
+    "difficulty": "easy"
+  },
+  {
+    "id": "w-city",
+    "spelling": "city",
+    "ipa": "/ˈsɪti/",
+    "patternIds": [
+      "pat-soft-c"
+    ],
+    "audioId": "w-city",
+    "difficulty": "easy"
+  },
+  {
+    "id": "w-gym",
+    "spelling": "gym",
+    "ipa": "/dʒɪm/",
+    "patternIds": [
+      "pat-soft-g"
+    ],
+    "audioId": "w-gym",
+    "difficulty": "easy"
+  },
+  {
+    "id": "w-face",
+    "spelling": "face",
+    "ipa": "/feɪs/",
+    "patternIds": [
+      "pat-soft-c"
+    ],
+    "audioId": null,
+    "difficulty": "easy"
+  },
+  {
+    "id": "w-nice",
+    "spelling": "nice",
+    "ipa": "/naɪs/",
+    "patternIds": [
+      "pat-soft-c"
+    ],
+    "audioId": null,
+    "difficulty": "easy"
+  },
+  {
+    "id": "w-gift",
+    "spelling": "gift",
+    "ipa": "/ɡɪft/",
+    "patternIds": [
+      "pat-hard-c-g"
+    ],
+    "audioId": "w-gift",
+    "difficulty": "easy"
+  },
+  {
+    "id": "w-get",
+    "spelling": "get",
+    "ipa": "/ɡet/",
+    "patternIds": [
+      "pat-hard-c-g"
+    ],
+    "audioId": null,
+    "difficulty": "easy"
+  },
+  {
+    "id": "w-girl",
+    "spelling": "girl",
+    "ipa": "/ɡɜːl/",
+    "patternIds": [
+      "pat-hard-c-g"
+    ],
+    "audioId": null,
+    "difficulty": "easy"
+  },
+  {
+    "id": "w-cat",
+    "spelling": "cat",
+    "ipa": "/kæt/",
+    "patternIds": [
+      "pat-hard-c-g"
+    ],
+    "audioId": null,
+    "difficulty": "easy"
+  },
+  {
+    "id": "w-rice",
+    "spelling": "rice",
+    "ipa": "/raɪs/",
+    "patternIds": [
+      "pat-soft-c"
+    ],
+    "audioId": null,
+    "difficulty": "easy"
+  },
+  {
+    "id": "w-happy",
+    "spelling": "happy",
+    "ipa": "/ˈhæpi/",
+    "patternIds": [
+      "pat-double-medial"
+    ],
+    "audioId": "w-happy",
+    "difficulty": "easy"
+  },
+  {
+    "id": "w-letter",
+    "spelling": "letter",
+    "ipa": "/ˈletə/",
+    "patternIds": [
+      "pat-double-medial"
+    ],
+    "audioId": "w-letter",
+    "difficulty": "easy"
+  },
+  {
+    "id": "w-bell",
+    "spelling": "bell",
+    "ipa": "/bel/",
+    "patternIds": [
+      "pat-ll"
+    ],
+    "audioId": "w-bell",
+    "difficulty": "easy"
+  },
+  {
+    "id": "w-sock",
+    "spelling": "sock",
+    "ipa": "/sɒk/",
+    "patternIds": [
+      "pat-ck"
+    ],
+    "audioId": null,
+    "difficulty": "easy"
+  },
+  {
+    "id": "w-miss",
+    "spelling": "miss",
+    "ipa": "/mɪs/",
+    "patternIds": [
+      "pat-ss"
+    ],
+    "audioId": null,
+    "difficulty": "easy"
+  },
+  {
+    "id": "w-clock",
+    "spelling": "clock",
+    "ipa": "/klɒk/",
+    "patternIds": [
+      "pat-ck"
+    ],
+    "audioId": "w-clock",
+    "difficulty": "easy"
+  }
 ]

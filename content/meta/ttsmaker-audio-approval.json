@@ -1,0 +1,17 @@
+{
+  "bankId": "ttsmaker-2402-robert",
+  "service": "TTSMaker",
+  "voiceId": "2402",
+  "voiceName": "Robert",
+  "locale": "United Kingdom",
+  "gender": "male",
+  "wordCount": 15,
+  "approvedCount": 15,
+  "approvalDate": "2026-09-24",
+  "approver": "project owner",
+  "approvalSource": "explicit owner declaration in ChatGPT conversation (2026-09-24)",
+  "approvalScope": "pronunciation review – all 15 mixed-lesson TTSMaker MP3 recordings",
+  "linkedManifest": "content/meta/audio-manifest.json",
+  "reviewHtmlNote": "tools/audio-prototype/ttsmaker-2402/review.html localStorage was not the approval record. No review JSON export is on file.",
+  "generationDateNote": "Exact TTSMaker export timestamp not separately recorded by the owner. Do not infer generation date from file mtime alone."
+}

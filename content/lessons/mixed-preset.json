@@ -4,7 +4,7 @@
     "preset": true,
     "title": { "cs": "READ IT! – smíšená 30min lekce" },
     "description": {
-      "cs": "První smíšená lekce pokrývající všech pět oblastí (A1–A2). 24 cvičných položek v aplikaci + učitelský poslechový blok (bez studentského audia)."
+      "cs": "První smíšená lekce pokrývající všech pět oblastí (A1–A2). 24 cvičných položek v aplikaci + učitelský poslechový blok. U 26 mapovaných slov je k dispozici schválené TTSMaker audio (tlačítko Poslech) – ne u každého slova v databázi READ IT!."
     },
     "plannedMinutes": 30,
     "difficulty": "medium",
@@ -15,7 +15,7 @@
       { "exerciseId": "ex-exit-ticket-mixed", "feedbackMode": "assessment" }
     ],
     "teacherNotes": {
-      "cs": "Soft C (cílové příklady): city, face, nice → c před e/i/y dává /s/.\n\nSoft G (cílový příklad): gym → g před y dává /dʒ/.\n\nHard-g kontrasty (NE jsou soft g): gift, get, girl. G před e/i/y není vždy měkké – toto pravidlo neučte jako absolutní.\n\nHard C: cat je běžný příklad hard c před a – není to výjimka k soft c, jen běžné srovnání s city/face.\n\nPřed exit ticketem: uveď kontrast hard g na příkladech get a girl – g před e/i dává /ɡ/, ne /dʒ/. Neučte pravidlo jako absolutní; neprozrazujte odpověď k položce gift dřív, než studenti odpoví.\n\nPo exit ticketu (zpětná vazba): u položky gift vysvětli, proč patří k hard g, ne k soft g.\n\nDouble consonants: ll, pp, tt, ss = dvojité písmeno (pravopis) – souhláska se nevyslovuje dvakrát. ck = pravopisný digraf (např. clock), ne dvojité písmeno.\n\nPoslech (5 slov: rain, car, coin, city, happy): učitelský plánovaný blok. Aplikace zatím nemá studentské audio – modelujte výslovnost nebo použijte lokální M6A.2 prototyp mimo app.\n\nVolitelné guided příklady podle času (mimo student player): turn, wait, play, brown, rice, sock, miss."
+      "cs": "Soft C (cílové příklady): city, face, nice → c před e/i/y dává /s/.\n\nSoft G (cílový příklad): gym → g před y dává /dʒ/.\n\nHard-g kontrasty (NE jsou soft g): gift, get, girl. G před e/i/y není vždy měkké – toto pravidlo neučte jako absolutní.\n\nHard C: cat je běžný příklad hard c před a – není to výjimka k soft c, jen běžné srovnání s city/face.\n\nPřed exit ticketem: uveď kontrast hard g na příkladech get a girl – g před e/i dává /ɡ/, ne /dʒ/. Neučte pravidlo jako absolutní; neprozrazujte odpověď k položce gift dřív, než studenti odpoví.\n\nPo exit ticketu (zpětná vazba): u položky gift vysvětli, proč patří k hard g, ne k soft g.\n\nDouble consonants: ll, pp, tt, ss = dvojité písmeno (pravopis) – souhláska se nevyslovuje dvakrát. ck = pravopisný digraf (např. clock), ne dvojité písmeno.\n\nPoslech (5 slov: rain, car, coin, city, happy): učitelský plánovaný blok – studenti mohou u těchto slov (a u dalších mapovaných slov v cvičeních) použít tlačítko Poslech. Schválené TTSMaker audio je k dispozici u 26 mapovaných slov, ne u celé word banky. U ostatních slov modelujte výslovnost ústně nebo pomocí IPA.\n\nVolitelné guided příklady podle času (mimo student player): turn, wait, play, brown, rice, sock, miss."
     }
   }
 ]

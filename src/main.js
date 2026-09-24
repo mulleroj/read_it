@@ -20,9 +20,9 @@ import { getCategoryClass } from './ui/category-styles.js';
 import { iconTeacher, iconStudent } from './ui/icons.js';
 import { escapeHtml } from './ui/html-utils.js';
 import {
-  probeLocalPrototypeAudio,
   syncLocalPrototypeAudioFromLocation,
 } from './audio/local-prototype-audio.js';
+import { probeWordAudio } from './audio/word-audio.js';
 
 /** @type {Awaited<ReturnType<typeof loadContentStore>> | null} */
 let contentStore = null;
@@ -55,9 +55,9 @@ async function init() {
   try {
     contentStore = await loadContentStore('');
     try {
-      await probeLocalPrototypeAudio('');
+      await probeWordAudio('');
     } catch (audioErr) {
-      console.warn('Local prototype audio probe skipped:', audioErr);
+      console.warn('Word audio probe skipped:', audioErr);
     }
   } catch (err) {
     console.error(err);
