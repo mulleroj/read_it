@@ -17,7 +17,7 @@ const repoRoot = path.resolve(__dirname, '..');
 export const PUBLIC_SURFACE_DIRS = new Set(['styles', 'src', 'content']);
 
 /** @type {ReadonlySet<string>} */
-export const PUBLIC_SURFACE_FILES = new Set(['index.html']);
+export const PUBLIC_SURFACE_FILES = new Set(['index.html', 'favicon.svg']);
 
 /** @type {ReadonlySet<string>} */
 export const BLOCKED_PUBLISH_EXTENSIONS = new Set([

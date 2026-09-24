@@ -15,6 +15,7 @@ const distRoot = path.join(repoRoot, 'dist');
 describe('public surface allowlist', () => {
   it('allows app files and blocks repo internals', () => {
     assert.equal(isPublishableRelativePath('index.html'), true);
+    assert.equal(isPublishableRelativePath('favicon.svg'), true);
     assert.equal(isPublishableRelativePath('src/main.js'), true);
     assert.equal(isPublishableRelativePath('src/vendor/qrcode-generator.mjs'), true);
     assert.equal(isPublishableRelativePath('content/index.json'), true);
@@ -50,6 +51,7 @@ describe('build:public output', () => {
 
   it('includes required application assets', () => {
     assert.ok(builtFiles.includes('index.html'));
+    assert.ok(builtFiles.includes('favicon.svg'));
     assert.ok(builtFiles.includes('styles/main.css'));
     assert.ok(builtFiles.includes('src/main.js'));
     assert.ok(builtFiles.includes('src/vendor/qrcode-generator.mjs'));

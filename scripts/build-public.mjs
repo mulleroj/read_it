@@ -15,4 +15,4 @@ const { fileCount } = buildPublicDirectory(repoRoot, outDir);
 console.log(`READ IT! public build ready`);
 console.log(`  Output: ${outDir}`);
 console.log(`  Files:  ${fileCount}`);
-console.log(`  Surface: index.html, styles/, src/, content/`);
+console.log(`  Surface: index.html, favicon.svg, styles/, src/, content/`);
