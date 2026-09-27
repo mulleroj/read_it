@@ -84,7 +84,7 @@
   {
     "id": "pat-hard-c-g",
     "categoryId": "cat-soft-cg",
-    "label": { "cs": "hard c / hard g (kontrast)", "en": "hard c or hard g" },
+    "label": { "cs": "c /k/, g /ɡ/ – tvrdé c a g", "en": "hard c or hard g" },
     "graphemes": ["c", "g"],
     "phoneme": "—",
     "notes": { "cs": "Kontrastní položka – NE měkké c/g. Např. gift, get, cat." }

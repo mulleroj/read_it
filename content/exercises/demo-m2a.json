@@ -92,14 +92,14 @@
     "autoCheck": true,
     "items": [
       {
-        "prompt": { "cs": "Sestav slovo s významem prší (dešť)." },
+        "prompt": { "cs": "Sestav slovo, které znamená déšť." },
         "targetWordId": "w-rain",
         "tiles": ["r", "ai", "n"],
         "correctOrder": ["r", "ai", "n"],
         "explanation": { "cs": "Rain = r + ai + n. Vzor ai se vyslovuje /eɪ/." }
       },
       {
-        "prompt": { "cs": "Sestav slovo s významem noc (night)." },
+        "prompt": { "cs": "Sestav slovo, které znamená noc." },
         "targetWordId": "w-night",
         "tiles": ["n", "igh", "t"],
         "correctOrder": ["n", "igh", "t"],

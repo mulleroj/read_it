@@ -138,7 +138,7 @@ describe('M6B mixed lesson content', () => {
 
     const hardPattern = store.getPattern('pat-hard-c-g');
     assert.ok(hardPattern);
-    assert.match(hardPattern.label.cs, /kontrast|hard/i);
+    assert.match(hardPattern.label.cs, /tvrdé c a g|kontrast|hard/i);
 
     const exit = store.getExercise('ex-exit-ticket-mixed');
     const giftItem = exit.items.find((i) => i.wordId === 'w-gift');

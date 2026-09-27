@@ -5,7 +5,11 @@ import {
   isAssessmentExercise,
   renderLessonTeacherNotesOverview,
   renderLessonTeacherNotesPanel,
+  bindTeacherNotesToggle,
 } from './lesson-teacher-notes.js';
+import { buildLessonShareLinks } from '../share/url-codec.js';
+import { openQrFullscreen } from '../ui/lesson-share.js';
+import { scrollToContentStart } from '../ui/content-scroll.js';
 import { escapeHtml, escapeAttr } from '../ui/html-utils.js';
 import { iconArrowRight, iconCheck, iconTrophy } from '../ui/icons.js';
 import { buildHelpHref, buildHelpPageUrl, getCurrentReturnPath } from '../help/help-navigation.js';
@@ -43,6 +47,8 @@ export function mountLessonPlayer(container, config, resolved, mode, store, cont
     if (step === 'overview') {
       host.innerHTML = renderOverview();
       bindOverviewEvents();
+      bindTeacherNotesToggle(host);
+      requestAnimationFrame(() => scrollToContentStart(host));
       return;
     }
 
@@ -56,6 +62,7 @@ export function mountLessonPlayer(container, config, resolved, mode, store, cont
       host.querySelector('.btn-back-builder')?.addEventListener('click', () => {
         window.location.hash = '#/builder';
       });
+      requestAnimationFrame(() => scrollToContentStart(host));
       return;
     }
 
@@ -106,6 +113,11 @@ export function mountLessonPlayer(container, config, resolved, mode, store, cont
           <ol class="lesson-sequence__list">${items}</ol>
         </section>
         <div class="lesson-overview__actions">
+          ${
+            mode === 'teacher'
+              ? `<button type="button" class="btn btn-secondary btn-lesson-show-qr">${escapeHtml(context.t('lessonShowQr'))}</button>`
+              : ''
+          }
           <button type="button" class="btn btn-primary btn-start-lesson">
             ${iconArrowRight}
             ${escapeHtml(context.t('lessonStart'))}
@@ -125,6 +137,15 @@ export function mountLessonPlayer(container, config, resolved, mode, store, cont
       step = 'exercise';
       exerciseIndex = 0;
       render();
+    });
+
+    host.querySelector('.btn-lesson-show-qr')?.addEventListener('click', () => {
+      const studentLinks = buildLessonShareLinks(config, 'student', undefined, store);
+      if (studentLinks.tooLong) {
+        window.alert(context.t('shareUrlTooLong'));
+        return;
+      }
+      openQrFullscreen(studentLinks.url, context.t);
     });
   }
 
@@ -212,6 +233,9 @@ export function mountLessonPlayer(container, config, resolved, mode, store, cont
     host.querySelector('.btn-lesson-next-exercise')?.addEventListener('click', () => {
       goNextExercise();
     });
+
+    bindTeacherNotesToggle(host);
+    requestAnimationFrame(() => scrollToContentStart(host));
   }
 
   function watchExerciseCompletion() {
@@ -276,7 +300,10 @@ export function mountLessonPlayer(container, config, resolved, mode, store, cont
 
   function renderTeacherNotesOverview() {
     if (!hasTeacherNotes()) return '';
-    return renderLessonTeacherNotesOverview(config.teacherNotes, context.t('lessonTeacherNotesTitle'));
+    return renderLessonTeacherNotesOverview(config.teacherNotes, context.t('lessonTeacherNotesTitle'), {
+      showNotesToggle: context.t('lessonShowNotes'),
+      hideNotesToggle: context.t('lessonHideNotes'),
+    });
   }
 
   /**
@@ -294,6 +321,8 @@ export function mountLessonPlayer(container, config, resolved, mode, store, cont
     return renderLessonTeacherNotesPanel(config.teacherNotes, {
       title: context.t('lessonTeacherNotesTitle'),
       callout: showAssessmentCallout ? context.t('lessonTeacherNotesCallout') : undefined,
+      showNotesToggle: context.t('lessonShowNotes'),
+      hideNotesToggle: context.t('lessonHideNotes'),
     });
   }
 }

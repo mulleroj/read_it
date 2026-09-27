@@ -117,7 +117,7 @@ export function renderLessonSharePanel(container, config, context, store) {
  * @param {string} url
  * @param {Function} t
  */
-function openQrFullscreen(url, t) {
+export function openQrFullscreen(url, t) {
   const overlay = document.createElement('div');
   overlay.className = 'qr-overlay';
   overlay.setAttribute('role', 'dialog');

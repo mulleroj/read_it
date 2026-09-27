@@ -92,21 +92,21 @@
     "autoCheck": true,
     "items": [
       {
-        "prompt": { "cs": "Sestav slovo rain (prší)." },
+        "prompt": { "cs": "Sestav slovo, které znamená déšť." },
         "targetWordId": "w-rain",
         "tiles": ["r", "ai", "n"],
         "correctOrder": ["r", "ai", "n"],
         "explanation": { "cs": "Rain = r + ai + n. Ai je pravopisná jednotka (vowel team)." }
       },
       {
-        "prompt": { "cs": "Sestav slovo bell (zvonek)." },
+        "prompt": { "cs": "Sestav slovo, které znamená zvonek." },
         "targetWordId": "w-bell",
         "tiles": ["b", "e", "ll"],
         "correctOrder": ["b", "e", "ll"],
         "explanation": { "cs": "Bell = b + e + ll. Ll je dvojité písmeno – souhláska se nevyslovuje dvakrát." }
       },
       {
-        "prompt": { "cs": "Sestav slovo clock (hodiny)." },
+        "prompt": { "cs": "Sestav slovo, které znamená hodiny." },
         "targetWordId": "w-clock",
         "tiles": ["c", "l", "o", "ck"],
         "correctOrder": ["c", "l", "o", "ck"],

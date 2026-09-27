@@ -42,6 +42,9 @@ describe('lesson teacher notes', () => {
     assert.match(html, /teacher-panel--lesson-notes/);
     assert.match(html, /Před exit ticketem/);
     assert.match(html, /Note body/);
+    assert.match(html, /btn-toggle-teacher-notes/);
+    assert.match(html, /aria-expanded="false"/);
+    assert.match(html, /teacher-notes-collapsible" hidden/);
   });
 
   it('renderLessonTeacherNotesOverview returns empty for blank notes', () => {

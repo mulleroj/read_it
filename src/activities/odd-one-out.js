@@ -1,4 +1,5 @@
 import { checkOddOneOut } from '../core/evaluation.js';
+import { shuffleChoiceIds } from '../core/shuffle-choices.js';
 import { mountItemFlow } from './shared-item-flow.js';
 import { markOptionButtons } from './find-pattern.js';
 import { escapeHtml } from '../ui/html-utils.js';
@@ -12,11 +13,19 @@ const oddOneOut = {
   },
 
   mount(container, exercise, context, store) {
+    /** @type {Map<number, string[]>} */
+    const wordOrderByItem = new Map();
+
     return mountItemFlow(container, exercise, context, store, {
       extraClass: 'activity--odd-one-out',
 
-      renderBody(item) {
-        const words = item.wordIds.map((id) => store.getWord(id)).filter(Boolean);
+      renderBody(item, itemIndex) {
+        if (!wordOrderByItem.has(itemIndex)) {
+          wordOrderByItem.set(itemIndex, shuffleChoiceIds([...item.wordIds]));
+        }
+        const words = (wordOrderByItem.get(itemIndex) ?? [])
+          .map((id) => store.getWord(id))
+          .filter(Boolean);
 
         return `
           <p class="activity__prompt activity__prompt--strong">${escapeHtml(item.prompt?.cs ?? '')}</p>

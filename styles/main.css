@@ -674,6 +674,20 @@ body::before {
   overflow-y: auto;
 }
 
+.teacher-notes__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.teacher-notes__header .teacher-panel__title,
+.teacher-notes__header .lesson-teacher-notes__title {
+  margin: 0;
+}
+
 .lesson-teacher-notes {
   margin-bottom: var(--space-6);
   padding: var(--space-5);

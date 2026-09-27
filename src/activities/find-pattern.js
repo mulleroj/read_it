@@ -1,4 +1,5 @@
 import { checkSingleChoice } from '../core/evaluation.js';
+import { shuffleChoiceIds } from '../core/shuffle-choices.js';
 import { mountItemFlow } from './shared-item-flow.js';
 import { escapeHtml, escapeAttr } from '../ui/html-utils.js';
 import { renderActivityWordBlock } from '../ui/word-audio-control.js';
@@ -12,14 +13,22 @@ const findPattern = {
   },
 
   mount(container, exercise, context, store) {
+    /** @type {Map<number, string[]>} */
+    const optionOrderByItem = new Map();
+
     return mountItemFlow(container, exercise, context, store, {
       extraClass: 'activity--find-pattern',
 
-      renderBody(item) {
+      renderBody(item, itemIndex) {
         const word = store.getWord(item.wordId);
         if (!word) return `<p class="status-message status-message--error">Chybí slovo</p>`;
 
-        const options = item.optionPatternIds.map((id) => store.getPattern(id)).filter(Boolean);
+        if (!optionOrderByItem.has(itemIndex)) {
+          optionOrderByItem.set(itemIndex, shuffleChoiceIds([...item.optionPatternIds]));
+        }
+        const options = (optionOrderByItem.get(itemIndex) ?? [])
+          .map((id) => store.getPattern(id))
+          .filter(Boolean);
 
         return `
           ${renderActivityWordBlock(word, context.t)}
@@ -83,7 +92,11 @@ export function markOptionButtons(ui, selectedId, correctId) {
 
 export function formatPatternLabel(pattern) {
   if (!pattern) return '?';
-  return `${pattern.graphemes.join(' / ')} ${pattern.phoneme}`;
+  const phoneme = pattern.phoneme?.trim();
+  if (phoneme === '—' || phoneme === '–' || phoneme === '-') {
+    return pattern.label?.cs ?? pattern.graphemes.join(' / ');
+  }
+  return `${pattern.graphemes.join(' / ')} ${phoneme}`;
 }
 
 export default findPattern;

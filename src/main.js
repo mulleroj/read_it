@@ -23,6 +23,8 @@ import {
   syncLocalPrototypeAudioFromLocation,
 } from './audio/local-prototype-audio.js';
 import { probeWordAudio } from './audio/word-audio.js';
+import { shouldHideTeacherNavigation } from './ui/student-nav.js';
+import { scrollToContentStart } from './ui/content-scroll.js';
 
 /** @type {Awaited<ReturnType<typeof loadContentStore>> | null} */
 let contentStore = null;
@@ -90,6 +92,11 @@ function updateNavState() {
     const route = el.getAttribute('data-route');
     el.classList.toggle('is-active', route === mode);
   });
+
+  const hideTeacherNav = shouldHideTeacherNavigation(mode);
+  document.querySelectorAll('[data-nav-teacher-only]').forEach((el) => {
+    el.hidden = hideTeacherNav;
+  });
 }
 
 /** @param {string} mode */
@@ -120,16 +127,19 @@ function renderRoute() {
 
   if (mode === 'home') {
     renderHome();
+    requestAnimationFrame(() => scrollToContentStart(mainEl));
     return;
   }
 
   if (mode === 'builder') {
     activeActivity = mountLessonBuilder(mainEl, contentStore, { t });
+    requestAnimationFrame(() => scrollToContentStart(mainEl));
     return;
   }
 
   if (mode === 'help') {
     renderHelp(params);
+    requestAnimationFrame(() => scrollToContentStart(mainEl));
     return;
   }
 
@@ -142,10 +152,12 @@ function renderRoute() {
   const exerciseId = params.get('ex');
   if (!exerciseId) {
     renderExercisePicker(mode);
+    requestAnimationFrame(() => scrollToContentStart(mainEl));
     return;
   }
 
   renderExerciseMode(mode, exerciseId);
+  requestAnimationFrame(() => scrollToContentStart(mainEl));
 }
 
 /**

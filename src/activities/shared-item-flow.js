@@ -11,6 +11,7 @@ import {
 import { iconArrowRight } from '../ui/icons.js';
 import { escapeHtml } from '../ui/html-utils.js';
 import { bindWordAudioButtons } from '../ui/word-audio-control.js';
+import { scrollToContentStart } from '../ui/content-scroll.js';
 
 /**
  * @typedef {Object} ItemCheckResult
@@ -90,6 +91,7 @@ export function mountItemFlow(container, exercise, context, store, callbacks) {
 
     ui.innerHTML = `${header}${body}<div class="feedback-slot"></div>${actions}`;
     bindItemEvents(item, isLast);
+    requestAnimationFrame(() => scrollToContentStart(ui));
   }
 
   /** @param {object} item @param {boolean} isLast */
@@ -227,6 +229,7 @@ export function mountItemFlow(container, exercise, context, store, callbacks) {
         : '';
 
     ui.innerHTML = renderSummaryHtml({ score, context, reviewHtml });
+    requestAnimationFrame(() => scrollToContentStart(ui));
     ui.querySelector('.btn-restart')?.addEventListener('click', () => {
       session.clear();
       itemIndex = 0;

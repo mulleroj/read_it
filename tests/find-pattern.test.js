@@ -28,4 +28,13 @@ describe('find-pattern activity', () => {
     });
     assert.equal(label, 'ai / ay /eɪ/');
   });
+
+  it('uses Czech label when phoneme placeholder would be unreadable', () => {
+    const label = formatPatternLabel({
+      graphemes: ['c', 'g'],
+      phoneme: '—',
+      label: { cs: 'c /k/, g /ɡ/ – tvrdé c a g' },
+    });
+    assert.equal(label, 'c /k/, g /ɡ/ – tvrdé c a g');
+  });
 });
