@@ -20,6 +20,8 @@ import { scrollToContentStart } from '../ui/content-scroll.js';
  * @property {string} correctLabel
  * @property {string} [explanation]
  * @property {string} [prompt]
+ * @property {{ correct: number, total: number, percent: number }} [scoreOverride]
+ * @property {string} [feedbackText]
  */
 
 /**
@@ -45,6 +47,10 @@ export function mountItemFlow(container, exercise, context, store, callbacks) {
   let userInput = null;
   /** @type {ItemCheckResult|null} */
   let lastResult = null;
+  /** @type {{ correct: number, total: number, percent: number } | null} */
+  let summaryScoreOverride = null;
+  /** @type {{ correct: number, total: number, percent: number } | null} */
+  let persistedSummaryScore = null;
 
   const ui = document.createElement('div');
   ui.className = [getActivityPanelClass(exercise, store), callbacks.extraClass].filter(Boolean).join(' ');
@@ -70,6 +76,7 @@ export function mountItemFlow(container, exercise, context, store, callbacks) {
     revealed = false;
     userInput = null;
     lastResult = null;
+    summaryScoreOverride = null;
 
     const item = exercise.items[itemIndex];
     const current = itemIndex + 1;
@@ -169,6 +176,8 @@ export function mountItemFlow(container, exercise, context, store, callbacks) {
     if (userInput == null) return;
     lastResult = callbacks.checkItem(item, userInput);
     answered = true;
+    summaryScoreOverride = lastResult.scoreOverride ?? null;
+    if (summaryScoreOverride) persistedSummaryScore = summaryScoreOverride;
 
     const prompt =
       lastResult.prompt ??
@@ -200,7 +209,9 @@ export function mountItemFlow(container, exercise, context, store, callbacks) {
     const slot = ui.querySelector('.feedback-slot');
     if (!slot) return;
     const label = result.correct ? context.t('feedbackLabelCorrect') : context.t('feedbackLabelIncorrect');
-    const text = result.correct ? context.t('feedbackCorrect') : context.t('feedbackIncorrect', { answer: result.correctLabel });
+    const text =
+      result.feedbackText ??
+      (result.correct ? context.t('feedbackCorrect') : context.t('feedbackIncorrect', { answer: result.correctLabel }));
     slot.innerHTML = renderFeedbackHtml(result.correct, label, text, result.explanation ?? '');
   }
 
@@ -213,7 +224,8 @@ export function mountItemFlow(container, exercise, context, store, callbacks) {
       }
     }
 
-    const score = session.getScore();
+    const sessionScore = session.getScore();
+    const score = persistedSummaryScore ?? summaryScoreOverride ?? sessionScore;
     const reviewHtml =
       controls.deferFeedback || controls.manualReveal
         ? renderReviewListHtml(
@@ -233,6 +245,8 @@ export function mountItemFlow(container, exercise, context, store, callbacks) {
     ui.querySelector('.btn-restart')?.addEventListener('click', () => {
       session.clear();
       itemIndex = 0;
+      persistedSummaryScore = null;
+      summaryScoreOverride = null;
       renderCurrent();
     });
   }

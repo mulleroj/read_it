@@ -34,7 +34,7 @@ const exitTicket = {
           .filter(Boolean);
 
         return `
-          ${renderActivityWordBlock(word, context.t, { compact: true })}
+          ${renderActivityWordBlock(word, context.t, { compact: true, hideIpa: true })}
           <p class="activity__prompt">${escapeHtml(item.prompt?.cs ?? context.t('exitTicketPrompt'))}</p>
           <div class="activity__options" role="group">
             ${options

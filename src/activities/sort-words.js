@@ -1,7 +1,84 @@
 import { checkSortAssignments } from '../core/evaluation.js';
+import { calculateScorePercent } from '../core/validator.js';
 import { mountItemFlow } from './shared-item-flow.js';
-import { escapeHtml } from '../ui/html-utils.js';
+import { escapeHtml, escapeAttr } from '../ui/html-utils.js';
 import { renderWordAudioButton } from '../ui/word-audio-control.js';
+
+/**
+ * @param {object} item
+ * @param {object} store
+ */
+export function formatSortRevealLabel(item, store) {
+  return Object.entries(item.correctAssignments)
+    .map(([wordId, binId]) => {
+      const word = store.getWord(wordId);
+      const bin = item.bins.find((b) => b.patternId === binId);
+      return `${word?.spelling ?? wordId} → ${bin?.label ?? binId}`;
+    })
+    .join('; ');
+}
+
+/**
+ * @param {object} item
+ * @param {Record<string, string>} userInput
+ * @param {{ mode: string, t: Function }} context
+ * @param {object} store
+ */
+export function createSortWordsCheckResult(item, userInput, context, store) {
+  const assignments = userInput;
+  const result = checkSortAssignments(assignments, item.correctAssignments);
+  const correctCount = result.details.filter((d) => d.correct).length;
+  const total = result.details.length;
+  const percent = calculateScorePercent(correctCount, total);
+
+  const userLabel = context.t('sortWordsScoreSummary', {
+    correct: String(correctCount),
+    total: String(total),
+    percent: String(percent),
+  });
+  const revealLabel = formatSortRevealLabel(item, store);
+
+  return {
+    correct: result.correct,
+    scoreOverride: { correct: correctCount, total, percent },
+    userLabel,
+    correctLabel: revealLabel,
+    feedbackText:
+      context.mode === 'teacher'
+        ? revealLabel
+        : result.correct
+          ? undefined
+          : userLabel,
+    explanation: result.correct ? item.explanation?.cs ?? '' : context.t('sortWordsRetry'),
+    prompt: item.prompt?.cs ?? '',
+    sortDetails: result.details,
+  };
+}
+
+/**
+ * @param {HTMLElement} poolItem
+ * @param {'correct' | 'incorrect' | null} status
+ * @param {Function} t
+ */
+function setPoolItemStatus(poolItem, status, t) {
+  let statusEl = poolItem.querySelector('.sort-word-status');
+  if (!status) {
+    statusEl?.remove();
+    poolItem.classList.remove('sort-pool-item--correct', 'sort-pool-item--incorrect');
+    return;
+  }
+
+  if (!statusEl) {
+    statusEl = document.createElement('span');
+    statusEl.className = 'sort-word-status';
+    poolItem.appendChild(statusEl);
+  }
+
+  poolItem.classList.toggle('sort-pool-item--correct', status === 'correct');
+  poolItem.classList.toggle('sort-pool-item--incorrect', status === 'incorrect');
+  statusEl.textContent =
+    status === 'correct' ? t('sortWordsWordCorrect') : t('sortWordsWordIncorrect');
+}
 
 /** @type {import('./activity-types.js').ActivityModule} */
 const sortWords = {
@@ -27,8 +104,8 @@ const sortWords = {
               .map((w) => {
                 const audio = renderWordAudioButton(w.id, w.spelling, context.t);
                 return `
-              <div class="sort-pool-item">
-                <button type="button" class="word-chip" data-word-id="${escapeHtml(w.id)}" aria-pressed="false">
+              <div class="sort-pool-item" data-word-id="${escapeAttr(w.id)}">
+                <button type="button" class="word-chip" data-word-id="${escapeAttr(w.id)}" aria-pressed="false">
                   <span lang="en">${escapeHtml(w.spelling)}</span>
                 </button>
                 ${audio}
@@ -64,8 +141,8 @@ const sortWords = {
         let selectedWordId = null;
         /** @type {Record<string, string>} */
         const assignments = {};
-
         const pool = ui.querySelector('[data-role="pool"]');
+        const { t } = context;
 
         function syncAssignments() {
           handlers.onSelect({ ...assignments });
@@ -73,15 +150,16 @@ const sortWords = {
 
         function clearSelection() {
           selectedWordId = null;
-          ui.querySelectorAll('.word-chip').forEach((c) => {
+          ui.querySelectorAll('.word-chip:not(.word-chip--locked)').forEach((c) => {
             c.classList.remove('is-selected');
             c.setAttribute('aria-pressed', 'false');
           });
         }
 
         function selectWord(wordId, btn) {
+          if (btn.classList.contains('word-chip--locked')) return;
           selectedWordId = wordId;
-          ui.querySelectorAll('.word-chip').forEach((c) => {
+          ui.querySelectorAll('.word-chip:not(.word-chip--locked)').forEach((c) => {
             c.classList.remove('is-selected');
             c.setAttribute('aria-pressed', 'false');
           });
@@ -90,40 +168,50 @@ const sortWords = {
           syncAssignments();
         }
 
+        function getPoolItem(wordId) {
+          return ui.querySelector(`.sort-pool-item[data-word-id="${wordId}"]`);
+        }
+
         function assignSelectedToBin(binId) {
           if (!selectedWordId) return;
 
           assignments[selectedWordId] = binId;
-
-          const chip = pool?.querySelector(`[data-word-id="${selectedWordId}"]`);
-          if (chip) {
-            chip.disabled = true;
-            chip.hidden = true;
-            chip.classList.remove('is-selected');
-            chip.setAttribute('aria-pressed', 'false');
-          }
-
+          const poolItem = getPoolItem(selectedWordId);
           const binWords = ui.querySelector(`[data-bin-words="${binId}"]`);
-          const word = store.getWord(selectedWordId);
-          if (binWords && word) {
-            const tag = document.createElement('span');
-            tag.className = 'sort-bin__tag';
-            tag.textContent = word.spelling;
-            tag.setAttribute('data-word-id', selectedWordId);
-            binWords.appendChild(tag);
+          if (poolItem && binWords) {
+            setPoolItemStatus(poolItem, null, t);
+            poolItem.dataset.assignedBin = binId;
+            binWords.appendChild(poolItem);
           }
 
           selectedWordId = null;
           syncAssignments();
 
-          const nextChip = pool?.querySelector('.word-chip:not([disabled])');
-          if (nextChip) nextChip.focus();
+          const nextChip = pool?.querySelector('.word-chip:not(.word-chip--locked):not([disabled])');
+          if (nextChip instanceof HTMLElement) nextChip.focus();
+        }
+
+        function returnWordToPool(wordId) {
+          const poolItem = getPoolItem(wordId);
+          if (!poolItem || poolItem.classList.contains('sort-pool-item--locked')) return;
+
+          delete assignments[wordId];
+          delete poolItem.dataset.assignedBin;
+          setPoolItemStatus(poolItem, null, t);
+          pool?.appendChild(poolItem);
+          syncAssignments();
         }
 
         pool?.querySelectorAll('.word-chip').forEach((btn) => {
           btn.addEventListener('click', () => {
             if (btn.disabled) return;
-            selectWord(btn.getAttribute('data-word-id') ?? '', btn);
+            const wordId = btn.getAttribute('data-word-id') ?? '';
+            const poolItem = btn.closest('.sort-pool-item');
+            if (poolItem?.dataset.assignedBin) {
+              returnWordToPool(wordId);
+              return;
+            }
+            selectWord(wordId, btn);
           });
         });
 
@@ -151,32 +239,66 @@ const sortWords = {
       },
 
       checkItem(item, userInput) {
-        const assignments = /** @type {Record<string, string>} */ (userInput);
-        const result = checkSortAssignments(assignments, item.correctAssignments);
-        return {
-          correct: result.correct,
-          userLabel: context.t('sortWordsResult', {
-            correct: String(result.details.filter((d) => d.correct).length),
-            total: String(result.details.length),
-          }),
-          correctLabel: context.t('sortWordsAllCorrect'),
-          explanation: result.correct ? item.explanation?.cs ?? '' : context.t('sortWordsRetry'),
-          prompt: item.prompt?.cs ?? '',
-        };
+        return createSortWordsCheckResult(
+          item,
+          /** @type {Record<string, string>} */ (userInput),
+          context,
+          store
+        );
       },
 
-      applyResult(ui, _item, result) {
-        ui.querySelectorAll('.word-chip, .btn-bin-assign, .btn-check-sort').forEach((el) => {
-          el.disabled = true;
-        });
-        if (!result.correct) {
-          ui.querySelectorAll('.sort-bin').forEach((bin) => {
-            bin.classList.add('sort-bin--wrong');
+      applyResult(ui, item, result) {
+        const details = result.sortDetails ?? [];
+        markWordResults(ui, details, context.t);
+
+        if (result.correct) {
+          ui.querySelectorAll('.word-chip, .btn-bin-assign, .btn-check-sort').forEach((el) => {
+            el.disabled = true;
           });
+          return;
+        }
+
+        const checkBtn = ui.querySelector('.btn-check-sort');
+        if (checkBtn instanceof HTMLButtonElement) {
+          checkBtn.disabled = false;
         }
       },
     });
   },
 };
+
+/**
+ * @param {HTMLElement} ui
+ * @param {Array<{ wordId: string, correct: boolean }>} details
+ * @param {Function} t
+ */
+function markWordResults(ui, details, t) {
+  details.forEach(({ wordId, correct }) => {
+    const poolItem = ui.querySelector(`.sort-pool-item[data-word-id="${wordId}"]`);
+    if (!poolItem) return;
+
+    let statusEl = poolItem.querySelector('.sort-word-status');
+    if (!statusEl) {
+      statusEl = document.createElement('span');
+      statusEl.className = 'sort-word-status';
+      poolItem.appendChild(statusEl);
+    }
+
+    poolItem.classList.toggle('sort-pool-item--correct', correct);
+    poolItem.classList.toggle('sort-pool-item--incorrect', !correct);
+    statusEl.textContent = correct ? t('sortWordsWordCorrect') : t('sortWordsWordIncorrect');
+
+    const chip = poolItem.querySelector('.word-chip');
+    if (correct) {
+      poolItem.classList.add('sort-pool-item--locked');
+      chip?.classList.add('word-chip--locked');
+      if (chip instanceof HTMLButtonElement) chip.disabled = true;
+    } else {
+      poolItem.classList.remove('sort-pool-item--locked');
+      chip?.classList.remove('word-chip--locked');
+      if (chip instanceof HTMLButtonElement) chip.disabled = false;
+    }
+  });
+}
 
 export default sortWords;

@@ -140,14 +140,14 @@
       {
         "wordId": "w-gym",
         "prompt": { "cs": "Který popis výslovnosti g v gym je správný?" },
-        "optionPatternIds": ["pat-soft-g", "pat-soft-c", "pat-hard-c-g", "pat-oi"],
+        "optionPatternIds": ["pat-soft-g", "pat-soft-c", "pat-hard-c-g", "pat-ar"],
         "correctPatternId": "pat-soft-g",
         "explanation": { "cs": "Gym → měkké g /dʒ/ před y. Toto je cílový příklad soft g." }
       },
       {
         "wordId": "w-gift",
         "prompt": { "cs": "Který popis písmena g v gift je správný?" },
-        "optionPatternIds": ["pat-hard-c-g", "pat-soft-g", "pat-soft-c", "pat-oi"],
+        "optionPatternIds": ["pat-hard-c-g", "pat-soft-g", "pat-soft-c", "pat-ee"],
         "correctPatternId": "pat-hard-c-g",
         "explanation": { "cs": "Gift má hard g /ɡ/ – výjimka k pravidlu soft g. Není to měkké g." }
       },

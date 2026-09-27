@@ -13,6 +13,7 @@ import { scrollToContentStart } from '../ui/content-scroll.js';
 import { escapeHtml, escapeAttr } from '../ui/html-utils.js';
 import { iconArrowRight, iconCheck, iconTrophy } from '../ui/icons.js';
 import { buildHelpHref, buildHelpPageUrl, getCurrentReturnPath } from '../help/help-navigation.js';
+import { renderLessonClassroomFlowSection } from './lesson-classroom-flow.js';
 
 /**
  * @param {HTMLElement} container
@@ -108,6 +109,7 @@ export function mountLessonPlayer(container, config, resolved, mode, store, cont
           ${warning}
         </div>
         ${renderTeacherNotesOverview()}
+        ${renderLessonClassroomFlowSection(config.sourcePresetId ?? config.id, { t: context.t, mode })}
         <section class="lesson-sequence" aria-labelledby="lesson-sequence-title">
           <h2 id="lesson-sequence-title" class="lesson-sequence__title">${escapeHtml(context.t('lessonSequence'))}</h2>
           <ol class="lesson-sequence__list">${items}</ol>

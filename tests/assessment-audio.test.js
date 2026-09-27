@@ -19,16 +19,24 @@ describe('assessment audio safety', () => {
       .find((e) => e.id === 'ex-exit-ticket-mixed')
       .items.find((i) => i.wordId === 'w-gift');
 
-    const html = renderActivityWordBlock(
+    const htmlExit = renderActivityWordBlock(
+      { id: 'w-gift', spelling: 'gift', ipa: '/ɡɪft/' },
+      t,
+      { compact: true, hideIpa: true }
+    );
+    const htmlPractice = renderActivityWordBlock(
       { id: 'w-gift', spelling: 'gift', ipa: '/ɡɪft/' },
       t,
       { compact: true }
     );
 
-    assert.match(html, />gift</);
-    assert.match(html, /data-audio-word-id="w-gift"/);
-    assert.doesNotMatch(html, /pat-hard-c-g/);
-    assert.doesNotMatch(html, /hard g/i);
+    assert.match(htmlExit, />gift</);
+    assert.match(htmlExit, /data-audio-word-id="w-gift"/);
+    assert.doesNotMatch(htmlExit, /\/ɡɪft\//);
+    assert.doesNotMatch(htmlExit, /activity__ipa/);
+    assert.match(htmlPractice, /\/ɡɪft\//);
+    assert.doesNotMatch(htmlExit, /pat-hard-c-g/);
+    assert.doesNotMatch(htmlExit, /hard g/i);
     assert.doesNotMatch(giftItem.prompt.cs, /hard g/i);
   });
 });

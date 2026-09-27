@@ -25,6 +25,7 @@ import {
 import { probeWordAudio } from './audio/word-audio.js';
 import { shouldHideTeacherNavigation } from './ui/student-nav.js';
 import { scrollToContentStart } from './ui/content-scroll.js';
+import { comparePresetLessons, isRecommendedLesson } from './lessons/lesson-picker.js';
 
 /** @type {Awaited<ReturnType<typeof loadContentStore>> | null} */
 let contentStore = null;
@@ -222,10 +223,11 @@ function renderHome() {
     .join('');
 
   const presetCards = [...contentStore.lessonsById.values()]
+    .sort(comparePresetLessons)
     .map(
       (lesson) => `
-      <article class="exercise-card exercise-card--lesson">
-        <span class="exercise-card__type">${escapeHtml(t('homePresetLesson'))}</span>
+      <article class="exercise-card exercise-card--lesson${isRecommendedLesson(lesson.id) ? ' exercise-card--recommended' : ''}">
+        <span class="exercise-card__type">${escapeHtml(t('homePresetLesson'))}${isRecommendedLesson(lesson.id) ? ` · ${escapeHtml(t('lessonRecommendedBadge'))}` : ''}</span>
         <h3 class="exercise-card__title">${escapeHtml(lesson.title?.cs ?? lesson.id)}</h3>
         <p class="exercise-card__meta">${escapeHtml(lesson.description?.cs ?? '')}</p>
         <div class="exercise-card__actions">
@@ -300,10 +302,11 @@ function renderExercisePicker(mode) {
     .join('');
 
   const presetLinks = [...contentStore.lessonsById.values()]
+    .sort(comparePresetLessons)
     .map(
       (lesson) => `
-      <a href="#/${mode}?lesson=${escapeAttr(lesson.id)}" class="exercise-card exercise-card--link exercise-card--lesson">
-        <span class="exercise-card__type">${escapeHtml(t('homePresetLesson'))}</span>
+      <a href="#/${mode}?lesson=${escapeAttr(lesson.id)}" class="exercise-card exercise-card--link exercise-card--lesson${isRecommendedLesson(lesson.id) ? ' exercise-card--recommended' : ''}">
+        <span class="exercise-card__type">${escapeHtml(t('homePresetLesson'))}${isRecommendedLesson(lesson.id) ? ` · ${escapeHtml(t('lessonRecommendedBadge'))}` : ''}</span>
         <h3 class="exercise-card__title">${escapeHtml(lesson.title?.cs ?? lesson.id)}</h3>
       </a>`
     )

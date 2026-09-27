@@ -2085,6 +2085,152 @@ body::before {
   background: var(--scrollbar-track);
 }
 
+/* ── P1-A: sort words per-word feedback ── */
+.sort-word-status {
+  display: block;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  margin-top: var(--space-1);
+}
+
+.sort-pool-item--correct .word-chip {
+  border-color: var(--color-success, #16a34a);
+}
+
+.sort-pool-item--incorrect .word-chip {
+  border-color: var(--color-danger, #dc2626);
+}
+
+.sort-bin__words .sort-pool-item {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-2);
+}
+
+/* ── Lesson classroom flow (30min overview) ── */
+.lesson-classroom-flow {
+  margin: var(--space-5) 0;
+  padding: var(--space-4);
+  background: var(--color-bg-subtle);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-soft);
+}
+
+.lesson-classroom-flow__title {
+  margin: 0 0 var(--space-3);
+  font-size: var(--text-lg);
+}
+
+.lesson-classroom-flow__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+.lesson-classroom-flow__table th,
+.lesson-classroom-flow__table td {
+  padding: var(--space-2) var(--space-3);
+  text-align: left;
+  border-bottom: 1px solid var(--color-border-soft);
+  vertical-align: top;
+}
+
+.lesson-classroom-flow__tip,
+.lesson-classroom-flow__note {
+  margin: var(--space-3) 0 0;
+  font-size: var(--text-sm);
+  color: var(--color-text);
+}
+
+.lesson-classroom-flow__note {
+  font-weight: 600;
+}
+
+.exercise-card--recommended {
+  border-color: var(--color-brand);
+  box-shadow: 0 0 0 1px rgba(79, 70, 229, 0.15);
+}
+
+/* ── P1-E: compact student header on narrow viewports ── */
+@media (max-width: 480px) {
+  body.mode-student .app-header__inner {
+    padding: var(--space-2) var(--space-3);
+    gap: var(--space-2);
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+
+  body.mode-student .app-logo {
+    font-size: var(--text-base);
+    gap: var(--space-1);
+  }
+
+  body.mode-student .app-logo__mark {
+    width: 1.625rem;
+    height: 1.625rem;
+    font-size: var(--text-xs);
+  }
+
+  body.mode-student .app-header__right {
+    gap: var(--space-2);
+    flex: 1 1 auto;
+    justify-content: flex-end;
+  }
+
+  body.mode-student .mode-badge {
+    padding: 2px var(--space-2);
+    font-size: 0.65rem;
+  }
+
+  body.mode-student .mode-badge svg {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+
+  body.mode-student .app-nav {
+    gap: var(--space-1);
+  }
+
+  body.mode-student .app-nav__link {
+    padding: var(--space-1) var(--space-2);
+    font-size: var(--text-xs);
+  }
+
+  body.mode-student .app-nav__link[data-route='student'],
+  body.mode-student .app-nav__link--help {
+    display: none;
+  }
+
+  body.mode-student .app-nav__link[data-route='home'] {
+    display: none;
+  }
+
+  body.mode-student .activity {
+    padding: var(--space-4);
+  }
+
+  body.mode-student .activity__header {
+    margin-bottom: var(--space-3);
+  }
+
+  body.mode-student .activity__title-row {
+    margin-bottom: var(--space-2);
+  }
+
+  body.mode-student .activity__title {
+    font-size: 1.125rem;
+  }
+
+  body.mode-student .progress-block {
+    gap: var(--space-1);
+  }
+
+  body.mode-student .session-chip {
+    margin-bottom: var(--space-2);
+    font-size: var(--text-xs);
+  }
+}
+
 /* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   *,

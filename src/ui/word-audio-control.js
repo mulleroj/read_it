@@ -18,17 +18,20 @@ export function renderWordAudioButton(wordId, spelling, t) {
 /**
  * @param {object} word
  * @param {Function} t
- * @param {{ compact?: boolean }} [options]
+ * @param {{ compact?: boolean, hideIpa?: boolean }} [options]
  */
 export function renderActivityWordBlock(word, t, options = {}) {
   const compactClass = options.compact ? ' activity__word--compact' : '';
   const audio = renderWordAudioButton(word.id, word.spelling, t);
+  const ipaHtml = options.hideIpa
+    ? ''
+    : `<p class="activity__ipa" aria-label="IPA">${escapeHtml(word.ipa)}</p>`;
 
   return `
     <div class="activity__word${compactClass}">
       <div class="activity__word-main">
         <p class="activity__spelling" lang="en">${escapeHtml(word.spelling)}</p>
-        <p class="activity__ipa" aria-label="IPA">${escapeHtml(word.ipa)}</p>
+        ${ipaHtml}
       </div>
       ${audio}
     </div>`;
